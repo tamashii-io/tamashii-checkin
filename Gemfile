@@ -29,6 +29,18 @@ group :development, :test do
 
   gem 'capybara', '~> 2.7.0'
   gem 'selenium-webdriver'
+
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'shoulda'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'simplecov', require: false
+  gem 'fuubar', require: false
+
+  gem 'dotenv-rails'
+  gem 'rubocop', require: false
+  gem 'scss_lint', require: false
 end
 
 group :development do
@@ -37,6 +49,12 @@ group :development do
 
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  # Rails Console Helper
+  gem 'pry'
+  gem 'pry-rails'
+  gem 'hirb'
+  gem 'awesome_print'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
