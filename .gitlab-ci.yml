@@ -10,6 +10,7 @@ variables:
   RAILS_ENV: test
   POSTGRES_DB: tamashii
   NODE_VERSION: 7.4.0
+  YARN_VERSION: 0.21.3
   DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/$POSTGRES_DB"
 
 # build stages
@@ -26,7 +27,9 @@ cache:
 # services such as redis or postgres
 before_script:
   - if [[ ! -f /usr/local/bin/node ]]; then curl -SLO https://nodejs.org/dist/v$NODE_VERSION/node-v${NODE_VERSION}-linux-x64.tar.xz && tar -xJf node-v${NODE_VERSION}-linux-x64.tar.xz -C /usr/local --strip-components=1; fi
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+  - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+  - apt-get update && apt-get install yarn
   - gem install bundler -v 1.13.7 --no-ri --no-rdoc    # bundler is not installed with the image
   - ruby -v
   - node -v
