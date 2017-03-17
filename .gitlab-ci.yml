@@ -30,7 +30,7 @@ before_script:
   - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
   - apt-get update && apt-get install apt-transport-https
   - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-  - apt-get install yarn
+  - apt-get update && apt-get install yarn
   - gem install bundler -v 1.13.7 --no-ri --no-rdoc    # bundler is not installed with the image
   - ruby -v
   - node -v
