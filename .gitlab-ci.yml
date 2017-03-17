@@ -1,0 +1,58 @@
+# base image
+image: "ruby:2.4.0"
+
+# Services
+services:
+  - postgres:latest
+
+# default variables
+variables:
+  RAILS_ENV: test
+  POSTGRES_DB: tamashii
+  NODE_VERSION: 7.4.0
+  DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/$POSTGRES_DB"
+
+# build stages
+stages:
+  - test
+
+# cache gems in between builds
+cache:
+  paths:
+    - vendor/ruby
+    - node_modules
+
+# this is a basic example for a gem or script which doesn't use
+# services such as redis or postgres
+before_script:
+  - if [[ ! -f /usr/local/bin/node ]]; then curl -SLO https://nodejs.org/dist/v$NODE_VERSION/node-v${NODE_VERSION}-linux-x64.tar.xz && tar -xJf node-v${NODE_VERSION}-linux-x64.tar.xz -C /usr/local --strip-components=1; fi
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - gem install bundler -v 1.13.7 --no-ri --no-rdoc    # bundler is not installed with the image
+  - ruby -v
+  - node -v
+  - yarn -v
+  - bundle install -j $(nproc) --path vendor  # install dependencies into ./vendor/ruby
+  - yarn install
+
+# jobs
+rspec:
+  stage: test
+  script:
+    - bundle exec rake db:schema:load
+    - bundle exec rspec -p
+
+rubocop:
+  stage: test
+  services: []
+  before_script:
+    - gem install rubocop
+  script:
+    - rubocop
+
+scsslint:
+  stage: test
+  services: []
+  before_script:
+    - gem install scss_lint
+  script:
+    - scss-lint app/assets/stylesheets/
