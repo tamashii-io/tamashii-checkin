@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  serial: 1
+  code: MyString
+  name: MyString
+  email: MyString
+  phone: MyString
+  card_serial: MyString
+  meta: MyText
+  event_id: 1
+
+two:
+  serial: 1
+  code: MyString
+  name: MyString
+  email: MyString
+  phone: MyString
+  card_serial: MyString
+  meta: MyText
+  event_id: 1

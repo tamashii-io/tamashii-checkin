@@ -1,0 +1,34 @@
+<h1>參與名單</h1>
+<%= link_to "新增名單", new_event_attendee_path, class:"btn btn-warning btn-md" %>
+<%= link_to "上一頁（活動清單）", events_path, class:"btn btn-default btn-md" %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <td>報名序號</td>
+      <td>代碼</td>
+      <td>名字</td>
+      <td>信箱</td>
+      <td>手機</td>
+      <td>序號</td>
+      <td>其他</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @attendees.each do |attendee| %>
+    <tr>
+      <td><%= attendee.serial %></td>
+      <td><%= attendee.code %></td>
+      <td><%= attendee.name %></td>
+      <td><%= attendee.email %></td>
+      <td><%= attendee.phone %></td>
+      <td><%= attendee.card_serial %></td>
+      <td><%= attendee.meta %></td>
+      <td>
+        <%= link_to "編輯", edit_event_attendee_path(attendee.event_id,attendee), class:"btn btn-success btn-xs" %>
+        <%= link_to "刪除", event_attendee_path(attendee.event_id,attendee), method: "delete", data: { confirm: "確認刪除" }, class:"btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
