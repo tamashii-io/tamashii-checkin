@@ -1,0 +1,16 @@
+
+
+<%= simple_form_for [@event, @attendee] do |f| %>
+  <%= f.input :serial, label: "報名序號" %>
+  <%= f.input :code, label: "報導代碼" %>
+  <%= f.input :name, label: "會眾名字" %>
+  <%= f.input :email, label: "會眾信箱" %>
+  <%= f.input :phone, label: "會眾手機" %>
+  <%= f.input :card_serial, label: "卡片序號" %>
+  <%= f.hidden_field :event_id, value: params[:event_id] %>
+  <%= f.submit %>
+<% end %>
+
+
+<br />
+<%= link_to '回成員列表', event_attendees_path %>

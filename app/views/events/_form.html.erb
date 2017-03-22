@@ -1,0 +1,12 @@
+
+
+<%= simple_form_for(@event) do |f| %>
+<%#= simple_form_for(event_path(@event), method: :put) do |f| %>
+  <%= f.input :name, label: "活動名稱" %>
+  <%= f.input :start_at, label: "開始時間" %>
+  <%= f.input :end_at, label: "結束時間" %>
+  <%= f.submit %>
+<% end %>
+
+<br />
+<%= link_to '回活動列表', events_path %>
