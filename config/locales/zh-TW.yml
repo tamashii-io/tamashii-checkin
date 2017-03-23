@@ -1,0 +1,16 @@
+zh-TW:
+  machines:
+    new:
+      title: '新增機器'
+    edit:
+      title: '編輯機器'
+  simple_form:
+    labels:
+      machine:
+        serial: '機器序號'
+        name: '機器名稱'
+  machine:
+    created: '新增活動成功!'
+    updated: '機器資料更新成功!'
+    removed: '機器資料已刪除'
+

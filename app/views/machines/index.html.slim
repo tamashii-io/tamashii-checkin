@@ -1,0 +1,15 @@
+h1 Machine列表
+= link_to "新增machine", new_machine_path, class:"btn btn-warning btn-md"
+table.table
+  thead
+    tr
+      td 裝置的機器序號
+      td 裝置名稱
+  tbody
+    - @machines.each do |machine|
+      tr
+        td= machine.serial
+        td= machine.name
+        td
+          = link_to "編輯", edit_machine_path(machine), class:"btn btn-success btn-xs"
+          = link_to "刪除", machine_path(machine), method: "delete", data: { confirm: "確認刪除" }, class:"btn btn-danger btn-xs"
