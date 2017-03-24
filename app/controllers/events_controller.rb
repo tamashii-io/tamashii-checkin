@@ -12,27 +12,21 @@ class EventsController < ApplicationController
 
   def destroy
     @event.destroy if @event
-    redirect_to events_path, notice: '活動已刪除!'
+    redirect_to events_path, notice: I18n.t('event.removed') 
   end
 
   def create
-  @event = Event.new(event_params)
-    if @event.save
-      redirect_to events_path, notice: '新增活動成功'
-    else
-      render :new
-    end
+    @event = Event.new(event_params)
+    return redirect_to events_path, notice: I18n.t('event.created') if @event.save
+    render :new
   end
   
   def edit
   end
 
   def update
-    if @event.update_attributes(event_params)
-      redirect_to events_path, notice: '資料更新成功!'
-    else
-      render :edit
-    end
+    return redirect_to events_path, notice: I18n.t('event.updated') if @event.update_attributes(event_params)
+    render :edit
   end
 
   private

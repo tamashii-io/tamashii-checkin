@@ -1,0 +1,38 @@
+zh-TW:
+  events:
+    index:
+      title: '活動列表'
+    new:
+      title: '新增活動'
+    edit:
+      title: '編輯活動'
+  attendees:
+    index:
+      title: '成員列表'
+    new:
+      title: '新增成員'
+    edit:
+      title: '編輯成員'
+  simple_form:
+    labels:
+      event:
+        name: '活動名稱'
+        start_at: '開始時間'
+        end_at: '結束時間'
+  simple_form:
+    labels:
+      attendee:
+        serial: '報名序號'
+        code: '報到代碼'
+        name: '會眾名字'
+        email: '會眾信箱'
+        phone: '會眾手機'
+        card_serial: '卡片序號'
+  event:
+    created: '新增活動成功!'
+    updated: '資料更新成功!'
+    removed: '資料已刪除'
+  attendee:
+    created: '新增成員成功!'
+    updated: '資料更新成功!'
+    removed: '資料已刪除'

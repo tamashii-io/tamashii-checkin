@@ -14,16 +14,13 @@ class AttendeesController < ApplicationController
 
   def destroy
     @attendee.destroy if @attendee
-    redirect_to event_attendees_path, notice: I18n.t("attendee.removed")
+    redirect_to event_attendees_path, notice: I18n.t('attendee.removed')
   end
 
   def create
     @attendee = Attendee.new(attendee_params)
-    if @attendee.save
-      redirect_to event_attendees_path, notice: '新增成員成功!'
-    else
-      render :new
-    end
+    return redirect_to event_attendees_path, notice: I18n.t('attendee.created') if @attendee.save
+    render :new
   end
 
   def edit
@@ -31,11 +28,8 @@ class AttendeesController < ApplicationController
   end
 
   def update
-    if @attendee.update_attributes(attendee_params)
-      redirect_to event_attendees_path, notice: '資料更新成功!'
-    else
-      render :edit
-    end
+    return redirect_to event_attendees_path, notice: I18n.t('attendee.updated') if @attendee.update_attributes(attendee_params)
+    render :edit
   end
 
   private
