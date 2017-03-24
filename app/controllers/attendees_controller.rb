@@ -2,18 +2,18 @@
 # AttendeesController
 class AttendeesController < ApplicationController
   before_action :find_attendee, only: [:edit, :destroy, :update]
+  before_action :find_event, only: [:new, :edit]
 
   def index
     @attendees = Attendee.where(event_id: params[:event_id])
   end
 
   def new
-    @event = Event.find_by_id(params[:event_id])
     @attendee = Attendee.new
   end
 
   def destroy
-    @attendee.destroy if @attendee
+    @attendee&.destroy if @attendee
     redirect_to event_attendees_path, notice: I18n.t('attendee.removed')
   end
 
@@ -23,9 +23,7 @@ class AttendeesController < ApplicationController
     render :new
   end
 
-  def edit
-    @event = Event.find_by_id(params[:event_id])
-  end
+  def edit() end
 
   def update
     return redirect_to event_attendees_path, notice: I18n.t('attendee.updated') if @attendee.update_attributes(attendee_params)
@@ -40,5 +38,9 @@ class AttendeesController < ApplicationController
 
   def find_attendee
     @attendee = Attendee.find_by(id: params[:id])
+  end
+
+  def find_event
+    @event = Event.find_by(id: params[:event_id])
   end
 end

@@ -11,8 +11,8 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @event.destroy if @event
-    redirect_to events_path, notice: I18n.t('event.removed') 
+    @event&.destroy if @event
+    redirect_to events_path, notice: I18n.t('event.removed')
   end
 
   def create
@@ -20,9 +20,8 @@ class EventsController < ApplicationController
     return redirect_to events_path, notice: I18n.t('event.created') if @event.save
     render :new
   end
-  
-  def edit
-  end
+
+  def edit() end
 
   def update
     return redirect_to events_path, notice: I18n.t('event.updated') if @event.update_attributes(event_params)

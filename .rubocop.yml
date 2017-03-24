@@ -8,5 +8,6 @@ AllCops:
   Exclude:
     - db/schema.rb
     - vendor/ruby/**/*
+    - config/initializers/simple_form_bootstrap.rb
 Rails:
   Enabled: true
