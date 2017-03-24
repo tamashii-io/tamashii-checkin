@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# EventsController
 class EventsController < ApplicationController
   before_action :find_event, only: [:edit, :update, :destroy]
   def index
@@ -23,8 +24,9 @@ class EventsController < ApplicationController
     end
   end
   
-  def edit 
+  def edit
   end
+
   def update
     if @event.update_attributes(event_params)
       redirect_to events_path, notice: '資料更新成功!'
@@ -34,6 +36,7 @@ class EventsController < ApplicationController
   end
 
   private
+
   def event_params
     params.require(:event).permit(:name, :start_at, :end_at)
   end
