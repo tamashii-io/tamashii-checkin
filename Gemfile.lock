@@ -61,8 +61,13 @@ GEM
       public_suffix (~> 2.0, >= 2.0.2)
     arel (8.0.0)
     ast (2.3.0)
+    autoprefixer-rails (6.7.7.1)
+      execjs
     awesome_print (1.7.0)
     bcrypt (3.1.11)
+    bootstrap-sass (3.3.7)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     builder (3.2.3)
     byebug (9.0.6)
     capybara (2.7.1)
@@ -210,6 +215,9 @@ GEM
     shoulda-context (1.2.2)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
+    simple_form (3.4.0)
+      actionpack (> 4, < 5.1)
+      activemodel (> 4, < 5.1)
     simplecov (0.14.0)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
@@ -265,6 +273,7 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   bcrypt (~> 3.1.7)
+  bootstrap-sass (~> 3.3.6)
   byebug
   capybara (~> 2.7.0)
   dotenv-rails
@@ -287,6 +296,7 @@ DEPENDENCIES
   scss_lint
   selenium-webdriver
   shoulda
+  simple_form
   simplecov
   slim-rails
   spring

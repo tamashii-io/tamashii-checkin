@@ -1,0 +1,7 @@
+= simple_form_for(@checkpoint) do |f|
+  = f.input :name
+  = f.input :machine_id
+  = f.input :event_id
+  = f.submit
+br/
+= link_to '回列表', check_points_path
