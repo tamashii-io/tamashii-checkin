@@ -6,10 +6,6 @@ class CheckRecordsController < ApplicationController
     @checkrecords = CheckRecord.all
   end
 
-  def new
-    @checkrecord = CheckRecord.new
-  end
-
   def create
     @checkrecord = CheckRecord.new(checkrecord_params)
     return redirect_to check_records_path, notice: I18n.t('checkrecord.created') if @checkrecord.save
