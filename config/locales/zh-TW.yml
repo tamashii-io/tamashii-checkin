@@ -6,6 +6,7 @@ zh-TW:
       title: '新增機器'
     edit:
       title: '編輯機器'
+<<<<<<< HEAD
   check_points:
     index:
       title: '打卡點列表'
@@ -13,11 +14,14 @@ zh-TW:
       title: '新增打卡點'
     edit:
       title: '編輯打卡點'
+=======
+>>>>>>> develop
   simple_form:
     labels:
       machine:
         serial: '機器序號'
         name: '機器名稱'
+<<<<<<< HEAD
       check_point:
         name: '打卡點名稱'
         type: '打卡點類型'
@@ -31,3 +35,10 @@ zh-TW:
     created: '新增打卡點成功!'
     updated: '打卡點資料更新成功!'
     removed: '打卡點資料已刪除'
+=======
+  machine:
+    created: '新增活動成功!'
+    updated: '機器資料更新成功!'
+    removed: '機器資料已刪除'
+
+>>>>>>> develop

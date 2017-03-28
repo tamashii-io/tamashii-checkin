@@ -10,11 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20170327063320) do
+=======
+ActiveRecord::Schema.define(version: 20170323030841) do
+>>>>>>> develop
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+<<<<<<< HEAD
   create_table "attendees", force: :cascade do |t|
     t.integer "serial"
     t.string "code"
@@ -46,6 +51,8 @@ ActiveRecord::Schema.define(version: 20170327063320) do
     t.datetime "updated_at", null: false
   end
 
+=======
+>>>>>>> develop
   create_table "machines", force: :cascade do |t|
     t.string "serial"
     t.string "name"
