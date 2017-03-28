@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   root 'home#index'
   resources :check_records do
   end
+  resources :machines do
+  end
 end

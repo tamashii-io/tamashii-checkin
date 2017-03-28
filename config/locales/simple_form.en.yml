@@ -11,14 +11,17 @@ en:
     error_notification:
       default_message: "Please review the problems below:"
     # Examples
-    # labels:
-    #   defaults:
-    #     password: 'Password'
-    #   user:
-    #     new:
-    #       email: 'E-mail to sign in.'
-    #     edit:
-    #       email: 'E-mail.'
+    labels:
+      defaults:
+        password: 'Password'
+      user:
+        new:
+          email: 'E-mail to sign in.'
+        edit:
+          email: 'E-mail.'
+      machine:
+        serial: 'Machine serial'
+        name: 'Machine name'
     # hints:
     #   defaults:
     #     username: 'User name to sign in.'
