@@ -1,0 +1,48 @@
+zh-TW:
+  machines:
+    index:
+      title: '機器列表'
+    new:
+      title: '新增機器'
+    edit:
+      title: '編輯機器'
+  check_points:
+    index:
+      title: '打卡點列表'
+    new:
+      title: '新增打卡點'
+    edit:
+      title: '編輯打卡點'
+  check_records:
+    index:
+      title: '打卡記錄列表'
+    new:
+      title: '新增打卡記錄'
+    edit:
+      title: '編輯打卡記錄'
+  simple_form:
+    labels:
+      machine:
+        serial: '機器序號'
+        name: '機器名稱'
+      check_point:
+        name: '打卡點名稱'
+        type: '打卡點類型'
+        machine_id: '對應機器'
+        event_id: '對應活動'
+      check_record:
+        attendee_id: '會眾'
+        checkpoint_id: '打卡點'
+        times: '次數'
+  machine:
+    created: '新增機器成功!'
+    updated: '機器資料更新成功!'
+    removed: '機器資料已刪除'
+  checkpoint:
+    created: '新增打卡點成功!'
+    updated: '打卡點資料更新成功!'
+    removed: '打卡點資料已刪除'
+  checkrecord:
+    created: '新增打卡記錄成功!'
+    updated: '打卡記錄資料更新成功!'
+    removed: '打卡記錄資料已刪除'
