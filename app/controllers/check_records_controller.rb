@@ -19,6 +19,11 @@ class CheckRecordsController < ApplicationController
     render :edit
   end
 
+  def destroy
+    @checkrecord.destroy
+    redirect_to check_records_path, notice: I18n.t('checkrecord.removed')
+  end
+
   private
 
   def checkrecord_params
