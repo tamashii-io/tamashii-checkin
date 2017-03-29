@@ -13,7 +13,7 @@ class AttendeesController < ApplicationController
   end
 
   def destroy
-    @attendee&.destroy if @attendee
+    @attendee&.destroy
     redirect_to event_attendees_path, notice: I18n.t('attendee.removed')
   end
 
