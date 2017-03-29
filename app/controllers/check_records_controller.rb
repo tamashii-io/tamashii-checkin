@@ -19,11 +19,6 @@ class CheckRecordsController < ApplicationController
     render :edit
   end
 
-  def destroy
-    @checkrecord&.destroy if @checkrecord
-    redirect_to check_records_path, notice: I18n.t('checkrecord.removed')
-  end
-
   private
 
   def checkrecord_params
