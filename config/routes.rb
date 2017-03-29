@@ -2,5 +2,7 @@
 Rails.application.routes.draw do
   resources :events do
     resources :attendees
+  root 'home#index'
+  resources :machines do
   end
 end

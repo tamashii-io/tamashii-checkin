@@ -49,7 +49,7 @@ rubocop:
   stage: test
   services: []
   before_script:
-    - gem install rubocop
+    - gem install rubocop -v 0.47.1
   script:
     - rubocop
 
