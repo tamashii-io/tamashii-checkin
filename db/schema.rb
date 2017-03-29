@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 20170328031108) do
     t.string "email"
     t.string "phone"
     t.string "card_serial"
-    t.text "meta"
     t.integer "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -49,7 +48,6 @@ ActiveRecord::Schema.define(version: 20170328031108) do
     t.string "name"
     t.datetime "start_at"
     t.datetime "end_at"
-    t.text "options"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
