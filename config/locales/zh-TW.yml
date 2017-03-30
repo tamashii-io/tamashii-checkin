@@ -31,8 +31,3 @@ zh-TW:
     created: '新增打卡點成功!'
     updated: '打卡點資料更新成功!'
     removed: '打卡點資料已刪除'
-  machine:
-    created: '新增活動成功!'
-    updated: '機器資料更新成功!'
-    removed: '機器資料已刪除'
-
