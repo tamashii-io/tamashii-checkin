@@ -24,7 +24,7 @@ class CheckPointsController < ApplicationController
   end
 
   def destroy
-    @checkpoint&.destroy
+    @checkpoint.destroy
     redirect_to check_points_path, notice: I18n.t('checkPoint.removed')
   end
 
