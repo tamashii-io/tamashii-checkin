@@ -20,7 +20,7 @@ class CheckRecordsController < ApplicationController
   end
 
   def destroy
-    @checkrecord&.destroy
+    @checkrecord.destroy
     redirect_to check_records_path, notice: I18n.t('checkrecord.removed')
   end
 
