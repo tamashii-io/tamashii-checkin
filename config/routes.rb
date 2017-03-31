@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   resources :events do
     resources :attendees
   end
-  resources :check_points 
-  resources :machines 
+  resources :check_points
+  resources :machines
 end
