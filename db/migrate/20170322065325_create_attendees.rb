@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+# missing top-level class documentation comment
 class CreateAttendees < ActiveRecord::Migration[5.1]
   def change
     create_table :attendees do |t|
@@ -7,9 +9,7 @@ class CreateAttendees < ActiveRecord::Migration[5.1]
       t.string :email
       t.string :phone
       t.string :card_serial
-      t.text :meta
       t.integer :event_id
-
       t.timestamps
     end
   end

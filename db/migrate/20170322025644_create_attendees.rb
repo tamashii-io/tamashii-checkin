@@ -10,7 +10,6 @@ class CreateAttendees < ActiveRecord::Migration[5.1]
       t.string :phone
       t.string :card_serial
       t.integer :event_id
-
       t.timestamps
     end
   end
