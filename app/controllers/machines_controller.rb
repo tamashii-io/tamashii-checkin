@@ -26,7 +26,7 @@ class MachinesController < ApplicationController
   end
 
   def destroy
-    @machine&.destroy if @machine
+    @machine.destroy
     redirect_to machines_path, notice: I18n.t('machine.removed')
   end
 

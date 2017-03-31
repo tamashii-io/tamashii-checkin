@@ -24,7 +24,6 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'slim-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'simple_form'
-
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
