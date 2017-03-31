@@ -1,0 +1,29 @@
+<h1>活動列表</h1>
+
+<%= link_to "新增活動", new_event_path, class:"btn btn-warning btn-md" %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <td>活動名稱</td>
+      <td>開始時間</td>
+      <td>結束時間</td>
+      <td>其他</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @events.each do |event| %>
+    <tr>
+      <td><%= event.name %></td>
+      <td><%= event.start_at %></td>
+      <td><%= event.end_at %></td>
+      <td><%= event.options %></td>
+      <td>
+        <%= link_to "編輯", edit_event_path(event), class:"btn btn-success btn-xs" %>
+        <%= link_to "刪除", event_path(event), method: "delete", data: { confirm: "確認刪除" }, class:"btn btn-danger btn-xs" %>
+        <%= link_to "會眾", event_attendees_path(event), class:"btn btn-primary btn-xs" %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
