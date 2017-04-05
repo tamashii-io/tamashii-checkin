@@ -1,0 +1,7 @@
+= simple_form_for(@checkrecord) do |f|
+  = f.input :attendee_id
+  = f.input :checkpoint_id
+  = f.input :times
+  = f.submit
+br/
+= link_to '回列表', check_records_path
