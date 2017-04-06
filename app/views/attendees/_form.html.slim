@@ -1,0 +1,11 @@
+= simple_form_for [@event, @attendee] do |f|
+  = f.input :serial
+  = f.input :code
+  = f.input :name
+  = f.input :email
+  = f.input :phone
+  = f.input :card_serial
+  = f.hidden_field :event_id, value: params[:event_id]
+  = f.submit
+br
+= link_to '回成員列表', event_attendees_path

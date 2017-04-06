@@ -1,0 +1,34 @@
+h1 = t('.title')
+= link_to "返回活動", events_path, class:"btn btn-info btn-xs"
+= link_to "新增成員", new_event_attendee_path, class:"btn btn-danger btn-xs"
+table.table
+  thead
+    tr
+      td 報名序號
+      td 報導代碼
+      td 會眾名字
+      td 會眾信箱
+      td 會眾手機
+      td 卡片序號
+      td 所參加的活動
+      td 處理
+  tbody
+    - @attendees.each do |attendee|
+      tr
+        td
+          = attendee.serial
+        td
+          = attendee.code
+        td
+          = attendee.name
+        td
+          = attendee.email
+        td
+          = attendee.phone
+        td
+          = attendee.card_serial
+        td
+          = attendee.event_id
+        td
+          = link_to "編輯", edit_event_attendee_path(params[:event_id],attendee)
+          = link_to "刪除", event_attendee_path(params[:event_id],attendee), method: "delete", data: { confirm: "確認刪除" }
