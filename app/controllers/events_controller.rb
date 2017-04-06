@@ -21,7 +21,7 @@ class EventsController < ApplicationController
     render :new
   end
 
-  def edit() end
+  def edit(); end
 
   def update
     return redirect_to events_path, notice: I18n.t('event.updated') if @event.update_attributes(event_params)

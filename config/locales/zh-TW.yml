@@ -19,8 +19,6 @@ zh-TW:
         name: '活動名稱'
         start_at: '開始時間'
         end_at: '結束時間'
-  simple_form:
-    labels:
       attendee:
         serial: '報名序號'
         code: '報到代碼'
@@ -28,6 +26,18 @@ zh-TW:
         email: '會眾信箱'
         phone: '會眾手機'
         card_serial: '卡片序號'
+      machine:
+        serial: '機器序號'
+        name: '機器名稱'
+      check_point:
+        name: '打卡點名稱'
+        type: '打卡點類型'
+        machine_id: '對應機器'
+        event_id: '對應活動'
+      check_record:
+        attendee_id: '會眾'
+        checkpoint_id: '打卡點'
+        times: '次數'
   event:
     created: '新增活動成功!'
     updated: '資料更新成功!'
@@ -57,20 +67,6 @@ zh-TW:
       title: '新增打卡記錄'
     edit:
       title: '編輯打卡記錄'
-  simple_form:
-    labels:
-      machine:
-        serial: '機器序號'
-        name: '機器名稱'
-      check_point:
-        name: '打卡點名稱'
-        type: '打卡點類型'
-        machine_id: '對應機器'
-        event_id: '對應活動'
-      check_record:
-        attendee_id: '會眾'
-        checkpoint_id: '打卡點'
-        times: '次數'
   machine:
     created: '新增機器成功!'
     updated: '機器資料更新成功!'
