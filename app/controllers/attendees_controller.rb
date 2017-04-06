@@ -5,7 +5,7 @@ class AttendeesController < ApplicationController
   before_action :find_attendee, only: [:edit, :destroy, :update]
 
   def index
-    @attendees = Attendee.where(event_id: params[:event_id])
+    @attendees = @event.attendees
   end
 
   def new
