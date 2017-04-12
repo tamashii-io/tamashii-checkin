@@ -30,15 +30,15 @@ ActiveRecord::Schema.define(version: 20170328031108) do
   create_table "check_points", force: :cascade do |t|
     t.string "name"
     t.integer "type"
-    t.string "machine_id"
-    t.string "event_id"
+    t.integer "machine_id"
+    t.integer "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "check_records", force: :cascade do |t|
-    t.string "attendee_id"
-    t.string "checkpoint_id"
+    t.integer "attendee_id"
+    t.integer "check_point_id"
     t.integer "times"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

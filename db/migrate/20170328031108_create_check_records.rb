@@ -3,8 +3,8 @@
 class CreateCheckRecords < ActiveRecord::Migration[5.1]
   def change
     create_table :check_records do |t|
-      t.string :attendee_id
-      t.string :checkpoint_id
+      t.integer :attendee_id
+      t.integer :check_point_id
       t.integer :times
 
       t.timestamps

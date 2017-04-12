@@ -5,8 +5,8 @@ class CreateCheckPoints < ActiveRecord::Migration[5.1]
     create_table :check_points do |t|
       t.string :name
       t.integer :type
-      t.string :machine_id
-      t.string :event_id
+      t.integer :machine_id
+      t.integer :event_id
 
       t.timestamps
     end
