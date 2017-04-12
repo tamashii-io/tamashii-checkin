@@ -9,6 +9,6 @@ AllCops:
     - db/schema.rb
     - vendor/ruby/**/*
     - config/initializers/simple_form_bootstrap.rb
-    - node_moduels/**/*
+    - node_modules/**/*
 Rails:
   Enabled: true
