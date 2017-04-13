@@ -18,12 +18,13 @@ class CheckPoint < ApplicationRecord
   private
 
   def in_time_range?(attendee_id)
+    last_record = @record.last
     time_range = (-DateTime::Infinity.new.to_f..5.days.ago.to_f)
 
-    if time_range.include?(@record.pluck(:updated_at).last.to_f)
+    if time_range.include?(last_record.updated_at.to_f)
       CheckRecord.create(attendee_id: attendee_id, check_point_id: id)
     else
-      @record[0].increment
+      last_record.increment
     end
   end
 end
