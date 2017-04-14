@@ -10,8 +10,8 @@ FactoryGirl.define do
     phone { Faker::Code.asin }
     card_serial { Faker::Code.asin }
     event_id {}
-    created_at { Faker::Date.between(10.days.ago, 2.days.ago) }
-    updated_at { Faker::Date.between(2.days.ago, Time.zone.today) }
+    created_at {}
+    updated_at {}
     association :event, factory: :event
   end
 end
