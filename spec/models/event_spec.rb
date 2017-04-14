@@ -2,15 +2,7 @@
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
-  it 'has many attendee' do
-    event = create(:event)
-    create(:attendee, event_id: event.id)
-    expect(Event.first.attendee).to include(Attendee.first)
-  end
+  it { should have_many(:attendee) }
 
-  it 'has many check_point' do
-    event = create(:event)
-    create(:check_point, event_id: event.id)
-    expect(Event.first.check_point).to include(CheckPoint.first)
-  end
+  it { should have_many(:check_point) }
 end
