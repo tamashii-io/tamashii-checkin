@@ -5,8 +5,8 @@ FactoryGirl.define do
     check_point_id {}
     attendee_id {}
     times 1
-    created_at { Faker::Date.between(Time.zone.today, Time.zone.today) }
-    updated_at { Faker::Date.between(Time.zone.today, Time.zone.today) }
+    created_at {}
+    updated_at {}
     association :check_point, factory: :check_point
     association :attendee, factory: :attendee
   end
