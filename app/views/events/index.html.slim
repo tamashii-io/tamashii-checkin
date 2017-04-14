@@ -1,21 +1,31 @@
-h1 = t('.title')
-= link_to "新增活動", new_event_path, class:"btn btn-danger btn-xs"
-table.table
-  thead
-    tr
-      td 活動名稱
-      td 開始時間
-      td 結束時間
-      td 處理
-  tbody
-    - @events.each do |event|
-      tr
-        td
-          = link_to event.name, event_attendees_path(event.id)
-        td
-          = event.start_at
-        td
-          = event.end_at
-        td
-          = link_to "編輯", edit_event_path(event)
-          = link_to "刪除", event_path(event), method: "delete", data: { confirm: "確認刪除" }
+ol.breadcrumb
+  / TODO: Add breadcrum helper
+  li.breadcrumb-item
+    = link_to "Home", root_path
+  li.breadcrumb-item.active Events
+  li.breadcrumb-menu
+    .btn-group
+      = link_to "新增活動", new_event_path, class:"btn btn-secondary"
+.container-fluid
+  .animated.fadeIn
+    .row
+      .col-lg-12
+        .card
+          .card-header = t('.title')
+          .card-block
+            table.table.table-bordered.table-striped.table-condensed
+              thead
+                tr
+                  td 活動名稱
+                  td 開始時間
+                  td 結束時間
+                  td 處理
+              tbody
+                - @events.each do |event|
+                  tr
+                    td = link_to event.name, event_attendees_path(event.id)
+                    td = l event.start_at
+                    td = l event.end_at
+                    td
+                      = link_to "編輯", edit_event_path(event), class: 'btn btn-primary'
+                      = link_to "刪除", event_path(event), class: 'btn btn-danger', method: "delete", data: { confirm: "確認刪除" }

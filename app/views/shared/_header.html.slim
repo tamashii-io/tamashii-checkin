@@ -1,5 +1,5 @@
 header.app-header.navbar
-  a.navbar-brand href="#"
+  = link_to "", root_path, class: "navbar-brand"
   ul.nav.navbar-nav
     li.nav-item.px-1 = link_to "Home", root_path, class: 'nav-link'
     li.nav-item.px-1 = link_to "Events", events_path, class: 'nav-link'
