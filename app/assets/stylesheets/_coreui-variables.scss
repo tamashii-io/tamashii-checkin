@@ -58,10 +58,10 @@ $navbar-brand-border: (
   )
 );
 
-$navbar-color:                      rgba(0,0,0,.3);
-$navbar-hover-color:                rgba(0,0,0,.6);
-$navbar-active-color:               rgba(0,0,0,.8);
-$navbar-disabled-color:             rgba(0,0,0,.15);
+$navbar-color:                      rgba(0, 0, 0, .3);
+$navbar-hover-color:                rgba(0, 0, 0, .6);
+$navbar-active-color:               rgba(0, 0, 0, .8);
+$navbar-disabled-color:             rgba(0, 0, 0, .15);
 
 // Sidebar
 
@@ -71,8 +71,8 @@ $sidebar-compact-width:             50px;
 $sidebar-compact-height:            $sidebar-compact-width;
 $sidebar-color:                     #fff;
 $sidebar-bg:                        $gray-dark;
-$sidebar-header-bg:                 rgba(0,0,0,.2);
-$sidebar-footer-bg:                 rgba(0,0,0,.2);
+$sidebar-header-bg:                 rgba(0, 0, 0, .2);
+$sidebar-footer-bg:                 rgba(0, 0, 0, .2);
 $sidebar-borders:                   none;
 $mobile-sidebar-width:              220px;
 
@@ -91,7 +91,9 @@ $sidebar-nav-link-icon-color:       $text-muted;
 $sidebar-nav-link-borders:          0;
 $sidebar-nav-link-hover-color:      #fff;
 $sidebar-nav-link-hover-bg:         $brand-primary;
+// scss-lint:disable ColorVariable
 $sidebar-nav-link-hover-icon-color: #fff !important;
+// scss-lint:enable ColorVariable
 
 $sidebar-nav-link-hover-borders:    0;
 $sidebar-nav-link-active-color:     #fff;
@@ -101,7 +103,7 @@ $sidebar-nav-link-active-icon-color: $brand-primary;
 $sidebar-nav-link-active-borders:   0;
 
 $sidebar-nav-dropdown-color:        #fff;
-$sidebar-nav-dropdown-bg:           rgba(0,0,0,.2);
+$sidebar-nav-dropdown-bg:           rgba(0, 0, 0, .2);
 $sidebar-nav-dropdown-borders:      0;
 
 // Top Navigation
