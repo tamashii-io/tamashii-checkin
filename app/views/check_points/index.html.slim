@@ -1,19 +1,33 @@
-h1 = t('.title')
-= link_to "新增打卡點", new_check_point_path, class:"btn btn-warning btn-md"
-table.table
-  thead
-    tr
-      td 打卡點
-      td 打卡類型
-      td 對應機器
-      td 對應的活動
-  tbody
-    - @checkpoints.each do |checkpoint|
-      tr
-        td= checkpoint.name
-        td= checkpoint.type
-        td= checkpoint.machine_id
-        td= checkpoint.event_id
-        td
-          = link_to "編輯", edit_check_point_path(checkpoint), class:"btn btn-success btn-xs"
-          = link_to "刪除", check_point_path(checkpoint), method: "delete", data: { confirm: "確認刪除" }, class:"btn btn-danger btn-xs"
+ol.breadcrumb
+  / TODO: Add breadcrum helper
+  li.breadcrumb-item
+    = link_to "Home", root_path
+  li.breadcrumb-item.active CheckPoint
+  li.breadcrumb-menu
+    .btn-group
+      = link_to "新增打卡點", new_check_point_path, class:"btn btn-secondary"
+.container-fluid
+  .animated.fadeIn
+    .row
+      .col-lg-12
+        .card
+          .card-header = t('.title')
+          .card-block
+            table.table.table-bordered.table-striped.table-condensed
+              thead
+                tr
+                  th 打卡點
+                  th 打卡類型
+                  th 對應機器
+                  th 對應的活動
+                  th 處理
+              tbody
+                - @checkpoints.each do |checkpoint|
+                  tr
+                    td= checkpoint.name
+                    td= checkpoint.type
+                    td= checkpoint.machine_id
+                    td= checkpoint.event_id
+                    td
+                      = link_to "編輯", edit_check_point_path(checkpoint), class:"btn btn-primary"
+                      = link_to "刪除", check_point_path(checkpoint), method: "delete", data: { confirm: "確認刪除" }, class:"btn btn-danger"
