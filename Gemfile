@@ -22,7 +22,7 @@ gem 'redis', '~> 3.0'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'slim-rails'
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'simple_form'
 
 gem 'devise'
