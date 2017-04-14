@@ -12,6 +12,9 @@ gem 'rails', '~> 5.1.0.beta1'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 gem 'sassc-rails'
+gem 'jquery-rails'
+gem 'font-awesome-rails'
+gem 'simple-line-icons-rails'
 
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker', github: "rails/webpacker"

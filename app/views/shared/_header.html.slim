@@ -5,3 +5,7 @@ header.app-header.navbar
     li.nav-item.px-1 = link_to "Events", events_path, class: 'nav-link'
     li.nav-item.px-1 = link_to "Machines", machines_path, class: 'nav-link'
   ul.nav.navbar-nav.ml-auto
+    / TODO: Write helper to do this
+    - if user_signed_in?
+      / TODO: Convert to use dropdown with avatar
+      li.nav-item.px-3 = link_to "Logout", destroy_user_session_path, class: 'nav-link', method: :delete
