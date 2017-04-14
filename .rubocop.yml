@@ -7,6 +7,7 @@ AllCops:
     - config.ru
     - lib/**/*.rake
   Exclude:
+    - node_modules/**/*
     - db/*
     - vendor/ruby/**/*
     - config/initializers/simple_form_bootstrap.rb
