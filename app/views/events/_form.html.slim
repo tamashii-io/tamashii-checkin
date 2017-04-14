@@ -1,7 +1,7 @@
 = simple_form_for(@event) do |f|
-  = f.input :name
-  = f.input :start_at
-  = f.input :end_at
-  = f.submit
-br
-= link_to '回活動列表', events_path
+  .card-block
+      = f.input :name
+      = f.input :start_at
+      = f.input :end_at
+  .card-footer
+      = f.button :submit, class: 'btn btn-primary'

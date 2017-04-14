@@ -1,0 +1,7 @@
+header.app-header.navbar
+  = link_to "", root_path, class: "navbar-brand"
+  ul.nav.navbar-nav
+    li.nav-item.px-1 = link_to "Home", root_path, class: 'nav-link'
+    li.nav-item.px-1 = link_to "Events", events_path, class: 'nav-link'
+    li.nav-item.px-1 = link_to "Machines", machines_path, class: 'nav-link'
+  ul.nav.navbar-nav.ml-auto

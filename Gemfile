@@ -11,7 +11,7 @@ end
 gem 'rails', '~> 5.1.0.beta1'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
-gem 'sass-rails', github: "rails/sass-rails"
+gem 'sassc-rails'
 
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker', github: "rails/webpacker"
@@ -22,7 +22,7 @@ gem 'redis', '~> 3.0'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'slim-rails'
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'simple_form'
 
 gem 'devise'
