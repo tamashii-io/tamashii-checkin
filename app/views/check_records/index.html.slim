@@ -1,19 +1,26 @@
-h1 = t('.title')
-= link_to "新增打卡點", new_check_record_path, class:"btn btn-warning btn-md"
-table.table
-  thead
-    tr
-      td 會眾
-      td 打卡點
-      td 次數
-      td 時間
-  tbody
-    - @checkrecords.each do |checkrecord|
-      tr
-        td= checkrecord.attendee_id
-        td= checkrecord.checkpoint_id
-        td= checkrecord.times
-        td= checkrecord.updated_at
-        td
-          = link_to "編輯", edit_check_record_path(checkrecord), class:"btn btn-success btn-xs"
-          = link_to "刪除", check_record_path(checkrecord), method: "delete", data: { confirm: "確認刪除" }, class:"btn btn-danger btn-xs"
+ol.breadcrumb
+  / TODO: Add breadcrum helper
+  li.breadcrumb-item
+    = link_to "Home", root_path
+  li.breadcrumb-item.active CheckRecord
+.container-fluid
+  .animated.fadeIn
+    .row
+      .col-lg-12
+        .card
+          .card-header = t('.title')
+          .card-block
+            table.table.table-bordered.table-striped.table-condensed
+               thead
+                tr
+                  td 會眾
+                  td 打卡點
+                  td 次數
+                  td 時間
+                tbody
+                  - @checkrecords.each do |checkrecord|
+                    tr
+                      td= checkrecord.attendee_id
+                      td= checkrecord.checkpoint_id
+                      td= checkrecord.times
+                      td= checkrecord.updated_at
