@@ -1,2 +1,12 @@
-h1 = t('.title')
-= render "form"
+ol.breadcrumb
+  / TODO: Add breadcrum helper
+  li.breadcrumb-item = link_to "Home", root_path
+  li.breadcrumb-item = link_to "Events", events_path
+  li.breadcrumb-item.active New
+.container-fluid
+  .animated.fadeIn
+    .row
+      .col-lg-12
+        .card
+          .card-header = t('.title')
+          = render "form"
