@@ -1,6 +1,6 @@
 = simple_form_for(@machine) do |f|
-  = f.input :serial
-  = f.input :name
-  = f.submit
-br/
-= link_to '回列表', machines_path
+  .card-block
+    = f.input :serial
+    = f.input :name
+  .card-footer
+    = f.button :submit, class: 'btn btn-primary'
