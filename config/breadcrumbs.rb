@@ -8,7 +8,7 @@ crumb :events do
 end
 
 crumb :event do |event|
-  link event.name, event_path(event)
+  link event.name || 'New', event
   parent :events
 end
 

@@ -1,8 +1,4 @@
-ol.breadcrumb
-  / TODO: Add breadcrum helper
-  li.breadcrumb-item = link_to "Home", root_path
-  li.breadcrumb-item = link_to "Events", events_path
-  li.breadcrumb-item.active New
+- breadcrumb :event, @event
 .container-fluid
   .animated.fadeIn
     .row
