@@ -1,10 +1,4 @@
-ol.breadcrumb
-  / TODO: Add breadcrum helper
-  li.breadcrumb-item
-    = link_to "Home", root_path
-  li.breadcrumb-item.active
-    | Edit&nbsp;
-    = resource_name.to_s.humanize
+- breadcrumb :user, resource
 = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
   = f.error_notification
   .container-fluid

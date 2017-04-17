@@ -44,3 +44,7 @@ end
 crumb :check_records do
   link 'Check Records', check_records_path
 end
+
+crumb :user do |user|
+  link user.username
+end
