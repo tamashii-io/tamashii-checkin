@@ -13,4 +13,7 @@ Rails.application.routes.draw do
   resources :events do
     resources :attendees
   end
+
+  # Start tamashii manager
+  mount Tamashii::Manager::Server => '/tamashii'
 end
