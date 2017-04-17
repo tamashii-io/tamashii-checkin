@@ -14,6 +14,7 @@
     "rails-erb-loader": "^3.2.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "tether": "^1.4.0",
     "webpack": "^2.2.1",
     "webpack-merge": "^4.0.0"
   },
