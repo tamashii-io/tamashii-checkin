@@ -15,12 +15,25 @@ class TamashiiRailsHook < Tamashii::Hook
     Tamashii::Manager.logger.debug "Tamashii #{packet.type} Packet captured by Rails, #{packet.body}"
     handle(packet)
     # TODO: Save recent update information into Redis
-    Machine.find_by(serial: @client.id)&.touch
+    machine&.touch
     true
   end
 
+  def machine
+    Machine.find_by(serial: @client.id)
+  end
+
   def handle(packet)
-    # TODO: Implement handler
+    type, data = case packet.type
+                 when Tamashii::Type::RFID_NUMBER
+                   Tamashii::CardHandler.new(@client, packet).process
+                 end
+    response type, data
+  end
+
+  def response(type, data)
+    packet = Tamashii::Packet.new(type, @client.tag, data)
+    @client.send(packet.dump)
   end
 
   private
