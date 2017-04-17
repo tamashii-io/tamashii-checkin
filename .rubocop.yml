@@ -1,12 +1,14 @@
 inherit_from: .rubocop_todo.yml
 AllCops:
+  DisplayCopNames: true
   TargetRubyVersion: 2.4
   Include:
     - Rakefile
     - config.ru
     - lib/**/*.rake
   Exclude:
-    - db/schema.rb
+    - node_modules/**/*
+    - db/*
     - vendor/ruby/**/*
     - config/initializers/simple_form_bootstrap.rb
     - node_modules/**/*

@@ -14,5 +14,7 @@ module TamashiiCheckin
     # -- all .rb files in that directory are automatically loaded.
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
     config.i18n.default_locale = :"zh-TW"
+
+    config.sass.load_paths << Rails.root.join('vendor', 'coreui')
   end
 end
