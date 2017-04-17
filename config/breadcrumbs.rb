@@ -26,3 +26,12 @@ crumb :attendee do |attendee|
   link attendee.name || 'New'
   parent :attendees, attendee.event
 end
+
+crumb :check_points do
+  link 'Check Points', check_points_path
+end
+
+crumb :check_point do |point|
+  link point.name || 'New'
+  parent :check_points
+end
