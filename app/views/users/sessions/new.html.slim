@@ -1,0 +1,24 @@
+= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  .card-group
+    .card.p-4
+      .card-block
+        h1 Login
+        p.text-muted Sign In to your account
+        .input-group.mb-3
+          span.input-group-addon
+            i.icon-user
+          = f.input_field :email, label: false, class: 'form-control', required: false, autofocus: true, placeholder: 'Username'
+        .input-group.mb-4
+          span.input-group-addon
+            i.icon-lock
+          = f.input_field :password, label: false, class: 'form-control', required: false, placeholder: 'Password'
+        .row
+          .col-md-6
+            = f.button :submit, "Login", class: 'btn btn-primary px-4'
+          .col-md-6.text-md-right
+            = link_to "Forgot password?", new_password_path(resource_name), class: 'btn btn-link px-0'
+    .card.card-inverse.card-primary.py-5 style="width:44%"
+      .card-block.text-md-center
+          h2 Sign up
+          p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          = link_to "Register Now!", new_registration_path(resource_name), class: "btn btn-primary active mt-3"
