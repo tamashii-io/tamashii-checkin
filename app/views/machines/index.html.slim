@@ -1,11 +1,6 @@
-ol.breadcrumb
-  / TODO: Add breadcrum helper
-  li.breadcrumb-item
-    = link_to "Home", root_path
-  li.breadcrumb-item.active Machines
-  li.breadcrumb-menu
-    .btn-group
-      = link_to "新增裝置", new_machine_path, class:"btn btn-secondary"
+- breadcrumb :machines
+- content_for :breadcrumb_actions
+  = link_to "新增裝置", new_machine_path, class:"btn btn-secondary"
 .container-fluid
   .animated.fadeIn
     .row

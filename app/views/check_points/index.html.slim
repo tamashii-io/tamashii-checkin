@@ -1,11 +1,6 @@
-ol.breadcrumb
-  / TODO: Add breadcrum helper
-  li.breadcrumb-item
-    = link_to "Home", root_path
-  li.breadcrumb-item.active CheckPoint
-  li.breadcrumb-menu
-    .btn-group
-      = link_to "新增打卡點", new_check_point_path, class:"btn btn-secondary"
+- breadcrumb :check_points
+- content_for :breadcrumb_actions
+  = link_to "新增打卡點", new_check_point_path, class:"btn btn-secondary"
 .container-fluid
   .animated.fadeIn
     .row
