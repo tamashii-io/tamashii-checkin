@@ -35,3 +35,7 @@ crumb :check_point do |point|
   link point.name || 'New'
   parent :check_points
 end
+
+crumb :check_records do
+  link 'Check Records', check_records_path
+end
