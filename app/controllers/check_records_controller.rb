@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 # missing top-level class documentation comment
 class CheckRecordsController < ApplicationController
+  before_action :find_event
   before_action :find_checkrecord, only: [:edit, :update, :destroy]
   def index
-    @checkrecords = CheckRecord.all
+    @checkrecords = []
+    @event.attendees.each do |attendee|
+      @checkrecords << attendee.check_records
+    end
   end
 
   def create
@@ -32,5 +36,9 @@ class CheckRecordsController < ApplicationController
 
   def find_checkrecord
     @checkrecord = CheckRecord.find_by(id: params[:id])
+  end
+
+  def find_event
+    @event = Event.find(params[:event_id])
   end
 end
