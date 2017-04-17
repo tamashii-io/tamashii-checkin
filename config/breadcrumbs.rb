@@ -3,6 +3,10 @@ crumb :root do
   link 'Home', root_path
 end
 
+crumb :home do
+  link 'Dashbaord', root_path
+end
+
 crumb :events do
   link 'Events', events_path
 end
