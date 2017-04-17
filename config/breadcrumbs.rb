@@ -16,6 +16,11 @@ crumb :machines do
   link 'Machines', machines_path
 end
 
+crumb :machine do |machine|
+  link machine.name || 'New', machine
+  parent :machines
+end
+
 crumb :attendees do |event|
   link 'Attendees', event_attendees_path(event)
   # TODO: From events to event
