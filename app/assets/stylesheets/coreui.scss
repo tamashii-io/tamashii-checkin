@@ -1,0 +1,63 @@
+@import 'font-awesome';
+@import 'simple-line-icons';
+
+// Import normalize
+@import 'scss/bootstrap/normalize';
+
+// Override Boostrap variables
+@import 'bootstrap-variables';
+
+// Import Bootstrap source files
+@import 'scss/bootstrap/bootstrap';
+
+// Import vendors styles
+@import 'scss/vendors/vendors';
+@import 'coreui-variables';
+
+// Import core styles
+@import 'scss/core/mixins';
+
+// Additional typography
+@import 'scss/core/typography';
+
+// Animations
+@import 'scss/core/animate';
+
+// Core files
+@import 'scss/core/aside';
+@import 'scss/core/avatars';
+@import 'scss/core/badge';
+@import 'scss/core/breadcrumb-menu';
+@import 'scss/core/breadcrumb';
+@import 'scss/core/buttons';
+@import 'scss/core/callout';
+@import 'scss/core/card';
+@import 'scss/core/charts';
+@import 'scss/core/dropdown';
+@import 'scss/core/footer';
+@import 'scss/core/grid';
+@import 'scss/core/input-group';
+@import 'scss/core/layout';
+@import 'scss/core/loading';
+@import 'scss/core/modal';
+@import 'scss/core/nav';
+@import 'scss/core/navbar';
+@import 'scss/core/progress';
+@import 'scss/core/sidebar';
+@import 'scss/core/switches';
+@import 'scss/core/tables';
+@import 'scss/core/widgets';
+
+@import 'scss/core/others';
+
+// Utility classes
+@import 'scss/core/utilities';
+
+// Temporary fixes
+@import 'scss/core/temp';
+
+// Mobile View
+@import 'scss/core/mobile';
+
+// Right-to-left
+@import 'scss/core/rtl';

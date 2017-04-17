@@ -11,7 +11,10 @@ end
 gem 'rails', '~> 5.1.0.beta1'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
-gem 'sass-rails', github: "rails/sass-rails"
+gem 'sassc-rails'
+gem 'jquery-rails'
+gem 'font-awesome-rails'
+gem 'simple-line-icons-rails'
 
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker', github: "rails/webpacker"
@@ -22,10 +25,12 @@ gem 'redis', '~> 3.0'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'slim-rails'
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'simple_form'
 
+gem 'devise'
 
+gem 'settingslogic'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -58,6 +63,8 @@ group :development do
   gem 'pry-rails'
   gem 'hirb'
   gem 'awesome_print'
+
+  gem 'letter_opener'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
