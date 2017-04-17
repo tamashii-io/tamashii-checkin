@@ -1,0 +1,10 @@
+ol.breadcrumb
+  - breadcrumbs do |links|
+    - links.each do |link|
+      - if link.current?
+        li.breadcrumb-item.active = link.text
+      - else
+        li.breadcrumb-item = link_to link.text, link.url
+  li.breadcrumb-menu
+    .btn-group
+      = content_for :breadcrumb_actions

@@ -1,11 +1,6 @@
-ol.breadcrumb
-  / TODO: Add breadcrum helper
-  li.breadcrumb-item
-    = link_to "Home", root_path
-  li.breadcrumb-item.active Events
-  li.breadcrumb-menu
-    .btn-group
-      = link_to "新增活動", new_event_path, class:"btn btn-secondary"
+- content_for :breadcrumb_actions do
+  = link_to "新增活動", new_event_path, class:"btn btn-secondary"
+- breadcrumb :events
 .container-fluid
   .animated.fadeIn
     .row

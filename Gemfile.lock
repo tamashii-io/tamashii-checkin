@@ -101,6 +101,8 @@ GEM
       ruby-progressbar (~> 1.4)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    gretel (3.0.9)
+      rails (>= 3.1.0)
     hirb (0.7.3)
     i18n (0.8.1)
     jbuilder (2.6.3)
@@ -307,6 +309,7 @@ DEPENDENCIES
   faker
   font-awesome-rails
   fuubar
+  gretel
   hirb
   jbuilder (~> 2.5)
   jquery-rails
