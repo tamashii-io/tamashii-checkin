@@ -1,0 +1,13 @@
+default: &default
+  mailer:
+    url:
+      host: <%= ENV['MAILER_HOST'] %>
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

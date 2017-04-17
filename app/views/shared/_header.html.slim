@@ -5,3 +5,16 @@ header.app-header.navbar
     li.nav-item.px-1 = link_to "Events", events_path, class: 'nav-link'
     li.nav-item.px-1 = link_to "Machines", machines_path, class: 'nav-link'
   ul.nav.navbar-nav.ml-auto
+    / TODO: Write helper to do this
+    - if user_signed_in?
+      / TODO: Convert to use dropdown with avatar
+      li.nav-item.dropdown.px-4
+        a.nav-link.dropdown-toggle data-toggle="dropdown" href="#"
+          = image_tag current_user.avatar, class: 'img-avatar'
+          span = current_user.username
+        .dropdown-menu.dropdown-menu-right
+          .dropdown-header.text-sm-center
+            strong Settings
+          = link_to text_with_icon('fa fa-user', 'Profile'), edit_user_registration_path, class: 'dropdown-item'
+          .divider
+          = link_to text_with_icon('fa fa-lock', 'Logout'), destroy_user_session_path, class: 'dropdown-item', method: :delete
