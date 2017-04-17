@@ -11,5 +11,6 @@ AllCops:
     - db/*
     - vendor/ruby/**/*
     - config/initializers/simple_form_bootstrap.rb
+    - node_modules/**/*
 Rails:
   Enabled: true

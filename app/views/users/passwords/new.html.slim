@@ -1,0 +1,17 @@
+.col-md-5.mx-auto.pull-xs-none.vamiddle.animated.fadeIn
+  = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+    .card
+      .card-block.pa-4
+        h1 Forgot password?
+        p.text-muted Reset your password
+        .input-group.mb-4
+          span.input-group-addon @
+          = f.input_field :email, required: true, autofocus: true, placeholder: 'Email', class: 'form-control'
+
+        = f.button :submit, "Send me reset password instructions", class: 'btn btn-block btn-success'
+      .card-footer.pa-4
+        .row
+          .col-md-6
+            = link_to "Log in", new_session_path(resource_name), class: 'btn btn-block btn-primary'
+          .col-md-6
+            = link_to "Sign up", new_registration_path(resource_name), class: 'btn btn-block btn-primary'

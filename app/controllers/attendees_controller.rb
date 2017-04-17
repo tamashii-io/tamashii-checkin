@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 # AttendeesController
 class AttendeesController < ApplicationController
-  before_action :find_event, only: [:index, :new, :edit, :destroy, :update]
+  before_action :find_event
   before_action :find_attendee, only: [:edit, :destroy, :update]
 
   def index
@@ -9,7 +9,7 @@ class AttendeesController < ApplicationController
   end
 
   def new
-    @attendee = Attendee.new
+    @attendee = @event.attendees.new
   end
 
   def destroy
@@ -18,12 +18,12 @@ class AttendeesController < ApplicationController
   end
 
   def create
-    @attendee = Attendee.new(attendee_params)
+    @attendee = @event.attendees.new(attendee_params)
     return redirect_to event_attendees_path, notice: I18n.t('attendee.created') if @attendee.save
     render :new
   end
 
-  def edit(); end
+  def edit; end
 
   def update
     return redirect_to event_attendees_path, notice: I18n.t('attendee.updated') if @attendee.update_attributes(attendee_params)
@@ -33,7 +33,7 @@ class AttendeesController < ApplicationController
   private
 
   def attendee_params
-    params.require(:attendee).permit(:serial, :code, :name, :email, :phone, :card_serial, :event_id)
+    params.require(:attendee).permit(:serial, :code, :name, :email, :phone, :card_serial)
   end
 
   def find_attendee

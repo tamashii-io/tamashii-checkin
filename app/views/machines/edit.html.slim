@@ -1,8 +1,4 @@
-ol.breadcrumb
-  / TODO: Add breadcrum helper
-  li.breadcrumb-item = link_to "Home", root_path
-  li.breadcrumb-item = link_to "Machines", machines_path
-  li.breadcrumb-item.active Edit
+- breadcrumb :machine, @machine
 .container-fluid
   .animated.fadeIn
     .row
