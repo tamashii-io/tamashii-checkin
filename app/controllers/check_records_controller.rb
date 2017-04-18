@@ -4,10 +4,7 @@ class CheckRecordsController < ApplicationController
   before_action :find_event
   before_action :find_checkrecord, only: [:edit, :update, :destroy]
   def index
-    @checkrecords = []
-    @event.attendees.each do |attendee|
-      @checkrecords << attendee.check_records
-    end
+    @checkrecords = @event.check_records
   end
 
   def create
