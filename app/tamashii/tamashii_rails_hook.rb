@@ -9,6 +9,10 @@ class TamashiiRailsHook < Tamashii::Hook
   end
 
   def call(packet)
+    # rubocop:disable Rails/SkipsModelValidations
+    Tamashii::Machine.new(@client.id).touch
+    # rubocop:enable Rails/SkipsModelValidations
+
     return unless @client.authorized?
     return unless interested?(packet)
 

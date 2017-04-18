@@ -42,7 +42,7 @@ module Tamashii
     end
 
     def machine
-      @machine ||= Machine.find_by(serial: @client.id)
+      @machine ||= ::Machine.find_by(serial: @client.id)
     end
   end
 end

@@ -20,4 +20,5 @@ Rails.application.routes.draw do
 
   # Start tamashii manager
   mount Tamashii::Manager::Server => '/tamashii'
+  mount ActionCable.server => '/cable'
 end
