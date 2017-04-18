@@ -9,8 +9,15 @@ App.machines = App.cable.subscriptions.create("MachinesChannel", {
 
   received: function(data) {
       // TODO: Refactor to React Component
-      if(data.event === 'LAST_ACTIVE_UPDATED') {
-          $(`#${data.serial} .time`).text((new Date(data.last_active)).toLocaleString());
+      switch(data.event) {
+          case 'LAST_ACTIVE_UPDATED': {
+              $(`#${data.serial} .time`).text((new Date(data.last_active)).toLocaleString());
+              break;
+          }
+          case 'SHUTDOWN': {
+              $(`#${data.serial} .time`).text('');
+              break;
+          }
       }
   }
 });

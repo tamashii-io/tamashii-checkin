@@ -11,13 +11,18 @@ module Tamashii
     def touch
       time = Time.zone.now
       redis.hset(HASH_KEY, @serial, time)
-      broadcast_update(time)
+      cable_broadcast_update(time)
     end
 
     def last_active
       Time.zone.parse redis.hget(HASH_KEY, @serial)
     rescue ArgumentError
       nil
+    end
+
+    def close
+      redis.hdel(HASH_KEY, @serial)
+      cable_broadcast_close
     end
 
     def self.serials
@@ -36,13 +41,27 @@ module Tamashii
       Redis.current
     end
 
-    def broadcast_update(time)
+    def cable_broadcast_update(time)
+      return if @serial.match?(/Unauthorized/)
       event = {
         last_active: time,
         serial: @serial,
         event: 'LAST_ACTIVE_UPDATED'
       }
 
+      cable_broadcast event
+    end
+
+    def cable_broadcast_close
+      event = {
+        serial: @serial,
+        event: 'SHUTDOWN'
+      }
+
+      cable_broadcast event
+    end
+
+    def cable_broadcast(event)
       ActionCable.server.broadcast 'machines', event
     end
   end

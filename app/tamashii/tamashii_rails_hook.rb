@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+require_relative 'tamashii/manager/client'
+
 # Tamashii Rails Hook
 class TamashiiRailsHook < Tamashii::Hook
   INTERESTED_TYPES = [Tamashii::Type::RFID_NUMBER, Tamashii::Type::RFID_DATA].freeze
@@ -9,12 +11,12 @@ class TamashiiRailsHook < Tamashii::Hook
   end
 
   def call(packet)
+    return unless @client.authorized?
+    return unless interested?(packet)
+
     # rubocop:disable Rails/SkipsModelValidations
     Tamashii::Machine.new(@client.id).touch
     # rubocop:enable Rails/SkipsModelValidations
-
-    return unless @client.authorized?
-    return unless interested?(packet)
 
     Tamashii::Manager.logger.debug "Tamashii #{packet.type} Packet captured by Rails, #{packet.body}"
     handle(packet)
