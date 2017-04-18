@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   root 'home#index'
   resources :check_records
   resources :check_points
-  resources :machines
+  resources :machines do
+    scope module: :machines do
+      resources :actions, only: [:create]
+    end
+  end
   resources :events do
     resources :attendees
   end

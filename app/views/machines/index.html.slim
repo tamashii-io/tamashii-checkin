@@ -13,6 +13,7 @@
                   tr
                     th 裝置的機器序號
                     th 裝置名稱
+                    td 指令
                     th 處理
               tbody
                 - @machines.each do |machine|
@@ -20,5 +21,10 @@
                     td = machine.serial
                     td = machine.name
                     td
-                      = link_to "編輯", edit_machine_path(machine), class:"btn btn-primary"
-                      = link_to "刪除", machine_path(machine), method: "delete", data: { confirm: "確認刪除" }, class:"btn btn-danger"
+                      .btn-group
+                        = machine_command_button machine, :beep, :warning
+                        = machine_command_button machine, :restart
+                        = machine_command_button machine, :reboot
+                        = machine_command_button machine, :poweroff, :danger
+                    td
+                      = link_to "刪除", machine_path(machine), method: :delete, data: { confirm: "確認刪除" }, class: "btn btn-danger"

@@ -15,7 +15,7 @@ class TamashiiRailsHook < Tamashii::Hook
     Tamashii::Manager.logger.debug "Tamashii #{packet.type} Packet captured by Rails, #{packet.body}"
     handle(packet)
     # TODO: Save recent update information into Redis
-    machine&.touch
+    # machine&.touch
     true
   end
 
