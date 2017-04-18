@@ -2,7 +2,7 @@
 # missing top-level class documentation comment
 class CheckPoint < ApplicationRecord
   self.inheritance_column = :_type
-  has_many :check_record
+  has_many :check_records
   belongs_to :event
   belongs_to :machine
 
