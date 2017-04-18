@@ -5,6 +5,11 @@ class MachinesController < ApplicationController
 
   def index
     @machines = Machine.all
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @machines }
+    end
   end
 
   def new

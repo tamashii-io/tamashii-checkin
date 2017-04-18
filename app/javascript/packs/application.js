@@ -7,4 +7,16 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-console.log('Hello World from Webpacker')
+import MachineTableModule from './machine_table.jsx';
+
+const modules = {
+    machineTable: new MachineTableModule()
+};
+
+document.addEventListener('turbolinks:before-cache', () => {
+    modules.machineTable.unmount();
+});
+
+document.addEventListener('turbolinks:load', () => {
+    modules.machineTable.mount() ;
+});
