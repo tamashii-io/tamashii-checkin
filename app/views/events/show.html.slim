@@ -1,0 +1,44 @@
+- content_for :breadcrumb_actions
+  = link_to "新增打卡點", check_points_path, class:"btn btn-secondary"
+- breadcrumb :event, @event
+
+.container-fluid
+  .animated.fadeIn
+    .row
+      .col-sm-6.col-lg-3
+        .card.card-inverse.card-primary
+          .card-block.pb-2
+            span.pa-2.pull-right
+              i.icon-location-pin
+            h4.mb-2 = @event.attendees.count
+            p Attendees
+          .chart-wrapper.px-3 style="height: 70px;"
+            canvas#attendee-chart.chart.chart-line.fake-chart height="70" data-color="brandPrimary"
+      .col-sm-6.col-lg-3
+        .card.card-inverse.card-info
+          .card-block.pb-2
+            span.pa-2.pull-right
+              i.icon-location-pin
+            h4.mb-2 = 0
+            p Checked in attendees
+          .chart-wrapper.px-3 style="height: 70px;"
+            canvas#checkin-chart.chart.chart-line.fake-chart height="70" data-color="brandInfo"
+      .col-sm-6.col-lg-3
+        .card.card-inverse.card-success
+          .card-block.pb-2
+            span.pa-2.pull-right
+              i.icon-location-pin
+            h4.mb-2 = 0
+            p Total check-in
+          .chart-wrapper.px-3 style="height: 70px;"
+            canvas#checkin-chart.chart.chart-line.fake-chart height="70" data-color="brandSuccess"
+      .col-sm-6.col-lg-3
+        .card.card-inverse.card-info
+          .card-block.pb-2
+            span.pa-2.pull-right
+              i.icon-location-pin
+            h4.mb-2 = 0
+            p Total check-in
+          .chart-wrapper.px-3 style="height: 70px;"
+            canvas#checkin-chart.chart.chart-line.fake-chart height="70" data-color="brandInfo"
+
