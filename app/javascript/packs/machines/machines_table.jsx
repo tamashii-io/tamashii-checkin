@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 import store from './store';
 import { RECEIVE_MACHINES } from './constants';
 import { fetchMachines } from './action';
+
+const formatLastActive = date => (date ? moment(date).calendar() : '');
 
 // TODO: Bind ajax:success event for command result
 const CommandButton = ({ name, skin, link, command }) => (
@@ -44,7 +47,7 @@ const MachineTableItem = ({ machine }) => (
         />
       </div>
     </td>
-    <td />
+    <td>{formatLastActive(machine.lastActive)}</td>
     <td>
       <a href={machine.links.edit} className="btn btn-primary">編輯</a>
       <a
