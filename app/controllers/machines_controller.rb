@@ -15,7 +15,7 @@ class MachinesController < ApplicationController
     @machine = Machine.new(machine_params)
 
     if @machine.save
-      ActionCable.server.broadcast "index_channel", machine_nums: Machine.count
+      ActionCable.server.broadcast 'index_channel', machine_nums: Machine.count
       return redirect_to machines_path, notice: I18n.t('machine.created')
     else
       render :new
