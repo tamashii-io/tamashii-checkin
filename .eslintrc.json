@@ -11,6 +11,7 @@
     "globals": {
       "ActionCable": true,
       "$": true,
-      "document": true
+      "document": true,
+      "Chart": true
     }
 }
