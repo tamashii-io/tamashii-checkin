@@ -1,7 +1,11 @@
 import { EventEmitter } from 'events';
 import { fromJS, Record } from 'immutable';
 
-import { RECEIVE_MACHINES } from './constants';
+import {
+  RECEIVE_MACHINES,
+  LAST_ACTIVE_CHANGED,
+} from './constants';
+import { MachineChannel } from '../channels';
 
 const Machine = Record({
   id: 0,
@@ -20,7 +24,7 @@ class MachineStore extends EventEmitter {
   constructor() {
     super();
     this.machines = fromJS([]);
-    App.machines.received = (data) => { this.onReceive(data); };
+    MachineChannel.onReceived(action => this.dispatch(action));
   }
 
   update(serial, attr, value) {
@@ -31,24 +35,15 @@ class MachineStore extends EventEmitter {
     return this.machines.findIndex(machine => machine.serial === serial);
   }
 
-  // Processing ActionCable data
-  onReceive(data) {
-    switch (data.event) {
-      case 'LAST_ACTIVE_UPDATED': {
-        this.update(data.serial, 'lastActive', new Date(data.last_active));
-        this.emit(RECEIVE_MACHINES);
-        break;
-      }
-      default: {
-        break;
-      }
-    }
-  }
-
   dispatch(action) {
     switch (action.type) {
       case RECEIVE_MACHINES: {
         this.machines = fromJS(machinesToRecords(action.machines));
+        this.emit(action.type);
+        break;
+      }
+      case LAST_ACTIVE_CHANGED: {
+        this.update(action.serial, 'lastActive', new Date(action.last_active));
         this.emit(action.type);
         break;
       }
