@@ -7,7 +7,7 @@
       .col-lg-12
         .card
           .card-header = t('.title')
-          .card-block
+          #machines.card-block
             table.table.table-bordered.table-striped.table-condensed
               thead
                   tr
@@ -22,3 +22,4 @@
                     td
                       = link_to "編輯", edit_machine_path(machine), class:"btn btn-primary"
                       = link_to "刪除", machine_path(machine), method: "delete", data: { confirm: "確認刪除" }, class:"btn btn-danger"
+
