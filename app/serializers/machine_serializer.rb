@@ -8,7 +8,8 @@ class MachineSerializer < ActiveModel::Serializer
   attribute :links do
     {
       edit: edit_machine_path(object),
-      self: machine_path(object)
+      self: machine_path(object),
+      command: machine_actions_path(object)
     }
   end
 end
