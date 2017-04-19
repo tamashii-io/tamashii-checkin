@@ -20,3 +20,4 @@
             i.icon-puzzle
           .h4.mb-0 = Machine.count
           small.text-muted.text-uppercase.font-weight-bold Machines
+          = progress_bar(value: Machine.recent_update.count, max: Machine.count)

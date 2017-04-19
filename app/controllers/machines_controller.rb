@@ -5,6 +5,7 @@ class MachinesController < ApplicationController
 
   def index
     @machines = Machine.all
+    @machine_activities = Tamashii::Machine.activities
 
     respond_to do |format|
       format.html

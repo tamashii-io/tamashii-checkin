@@ -8,9 +8,17 @@ Rails.application.routes.draw do
 
   root 'home#index'
   resources :check_points
-  resources :machines
+  resources :machines do
+    scope module: :machines do
+      resources :actions, only: [:create]
+    end
+  end
   resources :events do
     resources :attendees
     resources :check_records
   end
+
+  # Start tamashii manager
+  mount Tamashii::Manager::Server => '/tamashii'
+  mount ActionCable.server => '/cable'
 end

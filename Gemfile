@@ -32,6 +32,7 @@ gem 'gretel'
 gem 'devise'
 
 gem 'settingslogic'
+gem 'tamashii-manager'
 gem 'active_model_serializers'
 
 group :development, :test do
