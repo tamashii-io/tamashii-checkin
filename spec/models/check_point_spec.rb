@@ -59,10 +59,18 @@ RSpec.describe CheckPoint, type: :model do
       expect(build(:check_point, name: 'name', machine_id: machines[1].id, event_id: event_c.id)).to be_valid
     end
 
-    it 'three event overlap' do
+    it 'three event overlap1' do
       create(:check_point, name: 'name', machine_id: machines[0].id, event_id: event_b.id)
       expect(build(:check_point, name: 'name', machine_id: machines[0].id, event_id: event_a.id)).to be_valid
+    end
+
+    it 'three event overlap2' do
+      create(:check_point, name: 'name', machine_id: machines[0].id, event_id: event_b.id)
       expect(build(:check_point, name: 'name', machine_id: machines[0].id, event_id: event_b.id)).not_to be_valid
+    end
+
+    it 'three event overlap3' do
+      create(:check_point, name: 'name', machine_id: machines[0].id, event_id: event_b.id)
       expect(build(:check_point, name: 'name', machine_id: machines[0].id, event_id: event_c.id)).not_to be_valid
     end
   end
