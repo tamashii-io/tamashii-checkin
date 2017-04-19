@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 
 import store from './store';
-import { RECEIVE_MACHINES } from './constants';
+import {
+  RECEIVE_MACHINES,
+  LAST_ACTIVE_CHANGED,
+} from './constants';
 import { fetchMachines } from './action';
 
 const formatLastActive = date => (date ? moment(date).calendar() : '');
@@ -68,6 +71,7 @@ class MachinesTable extends React.Component {
   constructor(props) {
     super(props);
     store.on(RECEIVE_MACHINES, () => this.setState({ machines: store.machines }));
+    store.on(LAST_ACTIVE_CHANGED, () => this.setState({ machines: store.machines }));
     this.state = {
       machines: [],
     };
