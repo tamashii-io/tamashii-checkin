@@ -1,7 +1,6 @@
-= simple_form_for(@checkpoint) do |f|
+= simple_form_for [@event, @checkpoint] do |f|
   .card-block
     = f.input :name
-    = f.input :machine_id
-    = f.input :event_id
+    = f.association :machine
   .card-footer
     = f.button :submit, class: 'btn btn-primary'
