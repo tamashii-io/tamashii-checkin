@@ -6,6 +6,11 @@ class MachinesController < ApplicationController
   def index
     @machines = Machine.all
     @machine_activities = Tamashii::Machine.activities
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @machines }
+    end
   end
 
   def new

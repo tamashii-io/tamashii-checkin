@@ -18,7 +18,7 @@
               tbody
                 - @events.each do |event|
                   tr
-                    td = link_to event.name, event_attendees_path(event.id)
+                    td = link_to event.name, event_path(event.id)
                     td = l event.start_at
                     td = l event.end_at
                     td

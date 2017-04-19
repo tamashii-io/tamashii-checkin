@@ -1,0 +1,2 @@
+export const RECEIVE_MACHINES = 'RECEIVE_MACHINES';
+export default RECEIVE_MACHINES;

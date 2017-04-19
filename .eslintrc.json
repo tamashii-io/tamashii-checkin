@@ -1,0 +1,17 @@
+{
+    "extends": "airbnb",
+    "rules": {
+      "import/extensions": ["error", "never", {"js": "never", "jsx": "always"}]
+    },
+    "plugins": [
+        "react",
+        "jsx-a11y",
+        "import"
+    ],
+    "globals": {
+      "ActionCable": true,
+      "$": true,
+      "document": true,
+      "Chart": true
+    }
+}
