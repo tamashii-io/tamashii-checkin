@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+module Machines
+  # Machine::ActionsController
+  class ActionsController < ApplicationController
+    before_action -> { @machine = Machine.find(params[:machine_id]) }
+
+    def create
+      @machine.send(command) if @machine.respond_to?(command)
+    end
+
+    def command
+      params.fetch(:command, nil).to_sym
+    end
+  end
+end

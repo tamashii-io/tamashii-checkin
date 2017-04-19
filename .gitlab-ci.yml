@@ -53,6 +53,16 @@ rubocop:
   script:
     - rubocop
 
+eslint:
+  stage: test
+  image: "node:7.4"
+  services: []
+  before_script:
+    - npm install
+  script:
+    - npm run eslint
+
+
 scsslint:
   stage: test
   services: []

@@ -1,5 +1,5 @@
 ol.breadcrumb
-  - breadcrumbs do |links|
+  - breadcrumbs.tap do |links|
     - links.each do |link|
       - if link.current?
         li.breadcrumb-item.active = link.text

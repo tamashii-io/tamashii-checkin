@@ -16,5 +16,6 @@ module TamashiiCheckin
     config.i18n.default_locale = :"zh-TW"
 
     config.sass.load_paths << Rails.root.join('vendor', 'coreui')
+    config.autoload_paths << Rails.root.join('app', 'tamashii')
   end
 end
