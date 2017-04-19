@@ -12,6 +12,7 @@
       "ActionCable": true,
       "$": true,
       "document": true,
-      "Chart": true
+      "Chart": true,
+      "App": true
     }
 }
