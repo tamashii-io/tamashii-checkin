@@ -83,6 +83,7 @@ class MachinesTable extends React.Component {
 
   componentWillUnmount() {
     store.removeAllListeners(RECEIVE_MACHINES);
+    store.removeAllListeners(LAST_ACTIVE_CHANGED);
   }
 
   render() {
