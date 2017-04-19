@@ -2,6 +2,12 @@
 // All this logic will automatically be available in application.js.
 // TODO: Move everythings to javascript/packs
 
+const charts = [];
+
+document.addEventListener('turbolinks:before-cache', () => {
+  charts.forEach(chart => chart.destroy());
+});
+
 document.addEventListener('turbolinks:load', () => {
   const $charts = document.querySelectorAll('.fake-chart');
   $charts.forEach(($el) => {
@@ -56,10 +62,10 @@ document.addEventListener('turbolinks:load', () => {
       },
     };
 
-    new Chart($el, {
+    charts.push(new Chart($el, {
       type: 'line',
       data,
       options,
-    });
+    }));
   });
 });

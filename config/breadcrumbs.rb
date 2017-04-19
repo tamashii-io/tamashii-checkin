@@ -27,8 +27,7 @@ end
 
 crumb :attendees do |event|
   link 'Attendees', event_attendees_path(event)
-  # TODO: From events to event
-  parent :events
+  parent :event, event
 end
 
 crumb :attendee do |attendee|
