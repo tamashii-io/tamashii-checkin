@@ -13,4 +13,5 @@ Rails.application.routes.draw do
     resources :attendees
     resources :check_records
   end
+  mount ActionCable.server, at: '/cable'
 end

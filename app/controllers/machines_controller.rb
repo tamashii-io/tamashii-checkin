@@ -14,8 +14,12 @@ class MachinesController < ApplicationController
   def create
     @machine = Machine.new(machine_params)
 
-    return redirect_to machines_path, notice: I18n.t('machine.created') if @machine.save
-    render :new
+    if @machine.save
+      ActionCable.server.broadcast "index_channel", machine_nums: Machine.count
+      return redirect_to machines_path, notice: I18n.t('machine.created')
+    else
+      render :new
+    end
   end
 
   def edit; end
