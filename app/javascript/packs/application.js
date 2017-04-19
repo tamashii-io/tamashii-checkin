@@ -7,16 +7,17 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-import MachineTableModule from './machine_table.jsx';
+import Mounter from './helpers/mounter.jsx';
+import MachinesTable from './machines/machines_table.jsx';
 
 const modules = {
-    machineTable: new MachineTableModule()
+  machines: new Mounter('#machines', MachinesTable),
 };
 
 document.addEventListener('turbolinks:before-cache', () => {
-    modules.machineTable.unmount();
+  modules.machines.unmount();
 });
 
 document.addEventListener('turbolinks:load', () => {
-    modules.machineTable.mount() ;
+  modules.machines.mount();
 });

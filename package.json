@@ -1,5 +1,8 @@
 {
   "name": "tamashii-checkin",
+  "scripts": {
+    "eslint": "eslint app/assets/javascripts app/javascript/packs --ext .js --ext .jsx"
+  },
   "private": true,
   "dependencies": {
     "babel-core": "^6.24.0",
@@ -20,6 +23,11 @@
     "webpack-merge": "^4.0.0"
   },
   "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
     "webpack-dev-server": "^2.4.2"
   }
 }
