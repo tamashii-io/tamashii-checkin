@@ -3,6 +3,7 @@ import React from 'react';
 import InverseCardChart from '../components/inverse_card_chart.jsx';
 import { LineFullWidth } from '../options/chart';
 
+// TODO: Use real-time data
 const labels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
 const Charts = [
@@ -23,7 +24,7 @@ const buildCharts = datasets => (
           datasets={datasets}
           icon={chart.icon}
           skin={chart.skin}
-          options={LineFullWidth}
+          options={Object.assign({}, LineFullWidth, { animation: false })}
           fullWidth
         />
       </div>
@@ -45,6 +46,7 @@ class Dashboard extends React.Component {
     clearTimeout(this.timer);
   }
 
+  // TODO: Use real-time data
   updateData() {
     const data = this.state.data;
     data.shift();
