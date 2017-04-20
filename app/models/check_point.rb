@@ -13,11 +13,18 @@ class CheckPoint < ApplicationRecord
   validate :machine_available, on: :create
 
   enum type: {
-    checkin: 0,
-    room: 1
+    registrar: 0,
+    site: 1
   }
 
+  def register(card_serial)
+    return if event.attendees.where(card_serial: card_serial).exists?
+    # TODO: return if registrar.present?
+    # TODO: ActionCable broadcast to registrar
+  end
+
   def checkin(attendee)
+    return unless attendee.present?
     latest_record(attendee).increment
   end
 
