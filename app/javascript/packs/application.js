@@ -8,16 +8,18 @@
 // layout file, like app/views/layouts/application.html.erb
 
 import Mounter from './helpers/mounter.jsx';
+import EventDashboard from './events/dashboard.jsx';
 import MachinesTable from './machines/machines_table.jsx';
 
-const modules = {
-  machines: new Mounter('#machines', MachinesTable),
-};
+const modules = [
+  new Mounter('#machines', MachinesTable),
+  new Mounter('#event', EventDashboard),
+];
 
 document.addEventListener('turbolinks:before-cache', () => {
-  modules.machines.unmount();
+  modules.forEach(module => module.unmount());
 });
 
 document.addEventListener('turbolinks:load', () => {
-  modules.machines.mount();
+  modules.forEach(module => module.mount());
 });
