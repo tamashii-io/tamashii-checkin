@@ -31,3 +31,4 @@ export default Channel;
 // Channels
 export const MachineChannel = new Channel('MachinesChannel');
 export const CheckpointChannel = new Channel('CheckpointsChannel');
+export const DashboardChannel = new Channel('DashboardsChannel');
