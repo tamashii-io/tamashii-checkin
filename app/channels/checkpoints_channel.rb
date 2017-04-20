@@ -3,7 +3,7 @@
 class CheckpointsChannel < ApplicationCable::Channel
   def subscribed
     # stream_from "some_channel"
-    strean_from 'checkpoint_channel'
+    stream_from 'checkpoint_channel'
   end
 
   def unsubscribed

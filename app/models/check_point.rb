@@ -9,14 +9,20 @@ class CheckPoint < ApplicationRecord
   belongs_to :event
   belongs_to :machine
 
-  validates :name, presence: true
-  validate :machine_available
+  validates :name, :type, presence: true
+  validate :machine_available, on: :create
+
+  enum type: {
+    checkin: 0,
+    room: 1
+  }
 
   def checkin(attendee)
     latest_record(attendee).increment
   end
 
   def machine_available
+    return unless machine.present?
     return unless machine.events.overlap(event.peroid).any?
     errors.add(:machine, '這時間已經有人使用此機器')
   end

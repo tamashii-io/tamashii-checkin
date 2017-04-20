@@ -10,6 +10,10 @@ class Machine < ApplicationRecord
     check_points.find_by(event: events.now)
   end
 
+  def current_event
+    events.now.first
+  end
+
   # TODO: Use ruby auto generate below code
   def beep(type = 'ok')
     process_command :beep, type

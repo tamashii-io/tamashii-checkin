@@ -18,6 +18,7 @@ module Tamashii
       raise InvalidCardError, 'Invalid Card' if card_id.blank?
       raise UnregisterMachineError, 'Unregister Machine' unless machine.present?
       # TODO: Handle Register
+      check_point.checkin(attendee)
       response auth: true, reason: 'checkin'
     rescue CardError => e
       response auth: false, reason: e.message
@@ -47,6 +48,11 @@ module Tamashii
 
     def check_point
       machine.current_event_check_point
+    end
+
+    def attendee
+      # TODO: Find user by Card ID
+      machine.current_event.attendees.first
     end
   end
 end
