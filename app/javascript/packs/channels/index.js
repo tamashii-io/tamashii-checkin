@@ -30,3 +30,4 @@ export default Channel;
 
 // Channels
 export const MachineChannel = new Channel('MachinesChannel');
+export const DashboardChannel = new Channel('DashboardsChannel');
