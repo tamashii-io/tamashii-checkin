@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :events do
     resources :attendees
     resources :check_records
+    resources :check_points
   end
 
   # Start tamashii manager

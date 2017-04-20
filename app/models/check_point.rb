@@ -5,6 +5,8 @@ class CheckPoint < ApplicationRecord
   has_many :check_records
   belongs_to :event
   belongs_to :machine
+  validates :name, presence: true
+  validate :machine_available
 
   def checkin(attendee_id)
     @record = CheckRecord.where(attendee_id: attendee_id, check_point_id: id)
@@ -16,6 +18,15 @@ class CheckPoint < ApplicationRecord
   end
 
   private
+
+  def machine_available
+    machine_selected = Machine.find(machine_id)
+    machine_selected.events.each do |machine_time|
+      unless Event.where('end_at < ? OR start_at > ?', machine_time.start_at, machine_time.end_at).any?
+        errors.add(:machine, '這時間已經有人使用此機器')
+      end
+    end
+  end
 
   def in_time_range?(attendee_id)
     last_record = @record.last

@@ -1,6 +1,6 @@
 - breadcrumb :check_points
 - content_for :breadcrumb_actions
-  = link_to "新增打卡點", new_check_point_path, class:"btn btn-secondary"
+  = link_to "新增打卡點", new_event_check_point_path, class:"btn btn-secondary"
 .container-fluid
   .animated.fadeIn
     .row
@@ -24,5 +24,5 @@
                     td= checkpoint.machine_id
                     td= checkpoint.event_id
                     td
-                      = link_to "編輯", edit_check_point_path(checkpoint), class:"btn btn-primary"
-                      = link_to "刪除", check_point_path(checkpoint), method: "delete", data: { confirm: "確認刪除" }, class:"btn btn-danger"
+                      = link_to "編輯", edit_event_check_point_path(params[:event_id],checkpoint), class:"btn btn-primary"
+                      = link_to "刪除", event_check_point_path(params[:event_id],checkpoint), method: "delete", data: { confirm: "確認刪除" }, class:"btn btn-danger"
