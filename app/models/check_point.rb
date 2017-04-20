@@ -2,9 +2,11 @@
 # missing top-level class documentation comment
 class CheckPoint < ApplicationRecord
   self.inheritance_column = :_type
+
   has_many :check_records
   belongs_to :event
   belongs_to :machine
+
   validates :name, presence: true
   validate :machine_available
 
@@ -17,16 +19,12 @@ class CheckPoint < ApplicationRecord
     end
   end
 
-  private
-
   def machine_available
-    machine_selected = Machine.find(machine_id)
-    machine_selected.events.each do |machine_time|
-      unless Event.where('end_at < ? OR start_at > ?', machine_time.start_at, machine_time.end_at).any?
-        errors.add(:machine, '這時間已經有人使用此機器')
-      end
-    end
+    return unless machine.events.overlap(event.peroid).any?
+    errors.add(:machine, '這時間已經有人使用此機器')
   end
+
+  private
 
   def in_time_range?(attendee_id)
     last_record = @record.last

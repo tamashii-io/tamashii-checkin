@@ -44,5 +44,9 @@ module Tamashii
     def machine
       @machine ||= ::Machine.find_by(serial: @client.id)
     end
+
+    def check_point
+      machine.current_event_check_point
+    end
   end
 end
