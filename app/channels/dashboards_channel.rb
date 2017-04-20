@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 # missing top-level class documentation comment
-class IndexChannel < ApplicationCable::Channel
+class DashboardsChannel < ApplicationCable::Channel
   def subscribed
     # stream_from "some_channel"
-    stream_from 'index_channel'
+    stream_from 'dashboards'
   end
 
   def unsubscribed
