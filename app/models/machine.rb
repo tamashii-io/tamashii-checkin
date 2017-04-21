@@ -44,5 +44,4 @@ class Machine < ApplicationRecord
   def process_command(command, options = nil)
     Tamashii::Commander.new(self, command).process(options)
   end
-
 end
