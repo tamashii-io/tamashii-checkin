@@ -35,9 +35,14 @@ class Machine < ApplicationRecord
     process_command :update
   end
 
+  def to_s
+    name
+  end
+
   private
 
   def process_command(command, options = nil)
     Tamashii::Commander.new(self, command).process(options)
   end
+
 end

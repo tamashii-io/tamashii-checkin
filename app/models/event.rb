@@ -11,4 +11,8 @@ class Event < ApplicationRecord
   def peroid
     start_at..end_at
   end
+  
+  def to_s
+    name
+  end
 end
