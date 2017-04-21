@@ -3,18 +3,24 @@
 class RegistrarChannel < ApplicationCable::Channel
   EVENTS = {
     register: 'REGISTER',
-    success: 'REGISTER_SUCCESS'
+    success: 'REGISTER_SUCCESS',
+    update: 'REGISTER_UPDATE'
   }.freeze
 
   class << self
     def register(registrar, serial)
       broadcast_to(registrar, type: EVENTS[:register], serial: serial)
     end
+
+    def update(attendee)
+      broadcast_to(attendee.event, type: EVENTS[:update], attendee: attendee)
+    end
   end
 
   def follow(data)
     stop_all_streams
     event = Event.find(data['event_id'])
+    stream_for event
     stream_for [current_user, event]
   end
 
