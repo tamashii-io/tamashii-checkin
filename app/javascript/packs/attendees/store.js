@@ -6,6 +6,7 @@ import {
   START_REGISTER,
   REGISTER,
   REGISTER_SUCCESS,
+  REGISTER_UPDATE,
   CANCEL_REGISTER,
 } from './constants';
 import { RegistrarChannel } from '../channels';
@@ -76,6 +77,15 @@ class AttendeeStore extends EventEmitter {
         this.emit(action.type, this.attendees);
         break;
       }
+      case REGISTER_UPDATE: {
+        const attendee = new Attendee(action.attendee);
+        this.update(attendee.id, attendee);
+        if (this.nextRegisterAttendeeId === attendee.id) {
+          this.nextRegisterAttendeeId = 0;
+        }
+        this.emit(action.type, this.attendees, this.nextRegisterAttendeeId);
+        break;
+      }
       case CANCEL_REGISTER: {
         this.nextRegisterAttendeeId = 0;
         break;
@@ -91,6 +101,7 @@ class AttendeeStore extends EventEmitter {
     this.removeAllListeners(START_REGISTER);
     this.removeAllListeners(REGISTER);
     this.removeAllListeners(REGISTER_SUCCESS);
+    this.removeAllListeners(REGISTER_UPDATE);
     this.removeAllListeners(CANCEL_REGISTER);
   }
 }

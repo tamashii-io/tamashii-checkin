@@ -8,6 +8,7 @@ import {
   START_REGISTER,
   CANCEL_REGISTER,
   REGISTER_SUCCESS,
+  REGISTER_UPDATE,
 } from './constants';
 import { fetchAttendees } from './actions';
 import { RegistrarChannel } from '../channels';
@@ -34,6 +35,10 @@ class AttendeesTable extends React.Component {
   componentDidMount() {
     store.on(RECEIVE_ATTENDEES, attendees => this.setState({ attendees }));
     store.on(START_REGISTER, attendeeId => this.setState({ nextRegisterAttendeeId: attendeeId }));
+    store.on(
+      REGISTER_UPDATE,
+      (attendees, nextId) => this.setState({ attendees, nextRegisterAttendeeId: nextId }),
+    );
     store.on(
       REGISTER_SUCCESS,
       attendees => this.setState({ attendees, nextRegisterAttendeeId: 0 }),
