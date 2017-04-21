@@ -11,7 +11,8 @@ export default class Mounter {
     const $el = document.querySelector(this.selector);
     const Component = this.component;
     if ($el) {
-      ReactDOM.render(<Component />, $el);
+      const dataset = $el.dataset;
+      ReactDOM.render(<Component {...dataset} />, $el);
     }
   }
 

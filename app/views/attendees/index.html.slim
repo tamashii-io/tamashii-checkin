@@ -8,27 +8,26 @@
         .card
           .card-header = t('.title')
           .card-block
-            table.table.table-bordered.table-striped.table-condensed
-              thead
-                tr
-                  td 報名序號
-                  td 報導代碼
-                  td 會眾名字
-                  td 會眾信箱
-                  td 會眾手機
-                  td 卡片序號
-                  td 所參加的活動
-                  td 處理
-              tbody
-                - @attendees.each do |attendee|
+            #attendees data-event-id="#{@event.id}"
+              table.table.table-bordered.table-striped.table-condensed
+                thead
                   tr
-                    td = attendee.serial
-                    td = attendee.code
-                    td = attendee.name
-                    td = attendee.email
-                    td = attendee.phone
-                    td = attendee.card_serial
-                    td = attendee.event_id
-                    td
-                      = link_to "編輯", edit_event_attendee_path(params[:event_id],attendee), class: 'btn btn-primary'
-                      = link_to "刪除", event_attendee_path(params[:event_id],attendee), class: 'btn btn-danger', method: "delete", data: { confirm: "確認刪除" }
+                    th 報名序號
+                    th 報到代碼
+                    th 姓名
+                    th 信箱
+                    th 手機
+                    th 卡片序號
+                    th 處理
+                tbody
+                  - @attendees.each do |attendee|
+                    tr
+                      td = attendee.serial
+                      td = attendee.code
+                      td = attendee.name
+                      td = attendee.email
+                      td = attendee.phone
+                      td = attendee.card_serial
+                      td
+                        = link_to "編輯", edit_event_attendee_path(params[:event_id],attendee), class: 'btn btn-primary'
+                        = link_to "刪除", event_attendee_path(params[:event_id],attendee), class: 'btn btn-danger', method: "delete", data: { confirm: "確認刪除" }

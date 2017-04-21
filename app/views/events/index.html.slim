@@ -24,4 +24,3 @@
                     td
                       = link_to "編輯", edit_event_path(event), class: 'btn btn-primary'
                       = link_to "刪除", event_path(event), class: 'btn btn-danger', method: "delete", data: { confirm: "確認刪除" }
-                      = link_to " 打卡點", event_check_points_path(event.id)

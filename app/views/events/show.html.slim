@@ -1,5 +1,5 @@
 - content_for :breadcrumb_actions
-  = link_to "新增打卡點", check_points_path, class: "btn btn-secondary"
+  = link_to "打卡點", event_check_points_path(@event), class: "btn btn-secondary"
   = link_to "會眾管理", event_attendees_path(@event), class: "btn btn-secondary"
 - breadcrumb :event, @event
 

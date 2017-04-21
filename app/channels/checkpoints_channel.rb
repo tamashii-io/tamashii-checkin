@@ -2,8 +2,7 @@
 # missing top-level class documentation comment
 class CheckpointsChannel < ApplicationCable::Channel
   def subscribed
-    # stream_from "some_channel"
-    strean_from 'checkpoint_channel'
+    stream_for current_user
   end
 
   def unsubscribed

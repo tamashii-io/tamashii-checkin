@@ -10,10 +10,12 @@
 import Mounter from './helpers/mounter.jsx';
 import EventDashboard from './events/dashboard.jsx';
 import MachinesTable from './machines/machines_table.jsx';
+import AttendeesTable from './attendees/attendees_table.jsx';
 
 const modules = [
   new Mounter('#machines', MachinesTable),
   new Mounter('#event', EventDashboard),
+  new Mounter('#attendees', AttendeesTable),
 ];
 
 document.addEventListener('turbolinks:before-cache', () => {

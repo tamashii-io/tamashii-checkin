@@ -25,7 +25,7 @@ const InverseCardChart = ({
       <h4 className="mb-2">{value}</h4>
       <p>{label}</p>
     </div>
-    <div className={chartWrapperClass(fullWidth)}>
+    <div className={chartWrapperClass(fullWidth)} style={{ height: '70px' }}>
       <Chart
         datasets={datasets}
         options={options}
