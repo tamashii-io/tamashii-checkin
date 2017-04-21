@@ -6,6 +6,11 @@ class AttendeesController < ApplicationController
 
   def index
     @attendees = @event.attendees
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @attendees }
+    end
   end
 
   def new
