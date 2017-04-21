@@ -9,6 +9,7 @@ class User < ApplicationRecord
   def username
     email.split('@').first
   end
+  alias to_s username
 
   def avatar(size: 80)
     hash = Digest::MD5.hexdigest(email)

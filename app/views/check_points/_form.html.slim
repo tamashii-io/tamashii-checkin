@@ -3,5 +3,6 @@
     = f.input :name
     = f.input :type, collection: CheckPoint.types.keys
     = f.association :machine
+    = f.association :registrar
   .card-footer
     = f.button :submit, class: 'btn btn-primary'

@@ -28,7 +28,10 @@ class MachineStore extends EventEmitter {
   }
 
   update(serial, attr, value) {
-    this.machines = this.machines.update(this.index(serial), item => item.set(attr, value));
+    const index = this.index(serial);
+    if (index >= 0) {
+      this.machines = this.machines.update(index, item => item.set(attr, value));
+    }
   }
 
   index(serial) {

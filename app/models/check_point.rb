@@ -8,6 +8,7 @@ class CheckPoint < ApplicationRecord
   has_many :check_records
   belongs_to :event
   belongs_to :machine
+  belongs_to :registrar, class_name: 'User', optional: true
 
   validates :name, :type, presence: true
   validate :machine_available, on: :create
@@ -19,8 +20,8 @@ class CheckPoint < ApplicationRecord
 
   def register(card_serial)
     return if event.attendees.where(card_serial: card_serial).exists?
-    # TODO: return if registrar.present?
-    # TODO: ActionCable broadcast to registrar
+    return unless registrar.present?
+    RegistrarChannel.register([registrar, event], card_serial)
   end
 
   def checkin(attendee)
