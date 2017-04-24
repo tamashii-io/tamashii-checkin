@@ -1,0 +1,23 @@
+- breadcrumb :staffs, @event
+- content_for :breadcrumb_actions
+  = link_to "新增工作人員", new_event_staff_path(@event), class:"btn btn-secondary"
+.container-fluid
+  .animated.fadeIn
+    .row
+      .col-lg-12
+        .card
+          .card-header = t('.title')
+          .card-block
+            #staffs
+              table.table.table-bordered.table-striped.table-condensed
+                thead
+                  tr
+                    th 名稱
+                    th 處理
+                tbody
+                  - @staffs.each do |staff|
+                    tr
+                      td = staff
+                      td
+                        = link_to "編輯", edit_event_staff_path(@event, staff), class: 'btn btn-primary'
+                        = link_to "刪除", event_staff_path(@event, staff), class: 'btn btn-danger', method: "delete", data: { confirm: "確認刪除" }
