@@ -10,4 +10,8 @@ class Attendee < ApplicationRecord
     return if card_serial.present?
     update_attributes(card_serial: serial)
   end
+
+  def to_s
+    name
+  end
 end

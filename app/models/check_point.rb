@@ -38,4 +38,8 @@ class CheckPoint < ApplicationRecord
   def latest_record(attendee)
     check_records.active.first_or_create(attendee: attendee)
   end
+
+  def to_s
+    name
+  end
 end

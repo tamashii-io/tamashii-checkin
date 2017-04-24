@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   before_action :find_event, only: [:show, :edit, :update, :destroy]
 
   def index
-    @events = Event.all
+    @events = current_user.events
   end
 
   def show; end
@@ -20,6 +20,8 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
+    # TODO: Let admin can manage all events and add new staff
+    @event.staffs << current_user
     return redirect_to events_path, notice: I18n.t('event.created') if @event.save
     render :new
   end
@@ -38,6 +40,6 @@ class EventsController < ApplicationController
   end
 
   def find_event
-    @event = Event.find_by(id: params[:id])
+    @event = current_user.events.find_by(id: params[:id])
   end
 end
