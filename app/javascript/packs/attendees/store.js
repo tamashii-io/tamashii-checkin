@@ -37,7 +37,7 @@ class AttendeeStore extends EventEmitter {
 
   update(attendeeId, newAttendee) {
     const index = this.index(attendeeId);
-    if (index > 0) {
+    if (index >= 0) {
       this.attendees = this.attendees.set(index, newAttendee);
     }
   }

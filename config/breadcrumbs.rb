@@ -39,6 +39,11 @@ crumb :check_points do
   link 'Check Points', check_points_path
 end
 
+crumb :check_points do |event|
+  link 'Check Records', event_check_points_path(event)
+  parent :event, event
+end
+
 crumb :check_point do |point|
   link point.name || 'New'
   parent :check_points
@@ -46,6 +51,11 @@ end
 
 crumb :check_records do
   link 'Check Records', check_records_path
+end
+
+crumb :check_records do |event|
+  link 'Check Records', event_check_records_path(event)
+  parent :event, event
 end
 
 crumb :user do |user|
