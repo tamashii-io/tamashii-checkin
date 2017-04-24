@@ -21,8 +21,8 @@
                   tr
                     td= checkpoint.name
                     td= checkpoint.type
-                    td= checkpoint.machine_id
-                    td= checkpoint.event_id
+                    td= checkpoint.machine
+                    td= checkpoint.event
                     td
                       = link_to "編輯", edit_event_check_point_path(params[:event_id],checkpoint), class:"btn btn-primary"
                       = link_to "刪除", event_check_point_path(params[:event_id],checkpoint), method: "delete", data: { confirm: "確認刪除" }, class:"btn btn-danger"

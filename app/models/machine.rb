@@ -35,6 +35,10 @@ class Machine < ApplicationRecord
     process_command :update
   end
 
+  def to_s
+    name
+  end
+
   private
 
   def process_command(command, options = nil)
