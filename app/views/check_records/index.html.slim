@@ -16,7 +16,7 @@
                 tbody
                   - @checkrecords.each do |checkrecord|
                     tr
-                      td= checkrecord.attendee_id
-                      td= checkrecord.checkpoint_id
+                      td= checkrecord.attendee
+                      td= link_to checkrecord.check_point
                       td= checkrecord.times
-                      td= checkrecord.updated_at
+                      td= l checkrecord.updated_at

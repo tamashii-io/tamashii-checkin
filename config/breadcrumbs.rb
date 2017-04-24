@@ -58,6 +58,16 @@ crumb :check_records do |event|
   parent :event, event
 end
 
+crumb :staffs do |event|
+  link 'Staffs', event_staffs_path(event)
+  parent :event, event
+end
+
+crumb :staff do |staff|
+  link staff.user || 'New'
+  parent :staffs, staff.event
+end
+
 crumb :user do |user|
   link user.username
 end
