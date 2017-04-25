@@ -1,5 +1,5 @@
 # base image
-image: "ruby:2.4.0"
+image: "ruby:2.4.1"
 
 # Services
 services:
