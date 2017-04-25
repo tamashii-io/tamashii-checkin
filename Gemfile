@@ -68,6 +68,11 @@ group :development do
   gem 'awesome_print'
 
   gem 'letter_opener'
+
+  gem 'capistrano', '~> 3.6'
+  gem 'capistrano-rails', '~> 1.2'
+  gem 'capistrano-passenger'
+  gem 'capistrano-upload-config'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

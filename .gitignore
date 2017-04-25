@@ -22,3 +22,6 @@
 
 .env
 npm-debug.log
+
+config/database.*.yml
+config/settings.*.yml
