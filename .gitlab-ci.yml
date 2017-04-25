@@ -76,7 +76,7 @@ deploy_to_staging:
   stage: staging
   before_script:
     - gem install bundler -v 1.13.7 --no-ri --no-rdoc
-    - bundle install -j ($nproc) --path vendor
+    - bundle install -j $(nproc) --path vendor
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
     - ssh-add <(echo "$SSH_PRIVATE_KEY")
