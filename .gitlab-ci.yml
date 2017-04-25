@@ -74,6 +74,8 @@ scsslint:
 
 deploy_to_staging:
   stage: staging
+  only:
+    - develop
   before_script:
     - gem install bundler -v 1.13.7 --no-ri --no-rdoc
     - bundle install -j $(nproc) --path vendor
