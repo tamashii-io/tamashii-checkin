@@ -25,3 +25,4 @@ npm-debug.log
 
 config/database.*.yml
 config/settings.*.yml
+config/secrets.*.yml
