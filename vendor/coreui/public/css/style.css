@@ -6067,7 +6067,7 @@ body {
 .avatars-stack .avatar {
   margin-right: -15px;
   transition-duration: 0.25s, 0.25s;
-  transition-property: margin-left, margin-right; }
+  transition: margin-left, margin-right; }
   .avatars-stack .avatar:hover {
     margin-right: 0 !important; }
 
@@ -7464,7 +7464,7 @@ app-root {
 .main,
 .aside-menu {
   transition-duration: 0.25s, 0.25s, 0.25s, 0.25s;
-  transition-property: margin-left, margin-right, width, flex; }
+  transition: margin-left, margin-right, width, flex; }
 
 @media (max-width: 991px) {
   .app-header {
@@ -8052,10 +8052,10 @@ header.navbar {
     -o-transition: .15s ease-out;
     -webkit-transition: .15s ease-out;
     transition: .15s ease-out;
-    -moz-transition-property: opacity background;
-    -o-transition-property: opacity background;
-    -webkit-transition-property: opacity background;
-    transition-property: opacity background; }
+    -moz-transition: opacity background;
+    -o-transition: opacity background;
+    -webkit-transition: opacity background;
+    transition: opacity background; }
   .switch.switch-default .switch-input:checked ~ .switch-label::before {
     opacity: 0; }
   .switch.switch-default .switch-input:checked ~ .switch-label::after {
@@ -8133,10 +8133,10 @@ header.navbar {
     -o-transition: .15s ease-out;
     -webkit-transition: .15s ease-out;
     transition: .15s ease-out;
-    -moz-transition-property: opacity background;
-    -o-transition-property: opacity background;
-    -webkit-transition-property: opacity background;
-    transition-property: opacity background; }
+    -moz-transition: opacity background;
+    -o-transition: opacity background;
+    -webkit-transition: opacity background;
+    transition: opacity background; }
   .switch.switch-text .switch-label::before,
   .switch.switch-text .switch-label::after {
     position: absolute;
@@ -8236,10 +8236,10 @@ header.navbar {
     -o-transition: .15s ease-out;
     -webkit-transition: .15s ease-out;
     transition: .15s ease-out;
-    -moz-transition-property: opacity background;
-    -o-transition-property: opacity background;
-    -webkit-transition-property: opacity background;
-    transition-property: opacity background; }
+    -moz-transition: opacity background;
+    -o-transition: opacity background;
+    -webkit-transition: opacity background;
+    transition: opacity background; }
   .switch.switch-icon .switch-label::before,
   .switch.switch-icon .switch-label::after {
     position: absolute;
@@ -8338,10 +8338,10 @@ header.navbar {
     -o-transition: .15s ease-out;
     -webkit-transition: .15s ease-out;
     transition: .15s ease-out;
-    -moz-transition-property: opacity background;
-    -o-transition-property: opacity background;
-    -webkit-transition-property: opacity background;
-    transition-property: opacity background; }
+    -moz-transition: opacity background;
+    -o-transition: opacity background;
+    -webkit-transition: opacity background;
+    transition: opacity background; }
   .switch.switch-3d .switch-input:checked ~ .switch-label::before {
     opacity: 0; }
   .switch.switch-3d .switch-input:checked ~ .switch-label::after {

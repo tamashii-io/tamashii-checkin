@@ -53,10 +53,10 @@
     -o-transition: .15s ease-out;
     -webkit-transition: .15s ease-out;
     transition: .15s ease-out;
-    -moz-transition-property: opacity background;
-    -o-transition-property: opacity background;
-    -webkit-transition-property: opacity background;
-    transition-property: opacity background;
+    -moz-transition: opacity background;
+    -o-transition: opacity background;
+    -webkit-transition: opacity background;
+    transition: opacity background;
   }
   @if $type == text or $type == icon {
     .switch-label::before,
