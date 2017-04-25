@@ -36,3 +36,5 @@ set :default_env, path: '/usr/local/ruby-2.4.1/bin:$PATH'
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+
+set :passenger_restart_with_touch, true
