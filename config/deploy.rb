@@ -6,7 +6,11 @@ set :application, 'tamashii-checkin'
 set :repo_url, 'git@git.5xruby.tw:5xruby-codeme/tamashii-checkin.git'
 
 # Default branch is :master
-ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+if ENV['CI_BUILD_REF_NAME'].nil?
+  ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+else
+  set :branch, ENV['CI_BUILD_REF_NAME']
+end
 
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, '/var/www/my_app_name'
