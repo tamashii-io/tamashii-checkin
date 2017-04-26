@@ -17,6 +17,7 @@ module Tamashii
     def process
       raise InvalidCardError, 'Invalid Card' if card_id.blank?
       raise UnregisterMachineError, 'Unregister Machine' unless machine.present?
+      return response auth: false, reason: 'No Checkpoint Available' unless check_point.present?
       perform
     rescue CardError => e
       response auth: false, reason: e.message
