@@ -5,6 +5,7 @@ class Attendee < ApplicationRecord
   has_many :check_records
 
   after_save -> { RegistrarChannel.update(self) }
+  after_destroy -> { RegistrarChannel.update(self) }
 
   def register(serial)
     return if card_serial.present?
