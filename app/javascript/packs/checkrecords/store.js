@@ -9,20 +9,15 @@ import {
   REGISTER_UPDATE,
   CANCEL_REGISTER,
 } from './constants';
-import { RegistrarChannel } from '../channels';
+import { CheckrecordsChannel } from '../channels';
 
 const Attendee = Record({
   id: 0,
-  code: '',
-  serial: 0,
-  card_serial: '',
-  email: '',
-  name: '',
-  phone: '',
-  links: {
-    edit: '',
-    self: '',
-  },
+  attendee_id: '',
+  check_point_id: '',
+  times: '',
+  created_at: '',
+  updated_at: '',
 });
 
 const attendeesToRecord = attendees => attendees.map(attendee => new Attendee(attendee));
@@ -32,7 +27,7 @@ class AttendeeStore extends EventEmitter {
     super();
     this.attendees = fromJS([]);
     this.nextRegisterAttendeeId = 0;
-    RegistrarChannel.onReceived(action => this.dispatch(action));
+    CheckrecordsChannel.onReceived(action => this.dispatch(action));
   }
 
   update(attendeeId, newAttendee) {
@@ -59,9 +54,9 @@ class AttendeeStore extends EventEmitter {
         break;
       }
       case REGISTER: {
-        //this.emit(action.type, action.serial);
+        this.emit(action.type, action.serial);
         if (this.nextRegisterAttendeeId > 0) {
-          RegistrarChannel.perform(
+          CheckrecordsChannel.perform(
             'register',
             {
               attendeeId: this.nextRegisterAttendeeId,
