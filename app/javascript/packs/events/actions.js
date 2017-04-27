@@ -1,6 +1,5 @@
 import {
   RECEIVE_ATTENDEES,
-  START_REGISTER,
   AGAIN_ATTENDEES,
 } from './constants';
 
@@ -16,10 +15,6 @@ export const fetchAttendees = (eventId) => {
    .done((data) => { store.dispatch({ type: RECEIVE_ATTENDEES, attendees: data }); });
 };
 
-export const startRegister = (attendeeId) => {
-  store.dispatch({ type: START_REGISTER, attendeeId });
-};
-
 export const fetchAttendeesAgain = (eventId) => {
   $.get(ENDPOINTS.attendees(eventId))
    .promise()
@@ -28,6 +23,5 @@ export const fetchAttendeesAgain = (eventId) => {
 
 export default {
   fetchAttendees,
-  startRegister,
   fetchAttendeesAgain,
 };

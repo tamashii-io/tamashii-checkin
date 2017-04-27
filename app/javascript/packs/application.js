@@ -11,11 +11,11 @@ import Mounter from './helpers/mounter.jsx';
 import EventDashboard from './events/dashboard.jsx';
 import MachinesTable from './machines/machines_table.jsx';
 import AttendeesTable from './attendees/attendees_table.jsx';
-import EventAttendeeDashboard from './events/attendees_table.jsx';
+import EventAttendeeDashboard from './events/event_dashboard.jsx';
 
 const modules = [
   new Mounter('#machines', MachinesTable),
-  //new Mounter('#event', EventDashboard),
+  new Mounter('#event', EventDashboard),
   new Mounter('#attendees', AttendeesTable),
   new Mounter('#eventAttendee', EventAttendeeDashboard),
 ];
