@@ -2,7 +2,7 @@ import { EventEmitter } from 'events';
 import { fromJS, Record } from 'immutable';
 
 import {
-  RECEIVE_ATTENDEES,
+  RECEIVE_CHECK_RECORDS,
   START_REGISTER,
   REGISTER,
   REGISTER_SUCCESS,
@@ -11,7 +11,7 @@ import {
 } from './constants';
 import { CheckrecordsChannel } from '../channels';
 
-const Attendee = Record({
+const CheckRecord = Record({
   id: 0,
   attendee_id: '',
   check_point_id: '',
@@ -20,46 +20,46 @@ const Attendee = Record({
   updated_at: '',
 });
 
-const attendeesToRecord = attendees => attendees.map(attendee => new Attendee(attendee));
+const check_recordsToRecord = check_records => check_records.map(check_record => new CheckRecord(check_record));
 
-class AttendeeStore extends EventEmitter {
+class CheckRecordStore extends EventEmitter {
   constructor() {
     super();
-    this.attendees = fromJS([]);
-    this.nextRegisterAttendeeId = 0;
+    this.check_records = fromJS([]);
+    this.nextRegisterCheckRecordId = 0;
     CheckrecordsChannel.onReceived(action => this.dispatch(action));
   }
 
-  update(attendeeId, newAttendee) {
-    const index = this.index(attendeeId);
+  update(check_recordId, newCheckRecord) {
+    const index = this.index(check_recordId);
     if (index >= 0) {
-      this.attendees = this.attendees.set(index, newAttendee);
+      this.check_records = this.check_records.set(index, newCheckRecord);
     }
   }
 
-  index(attendeeId) {
-    return this.attendees.findIndex(attendee => attendee.id === attendeeId);
+  index(check_recordId) {
+    return this.check_records.findIndex(check_record => check_record.id === check_recordId);
   }
 
   dispatch(action) {
     switch (action.type) {
-      case RECEIVE_ATTENDEES: {
-        this.attendees = fromJS(attendeesToRecord(action.attendees));
-        this.emit(action.type, this.attendees);
+      case RECEIVE_CHECK_RECORDS: {
+        this.check_records = fromJS(check_recordsToRecord(action.check_records));
+        this.emit(action.type, this.check_records);
         break;
       }
       case START_REGISTER: {
-        this.nextRegisterAttendeeId = action.attendeeId;
-        this.emit(action.type, this.nextRegisterAttendeeId);
+        this.nextRegisterCheckRecordId = action.check_recordId;
+        this.emit(action.type, this.nextRegisterCheckRecordId);
         break;
       }
       case REGISTER: {
         this.emit(action.type, action.serial);
-        if (this.nextRegisterAttendeeId > 0) {
+        if (this.nextRegisterCheckRecordId > 0) {
           CheckrecordsChannel.perform(
             'register',
             {
-              attendeeId: this.nextRegisterAttendeeId,
+              check_recordId: this.nextRegisterCheckRecordId,
               serial: action.serial,
             },
           );
@@ -67,22 +67,22 @@ class AttendeeStore extends EventEmitter {
         break;
       }
       case REGISTER_SUCCESS: {
-        this.nextRegisterAttendeeId = 0;
-        this.update(action.attendee.id, new Attendee(action.attendee));
-        this.emit(action.type, this.attendees);
+        this.nextRegisterCheckRecordId = 0;
+        this.update(action.check_record.id, new CheckRecord(action.check_record));
+        this.emit(action.type, this.check_records);
         break;
       }
       case REGISTER_UPDATE: {
-        const attendee = new Attendee(action.attendee);
-        this.update(attendee.id, attendee);
-        if (this.nextRegisterAttendeeId === attendee.id) {
-          this.nextRegisterAttendeeId = 0;
+        const check_record = new CheckRecord(action.check_record);
+        this.update(check_record.id, check_record);
+        if (this.nextRegisterCheckRecordId === check_record.id) {
+          this.nextRegisterCheckRecordId = 0;
         }
-        this.emit(action.type, this.attendees, this.nextRegisterAttendeeId);
+        this.emit(action.type, this.check_records, this.nextRegisterCheckRecordId);
         break;
       }
       case CANCEL_REGISTER: {
-        this.nextRegisterAttendeeId = 0;
+        this.nextRegisterCheckRecordId = 0;
         break;
       }
       default: {
@@ -92,7 +92,7 @@ class AttendeeStore extends EventEmitter {
   }
 
   off() {
-    this.removeAllListeners(RECEIVE_ATTENDEES);
+    this.removeAllListeners(RECEIVE_CHECK_RECORDS);
     this.removeAllListeners(START_REGISTER);
     this.removeAllListeners(REGISTER);
     this.removeAllListeners(REGISTER_SUCCESS);
@@ -101,6 +101,6 @@ class AttendeeStore extends EventEmitter {
   }
 }
 
-const attendees = new AttendeeStore();
+const check_records = new CheckRecordStore();
 
-export default attendees;
+export default check_records;

@@ -17,11 +17,11 @@ class CheckrecordsChannel < ApplicationCable::Channel
 
   class << self
     def register(registrar, serial)
-      broadcast_to(registrar, type: EVENTS[:register], attendee: attendee)
+      broadcast_to(registrar, type: EVENTS[:register], check_record: check_record)
     end
 
-    def update(attendee)
-      broadcast_to(attendee.event, type: EVENTS[:update], attendee: attendee)
+    def update(check_record)
+      broadcast_to(check_record.event, type: EVENTS[:update], check_record: check_record)
     end
   end
 
@@ -37,9 +37,9 @@ class CheckrecordsChannel < ApplicationCable::Channel
   end
 
   def register(data)
-    attendee = CheckRecord.find(data['attendeeId'])
+    check_record = CheckRecord.find(data['check_recordId'])
     serial = data['serial']
-    return unless attendee.register(serial)
-    CheckrecordsChannel.broadcast_to([current_user, attendee.event], type: EVENTS[:success], attendee: attendee)
+    return unless check_record.register(serial)
+    CheckrecordsChannel.broadcast_to([current_user, check_record.event], type: EVENTS[:success], attendee: attendee)
   end
 end
