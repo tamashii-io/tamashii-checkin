@@ -1,13 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Modal, ModalBody } from 'reactstrap';
-
 import {
   RECEIVE_ATTENDEES,
-  START_REGISTER,
-  CANCEL_REGISTER,
-  REGISTER_SUCCESS,
   REGISTER_UPDATE,
   AGAIN_ATTENDEES,
 } from './constants';
@@ -22,10 +17,7 @@ class AttendeesTable extends React.Component {
     super();
     this.state = {
       attendees: [],
-      nextRegisterAttendeeId: 0,
     };
-
-    this.closeModal = this.closeModal.bind(this);
   }
 
   componentWillMount() {
@@ -35,14 +27,9 @@ class AttendeesTable extends React.Component {
 
   componentDidMount() {
     store.on(RECEIVE_ATTENDEES, attendees => this.setState({ attendees }));
-    store.on(START_REGISTER, attendeeId => this.setState({ nextRegisterAttendeeId: attendeeId }));
     store.on(
       REGISTER_UPDATE,
       (attendees, nextId) => fetchAttendeesAgain(this.props.eventId),
-    );
-    store.on(
-      REGISTER_SUCCESS,
-      attendees => this.setState({ attendees, nextRegisterAttendeeId: 0 }),
     );
     store.on(
       AGAIN_ATTENDEES,
@@ -57,16 +44,8 @@ class AttendeesTable extends React.Component {
 
   attendees() {
     const attendees = this.state.attendees;
-    return attendees.size;
-  }
-
-  hasNextAttendee() {
-    return this.state.nextRegisterAttendeeId > 0;
-  }
-
-  closeModal() {
-    this.setState({ nextRegisterAttendeeId: 0 });
-    store.dispatch({ type: CANCEL_REGISTER });
+    const checkin = attendees.filter(attendee => attendee.card_serial !== "");
+    return attendees.size+ "/" + checkin.size;
   }
 
   render() {
