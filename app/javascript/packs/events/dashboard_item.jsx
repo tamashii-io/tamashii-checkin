@@ -5,11 +5,11 @@ import InverseCardChart from '../components/inverse_card_chart.jsx';
 import { LineFullWidth } from '../options/chart';
 
 class DashboardItem extends React.Component {
-  render() {
+  item() {
     const { className, labels, chart, datasets } = this.props;
 
     return (
-      <div key={chart.name} className= {className}>
+      <div key={chart.name} className={className}>
         <InverseCardChart
           label={chart.name}
           value={chart.value}
@@ -23,11 +23,14 @@ class DashboardItem extends React.Component {
       </div>
     );
   }
+  render() {
+    return (this.item());
+  }
 }
 
 DashboardItem.propTypes = {
   className: PropTypes.string.isRequired,
-  labels: PropTypes.shape({}).isRequired,
+  labels: PropTypes.node.isRequired,
   chart: PropTypes.shape({}).isRequired,
   datasets: PropTypes.shape({}).isRequired,
 };

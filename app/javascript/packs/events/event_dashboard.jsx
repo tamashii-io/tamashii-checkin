@@ -13,6 +13,12 @@ import store from './store';
 import DashboardItem from './dashboard_item.jsx';
 
 class EventDashboard extends React.Component {
+  static attendees(Charts, attendees) {
+    const charts = Charts;
+    charts[0].value = attendees.size;
+    charts[1].value = attendees.filter(attendee => attendee.card_serial !== '').size;
+    return charts;
+  }
   constructor() {
     super();
     this.state = {
@@ -36,14 +42,17 @@ class EventDashboard extends React.Component {
 
   componentDidMount() {
     const { Charts } = this.state;
-    store.on(RECEIVE_ATTENDEES, attendees => this.setState({ attendees, Charts: this._attendees(Charts, attendees) }));
+    store.on(RECEIVE_ATTENDEES,
+      attendees => this.setState({ attendees,
+        Charts: EventDashboard.attendees(Charts, attendees) }),
+    );
     store.on(
-      REGISTER_UPDATE,
-      (attendees, nextId) => fetchAttendeesAgain(this.props.eventId),
+      REGISTER_UPDATE, () => fetchAttendeesAgain(this.props.eventId),
     );
     store.on(
       AGAIN_ATTENDEES,
-      attendees => this.setState({ attendees, Charts: this._attendees(Charts, attendees) }),
+      attendees => this.setState({ attendees,
+        Charts: EventDashboard.attendees(Charts, attendees) }),
     );
     this.timer = setTimeout(() => { this.updateData(); }, 500);
   }
@@ -54,11 +63,6 @@ class EventDashboard extends React.Component {
     clearTimeout(this.timer);
   }
 
-  _attendees(Charts, attendees) {
-    Charts[0].value = attendees.size;
-    Charts[1].value = attendees.filter(attendee => attendee.card_serial !== "").size; 
-    return Charts;
-  }
   // TODO: Use real-time data
   updateData() {
     const data = this.state.data;
@@ -69,12 +73,12 @@ class EventDashboard extends React.Component {
   }
 
   buildCharts(datasets) {
-    const { Charts, labels} = this.state
+    const { Charts, labels } = this.state;
     return Charts.map(
-      chart => ( 
-        <DashboardItem className = { "col-sm-6 col-lg-3" } labels = {labels} chart = {chart} datasets = {datasets}/> 
+      chart => (
+        <DashboardItem className={'col-sm-6 col-lg-3'} labels={labels} chart={chart} datasets={datasets} />
       ),
-    )
+    );
   }
 
   buildDatasets() {
