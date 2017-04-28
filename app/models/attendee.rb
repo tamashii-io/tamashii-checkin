@@ -15,5 +15,8 @@ class Attendee < ApplicationRecord
   def updatechannel
     RegistrarChannel.update(self)
     EventAttendeesDashboardChannel.update(self)
+  
+  def to_s
+    name
   end
 end

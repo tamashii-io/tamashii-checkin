@@ -1,0 +1,9 @@
+- breadcrumb :staff, @staff
+.container-fluid
+  .animated.fadeIn
+    .row
+      .col-lg-12
+        .card
+          .card-header = t('.title')
+          = simple_form_for @staff, url: event_staff_path(@event, @staff) do |f|
+            = render partial: "form", locals: {f: f}

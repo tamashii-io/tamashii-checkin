@@ -1,5 +1,5 @@
 # base image
-image: "ruby:2.4.0"
+image: "ruby:2.4.1"
 
 # Services
 services:
@@ -16,6 +16,7 @@ variables:
 # build stages
 stages:
   - test
+  - staging
 
 # cache gems in between builds
 cache:
@@ -70,3 +71,18 @@ scsslint:
     - gem install scss_lint
   script:
     - scss-lint app/assets/stylesheets/
+
+deploy_to_staging:
+  stage: staging
+  only:
+    - develop
+  before_script:
+    - gem install bundler -v 1.13.7 --no-ri --no-rdoc
+    - bundle install -j $(nproc) --path vendor
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    - cap staging deploy

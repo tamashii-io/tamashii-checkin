@@ -1,0 +1,5 @@
+  .card-block
+    = f.association :user
+    = f.input :role, collection: UserEventRelationship.roles.keys
+  .card-footer
+    = f.button :submit, class: 'btn btn-primary'

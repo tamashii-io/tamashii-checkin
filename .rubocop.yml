@@ -17,3 +17,6 @@ Rails:
 Metrics/BlockLength:
   Exclude:
     - spec/**/*_spec.rb
+Style/FileName:
+  Exclude:
+    - Capfile
