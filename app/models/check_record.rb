@@ -12,4 +12,13 @@ class CheckRecord < ApplicationRecord
     self.times += 1
     save
   end
+
+  def de_json
+  	rtn = self.as_json
+  	rtn["check_point"] = self.check_point
+  	rtn["attendee"] = self.attendee
+  	rtn
+  end
+
+
 end

@@ -16,6 +16,8 @@ const CheckRecord = Record({
   times: '',
   created_at: '',
   updated_at: '',
+  attendee: '',
+  check_point: '',
 });
 
 const check_recordsToRecord = check_records => check_records.map(check_record => new CheckRecord(check_record));

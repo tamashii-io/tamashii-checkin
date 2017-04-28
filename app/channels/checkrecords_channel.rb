@@ -13,7 +13,7 @@ class CheckrecordsChannel < ApplicationCable::Channel
     end
 
     def update(check_record)
-      broadcast_to(check_record.check_point.event, type: EVENTS[:update], check_record: check_record)
+      broadcast_to(check_record.check_point.event, type: EVENTS[:update], check_record: check_record.de_json)
     end
   end
 
