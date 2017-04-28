@@ -12,7 +12,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: { attendees: @attendees.count, checkin: @attendees.where.not(card_serial: "").count}}
+      format.json { render json: { attendees: @attendees.count, checkin: @attendees.where.not(card_serial: '').count } }
     end
   end
 
