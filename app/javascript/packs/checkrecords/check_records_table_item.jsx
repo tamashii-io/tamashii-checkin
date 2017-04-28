@@ -31,7 +31,7 @@ class CheckRecordsTableItem extends React.Component {
     console.log(check_record);
     return (
       <tr>
-        <td>{find_check_record_name(check_record.attendee_id)} </td>
+        <td>{find_check_record_name(check_record.id)} </td>
         <td>{check_record.check_point_id}</td>
         <td>{check_record.times}</td>
         <td>{check_record.updated_at}</td>
