@@ -27,7 +27,6 @@ class CheckRecordsTableItem extends React.Component {
 
   render() {
     const find_check_record_name = (attendee_id) => (attendee_id);
-
     const check_record = this.props.check_record;
     console.log(check_record);
     return (
