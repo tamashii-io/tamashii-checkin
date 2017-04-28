@@ -6,29 +6,20 @@ import {
   REGISTER_UPDATE,
   AGAIN_ATTENDEES,
 } from './constants';
-import { RegistrarChannel } from '../channels';
+import { EventAttendeesDashboardChannel } from '../channels';
 
 const Attendee = Record({
-  id: 0,
-  code: '',
-  serial: 0,
-  card_serial: '',
-  email: '',
-  name: '',
-  phone: '',
-  links: {
-    edit: '',
-    self: '',
-  },
+  attendees: 0,
+  checkin: 0,
 });
 
-const attendeesToRecord = attendees => attendees.map(attendee => new Attendee(attendee));
+const attendeesToRecord = attendees => new Attendee(attendees);
 
 class AttendeeStore extends EventEmitter {
   constructor() {
     super();
     this.attendees = fromJS([]);
-    RegistrarChannel.onReceived(action => this.dispatch(action));
+    EventAttendeesDashboardChannel.onReceived(action => this.dispatch(action));
   }
 
   dispatch(action) {

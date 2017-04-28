@@ -7,16 +7,16 @@ import {
   AGAIN_ATTENDEES,
 } from './constants';
 import { fetchAttendees, fetchAttendeesAgain } from './actions';
-import { RegistrarChannel } from '../channels';
+import { EventAttendeesDashboardChannel } from '../channels';
 import store from './store';
 
-import DashboardItem from './dashboard_item.jsx';
+import DashboardChart from './dashboard_chart.jsx';
 
 class EventDashboard extends React.Component {
   static attendees(Charts, attendees) {
     const charts = Charts;
-    charts[0].value = attendees.size;
-    charts[1].value = attendees.filter(attendee => attendee.card_serial !== '').size;
+    charts[0].value = attendees.attendees;
+    charts[1].value = attendees.checkin;
     return charts;
   }
   constructor() {
@@ -37,7 +37,7 @@ class EventDashboard extends React.Component {
 
   componentWillMount() {
     fetchAttendees(this.props.eventId);
-    RegistrarChannel.follow({ event_id: this.props.eventId });
+    EventAttendeesDashboardChannel.follow({ event_id: this.props.eventId });
   }
 
   componentDidMount() {
@@ -58,7 +58,7 @@ class EventDashboard extends React.Component {
   }
 
   componentWillUnmount() {
-    RegistrarChannel.unfollow();
+    EventAttendeesDashboardChannel.unfollow();
     store.off();
     clearTimeout(this.timer);
   }
@@ -76,7 +76,7 @@ class EventDashboard extends React.Component {
     const { Charts, labels } = this.state;
     return Charts.map(
       chart => (
-        <DashboardItem className={'col-sm-6 col-lg-3'} labels={labels} chart={chart} datasets={datasets} />
+        <DashboardChart className={'col-sm-6 col-lg-3'} labels={labels} chart={chart} datasets={datasets} />
       ),
     );
   }

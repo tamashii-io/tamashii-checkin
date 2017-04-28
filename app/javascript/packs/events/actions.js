@@ -6,7 +6,7 @@ import {
 import store from './store';
 
 const ENDPOINTS = {
-  attendees: eventId => `/events/${eventId}/attendees.json`,
+  attendees: eventId => `/events/${eventId}.json`,
 };
 
 export const fetchAttendees = (eventId) => {

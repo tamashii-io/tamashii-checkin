@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import InverseCardChart from '../components/inverse_card_chart.jsx';
 import { LineFullWidth } from '../options/chart';
 
-class DashboardItem extends React.Component {
+class DashboardChart extends React.Component {
   item() {
     const { className, labels, chart, datasets } = this.props;
 
@@ -28,11 +28,11 @@ class DashboardItem extends React.Component {
   }
 }
 
-DashboardItem.propTypes = {
+DashboardChart.propTypes = {
   className: PropTypes.string.isRequired,
   labels: PropTypes.node.isRequired,
   chart: PropTypes.shape({}).isRequired,
   datasets: PropTypes.shape({}).isRequired,
 };
 
-export default DashboardItem;
+export default DashboardChart;
