@@ -46,7 +46,7 @@ end
 
 crumb :check_point do |point|
   link point.name || 'New'
-  parent :check_points
+  parent :check_points, point.event
 end
 
 crumb :check_records do
