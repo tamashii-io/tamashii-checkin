@@ -3,9 +3,7 @@ import { fromJS, Record } from 'immutable';
 
 import {
   RECEIVE_CHECK_RECORDS,
-  START_REGISTER,
   REGISTER,
-  REGISTER_SUCCESS,
   REGISTER_UPDATE,
   CANCEL_REGISTER,
 } from './constants';
@@ -48,13 +46,7 @@ class CheckRecordStore extends EventEmitter {
         this.emit(action.type, this.check_records);
         break;
       }
-      case START_REGISTER: {
-        this.nextRegisterCheckRecordId = action.check_recordId;
-        this.emit(action.type, this.nextRegisterCheckRecordId);
-        break;
-      }
       case REGISTER: {
-        this.emit(action.type, action.serial);
         if (this.nextRegisterCheckRecordId > 0) {
           CheckrecordsChannel.perform(
             'register',
@@ -64,12 +56,6 @@ class CheckRecordStore extends EventEmitter {
             },
           );
         }
-        break;
-      }
-      case REGISTER_SUCCESS: {
-        this.nextRegisterCheckRecordId = 0;
-        this.update(action.check_record.id, new CheckRecord(action.check_record));
-        this.emit(action.type, this.check_records);
         break;
       }
       case REGISTER_UPDATE: {
@@ -93,9 +79,7 @@ class CheckRecordStore extends EventEmitter {
 
   off() {
     this.removeAllListeners(RECEIVE_CHECK_RECORDS);
-    this.removeAllListeners(START_REGISTER);
     this.removeAllListeners(REGISTER);
-    this.removeAllListeners(REGISTER_SUCCESS);
     this.removeAllListeners(REGISTER_UPDATE);
     this.removeAllListeners(CANCEL_REGISTER);
   }
