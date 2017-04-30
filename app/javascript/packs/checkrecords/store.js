@@ -69,10 +69,6 @@ class CheckRecordStore extends EventEmitter {
         this.emit(action.type, this.check_records, this.nextRegisterCheckRecordId);
         break;
       }
-      case CANCEL_REGISTER: {
-        this.nextRegisterCheckRecordId = 0;
-        break;
-      }
       default: {
         break;
       }

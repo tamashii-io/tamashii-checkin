@@ -5,7 +5,6 @@ import { Modal, ModalBody } from 'reactstrap';
 
 import {
   RECEIVE_CHECK_RECORDS,
-  CANCEL_REGISTER,
   REGISTER_UPDATE,
 } from './constants';
 import { fetchCheckRecords } from './actions';
@@ -21,7 +20,6 @@ class CheckRecordsTable extends React.Component {
       check_records: [],
       nextRegisterCheckRecordId: 0,
     };
-
   }
 
   componentWillMount() {

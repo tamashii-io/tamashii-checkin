@@ -19,6 +19,4 @@ class CheckRecord < ApplicationRecord
   	rtn["attendee"] = self.attendee
   	rtn
   end
-
-
 end
