@@ -18,7 +18,7 @@ const CheckRecord = Record({
   check_point: '',
 });
 
-const check_recordsToRecord = check_records => check_records.map(check_record => new CheckRecord(check_record));
+const checkRecordsToRecord = check_records => check_records.map(checkRecord => new CheckRecord(checkRecord));
 
 class CheckRecordStore extends EventEmitter {
   constructor() {
@@ -27,8 +27,8 @@ class CheckRecordStore extends EventEmitter {
     CheckrecordsChannel.onReceived(action => this.dispatch(action));
   }
 
-  update(check_recordId, newCheckRecord) {
-    const index = this.index(check_recordId);
+  update(checkRecordId, newCheckRecord) {
+    const index = this.index(checkRecordId);
     if (index >= 0) {
       this.check_records = this.check_records.set(index, newCheckRecord);
     } else {
@@ -36,20 +36,20 @@ class CheckRecordStore extends EventEmitter {
     }
   }
 
-  index(check_recordId) {
-    return this.check_records.findIndex(check_record => check_record.id === check_recordId);
+  index(checkRecordId) {
+    return this.check_records.findIndex(checkRecord => checkRecord.id === checkRecordId);
   }
 
   dispatch(action) {
     switch (action.type) {
       case RECEIVE_CHECK_RECORDS: {
-        this.check_records = fromJS(check_recordsToRecord(action.check_records));
+        this.check_records = fromJS(checkRecordsToRecord(action.check_records));
         this.emit(action.type, this.check_records);
         break;
       }
       case REGISTER_UPDATE: {
-        const check_record = new CheckRecord(action.check_record);
-        this.update(check_record.id, check_record);
+        const checkRecord = new CheckRecord(action.check_record);
+        this.update(checkRecord.id, checkRecord);
         this.emit(action.type, this.check_records);
         break;
       }
