@@ -8,7 +8,7 @@ class CheckRecordsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @checkrecords, :include => {:check_point => {:only => :name}, :attendee => {:only => :name}}}
+      format.json { render json: @checkrecords, include: { check_point: { only: :name }, attendee: { only: :name } } }
     end
   end
 

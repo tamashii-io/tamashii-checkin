@@ -14,9 +14,9 @@ class CheckRecord < ApplicationRecord
   end
 
   def de_json
-    rtn = self.as_json
-    rtn["check_point"] = self.check_point
-    rtn["attendee"] = self.attendee
+    rtn = as_json
+    rtn['check_point'] = check_point
+    rtn['attendee'] = attendee
     rtn
   end
 end
