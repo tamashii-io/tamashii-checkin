@@ -59,7 +59,7 @@ class AttendeeStore extends EventEmitter {
         break;
       }
       case REGISTER: {
-        //this.emit(action.type, action.serial);
+        this.emit(action.type, action.serial);
         if (this.nextRegisterAttendeeId > 0) {
           RegistrarChannel.perform(
             'register',

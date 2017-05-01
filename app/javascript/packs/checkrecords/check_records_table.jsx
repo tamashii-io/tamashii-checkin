@@ -1,8 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { Modal, ModalBody } from 'reactstrap';
-
 import {
   RECEIVE_CHECK_RECORDS,
   REGISTER_UPDATE,

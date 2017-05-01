@@ -5,20 +5,20 @@ import moment from 'moment';
 class CheckRecordsTableItem extends React.Component {
   render() {
     const formatLastActive = date => (date ? moment(date).calendar() : '');
-    const check_record = this.props.check_record;
+    const checkRecord = this.props.check_record;
     return (
       <tr>
-        <td>{check_record.attendee.name} </td>
-        <td>{check_record.check_point.name}</td>
-        <td>{check_record.times}</td>
-        <td>{formatLastActive(check_record.updated_at)}</td>
+        <td>{checkRecord.attendee.name} </td>
+        <td>{checkRecord.check_point.name}</td>
+        <td>{checkRecord.times}</td>
+        <td>{formatLastActive(checkRecord.updated_at)}</td>
       </tr>
     );
   }
 }
 
 CheckRecordsTableItem.propTypes = {
-  check_record: PropTypes.shape({}).isRequired,
+  checkRecord: PropTypes.shape({}).isRequired,
 };
 
 export default CheckRecordsTableItem;
