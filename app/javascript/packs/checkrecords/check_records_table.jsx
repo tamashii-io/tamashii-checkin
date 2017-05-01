@@ -36,9 +36,9 @@ class CheckRecordsTable extends React.Component {
     store.off();
   }
 
-  check_records() {
-    const check_records = this.state.check_records;
-    return check_records.map(checkRecord => <CheckRecordsTableItem key={checkRecord.id} checkRecord={checkRecord} />);
+  checkRecords() {
+    const checkRecords = this.state.check_records;
+    return checkRecords.map(checkRecord => <CheckRecordsTableItem key={checkRecord.id} checkRecord={checkRecord} />);
   }
 
   render() {
@@ -47,14 +47,14 @@ class CheckRecordsTable extends React.Component {
         <table className="table table-bordered table-striped table-condensed">
           <thead>
             <tr>
-              <th>會眾7</th>
+              <th>會眾9</th>
               <th>打卡點</th>
               <th>次數</th>
               <th>時間</th>
             </tr>
           </thead>
           <tbody>
-            { this.check_records() }
+            { this.checkRecords() }
           </tbody>
         </table>
       </div>
