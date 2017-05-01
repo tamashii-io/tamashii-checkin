@@ -27,7 +27,6 @@ class CheckPoint < ApplicationRecord
   def checkin(attendee)
     return unless attendee.present?
     latest_record(attendee).increment
-    CheckrecordsChannel.register([registrar, event], attendee)
   end
 
   def machine_available

@@ -3,7 +3,6 @@ import { fromJS, Record } from 'immutable';
 
 import {
   RECEIVE_CHECK_RECORDS,
-  REGISTER,
   REGISTER_UPDATE,
 } from './constants';
 import { CheckrecordsChannel } from '../channels';
@@ -25,7 +24,6 @@ class CheckRecordStore extends EventEmitter {
   constructor() {
     super();
     this.check_records = fromJS([]);
-    this.nextRegisterCheckRecordId = 0;
     CheckrecordsChannel.onReceived(action => this.dispatch(action));
   }
 
@@ -49,18 +47,6 @@ class CheckRecordStore extends EventEmitter {
         this.emit(action.type, this.check_records);
         break;
       }
-      case REGISTER: {
-        if (this.nextRegisterCheckRecordId > 0) {
-          CheckrecordsChannel.perform(
-            'register',
-            {
-              check_recordId: this.nextRegisterCheckRecordId,
-              serial: action.serial,
-            },
-          );
-        }
-        break;
-      }
       case REGISTER_UPDATE: {
         const check_record = new CheckRecord(action.check_record);
         this.update(check_record.id, check_record);
@@ -75,7 +61,6 @@ class CheckRecordStore extends EventEmitter {
 
   off() {
     this.removeAllListeners(RECEIVE_CHECK_RECORDS);
-    this.removeAllListeners(REGISTER);
     this.removeAllListeners(REGISTER_UPDATE);
   }
 }

@@ -1,6 +1,4 @@
 export const RECEIVE_CHECK_RECORDS = 'RECEIVE_CHECK_RECORDS';
-
-export const REGISTER = 'REGISTER';
 export const REGISTER_UPDATE = 'REGISTER_UPDATE';
 
 export default RECEIVE_CHECK_RECORDS;
