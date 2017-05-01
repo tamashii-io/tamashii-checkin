@@ -5,7 +5,6 @@ import {
   RECEIVE_CHECK_RECORDS,
   REGISTER,
   REGISTER_UPDATE,
-  CANCEL_REGISTER,
 } from './constants';
 import { CheckrecordsChannel } from '../channels';
 
@@ -34,6 +33,8 @@ class CheckRecordStore extends EventEmitter {
     const index = this.index(check_recordId);
     if (index >= 0) {
       this.check_records = this.check_records.set(index, newCheckRecord);
+    }else{
+      this.check_records = this.check_records.set(this.check_records.size , newCheckRecord);
     }
   }
 
@@ -63,10 +64,7 @@ class CheckRecordStore extends EventEmitter {
       case REGISTER_UPDATE: {
         const check_record = new CheckRecord(action.check_record);
         this.update(check_record.id, check_record);
-        if (this.nextRegisterCheckRecordId === check_record.id) {
-          this.nextRegisterCheckRecordId = 0;
-        }
-        this.emit(action.type, this.check_records, this.nextRegisterCheckRecordId);
+        this.emit(action.type, this.check_records);
         break;
       }
       default: {
@@ -79,7 +77,6 @@ class CheckRecordStore extends EventEmitter {
     this.removeAllListeners(RECEIVE_CHECK_RECORDS);
     this.removeAllListeners(REGISTER);
     this.removeAllListeners(REGISTER_UPDATE);
-    this.removeAllListeners(CANCEL_REGISTER);
   }
 }
 

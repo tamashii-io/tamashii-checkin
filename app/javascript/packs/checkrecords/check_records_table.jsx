@@ -18,7 +18,6 @@ class CheckRecordsTable extends React.Component {
     super();
     this.state = {
       check_records: [],
-      nextRegisterCheckRecordId: 0,
     };
   }
 
@@ -31,7 +30,7 @@ class CheckRecordsTable extends React.Component {
     store.on(RECEIVE_CHECK_RECORDS, check_records => this.setState({ check_records }));
     store.on(
       REGISTER_UPDATE,
-      (check_records, nextId) => this.setState({ check_records, nextRegisterCheckRecordId: nextId }),
+      (check_records, nextId) => this.setState({ check_records }),
     );
 
   }
@@ -52,7 +51,7 @@ class CheckRecordsTable extends React.Component {
         <table className="table table-bordered table-striped table-condensed">
           <thead>
             <tr>
-              <th>會眾3</th>
+              <th>會眾5</th>
               <th>打卡點</th>
               <th>次數</th>
               <th>時間</th>

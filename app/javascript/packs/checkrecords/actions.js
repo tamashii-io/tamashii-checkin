@@ -1,6 +1,5 @@
 import {
   RECEIVE_CHECK_RECORDS,
-  START_REGISTER,
 } from './constants';
 
 import store from './store';
@@ -15,11 +14,6 @@ export const fetchCheckRecords = (eventId) => {
    .done((data) => { store.dispatch({ type: RECEIVE_CHECK_RECORDS, check_records: data }); });
 };
 
-export const startRegister = (check_recordId) => {
-  store.dispatch({ type: START_REGISTER, check_recordId });
-};
-
 export default {
   fetchCheckRecords,
-  startRegister,
 };
