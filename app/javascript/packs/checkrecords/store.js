@@ -31,8 +31,8 @@ class CheckRecordStore extends EventEmitter {
     const index = this.index(check_recordId);
     if (index >= 0) {
       this.check_records = this.check_records.set(index, newCheckRecord);
-    }else{
-      this.check_records = this.check_records.set(this.check_records.size , newCheckRecord);
+    } else {
+      this.check_records = this.check_records.set(this.check_records.size, newCheckRecord);
     }
   }
 

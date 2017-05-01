@@ -27,9 +27,8 @@ class CheckRecordsTable extends React.Component {
     store.on(RECEIVE_CHECK_RECORDS, check_records => this.setState({ check_records }));
     store.on(
       REGISTER_UPDATE,
-      (check_records, nextId) => this.setState({ check_records }),
+      check_records => this.setState({ check_records }),
     );
-
   }
 
   componentWillUnmount() {
