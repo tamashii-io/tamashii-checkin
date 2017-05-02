@@ -18,9 +18,10 @@ const CheckRecord = Record({
   check_point: '',
 });
 
-const checkRecordsToRecord = (checkRecords) => {
-  checkRecords.map(checkRecord => new CheckRecord(checkRecord));
-};
+const checkRecordsToRecord = checkRecords => checkRecords.map(
+  checkRecord => new CheckRecord(checkRecord),
+  );
+
 
 class CheckRecordStore extends EventEmitter {
   constructor() {

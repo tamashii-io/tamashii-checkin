@@ -16,7 +16,6 @@ class CheckrecordsChannel < ApplicationCable::Channel
     stop_all_streams
     event = Event.find(data['event_id'])
     stream_for event
-    stream_for [current_user, event]
   end
 
   def unfollow
