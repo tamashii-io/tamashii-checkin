@@ -14,7 +14,7 @@ class CheckRecordsTable extends React.Component {
   constructor() {
     super();
     this.state = {
-      check_records: [],
+      checkRecords: [],
     };
   }
 
@@ -24,10 +24,10 @@ class CheckRecordsTable extends React.Component {
   }
 
   componentDidMount() {
-    store.on(RECEIVE_CHECK_RECORDS, check_records => this.setState({ check_records }));
+    store.on(RECEIVE_CHECK_RECORDS, checkRecords => this.setState({ checkRecords }));
     store.on(
       REGISTER_UPDATE,
-      check_records => this.setState({ check_records }),
+      checkRecords => this.setState({ checkRecords }),
     );
   }
 
@@ -37,7 +37,7 @@ class CheckRecordsTable extends React.Component {
   }
 
   checkRecords() {
-    const checkRecords = this.state.check_records;
+    const checkRecords = this.state.checkRecords;
     return checkRecords.map(checkRecord => <CheckRecordsTableItem key={checkRecord.id} checkRecord={checkRecord} />);
   }
 
