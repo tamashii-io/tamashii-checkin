@@ -38,7 +38,9 @@ class CheckRecordsTable extends React.Component {
 
   checkRecords() {
     const checkRecords = this.state.checkRecords;
-    return checkRecords.map(checkRecord => <CheckRecordsTableItem key={checkRecord.id} checkRecord={checkRecord} />);
+    return checkRecords.map(
+      checkRecord => <CheckRecordsTableItem key={checkRecord.id} checkRecord={checkRecord} />,
+    );
   }
 
   render() {
