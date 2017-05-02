@@ -49,7 +49,7 @@ class CheckRecordsTable extends React.Component {
         <table className="table table-bordered table-striped table-condensed">
           <thead>
             <tr>
-              <th>會眾2</th>
+              <th>會眾</th>
               <th>打卡點</th>
               <th>次數</th>
               <th>時間</th>
