@@ -2,9 +2,8 @@
 # missing top-level class documentation comment
 class CheckrecordsChannel < ApplicationCable::Channel
   EVENTS = {
-    register: 'REGISTER',
-    update: 'REGISTER_UPDATE',
-    set: 'REGISTER_SET'
+    update: 'CHECK_RECORD_UPDATE',
+    set: 'CHECK_RECORD_SET'
   }.freeze
 
   class << self

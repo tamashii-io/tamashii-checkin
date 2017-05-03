@@ -8,7 +8,7 @@ class CheckRecord < ApplicationRecord
   after_save do
     if times == 1
       CheckrecordsChannel.set(self)
-    else 
+    else
       CheckrecordsChannel.update(self)
     end
   end

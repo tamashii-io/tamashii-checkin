@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   RECEIVE_CHECK_RECORDS,
-  REGISTER_UPDATE,
-  REGISTER_SET,
+  CHECK_RECORD_UPDATE,
+  CHECK_RECORD_SET,
 } from './constants';
 import { fetchCheckRecords } from './actions';
 import { CheckrecordsChannel } from '../channels';
@@ -27,11 +27,11 @@ class CheckRecordsTable extends React.Component {
   componentDidMount() {
     store.on(RECEIVE_CHECK_RECORDS, checkRecords => this.setState({ checkRecords }));
     store.on(
-      REGISTER_UPDATE,
+      CHECK_RECORD_UPDATE,
       checkRecords => this.setState({ checkRecords }),
     );
     store.on(
-      REGISTER_SET,
+      CHECK_RECORD_SET,
       checkRecords => this.setState({ checkRecords }),
     );
   }
