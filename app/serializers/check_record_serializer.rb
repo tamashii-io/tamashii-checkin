@@ -14,4 +14,3 @@ class CheckRecordSerializer < ActiveModel::Serializer
     }
   end
 end
-
