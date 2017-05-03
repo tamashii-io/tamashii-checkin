@@ -3,12 +3,17 @@
 class CheckrecordsChannel < ApplicationCable::Channel
   EVENTS = {
     register: 'REGISTER',
-    update: 'REGISTER_UPDATE'
+    update: 'REGISTER_UPDATE',
+    set: 'REGISTER_SET'
   }.freeze
 
   class << self
     def update(check_record)
       broadcast_to(check_record.check_point.event, type: EVENTS[:update], check_record: check_record.de_json)
+    end
+
+    def set(check_record)
+      broadcast_to(check_record.check_point.event, type: EVENTS[:set], check_record: check_record.de_json)
     end
   end
 

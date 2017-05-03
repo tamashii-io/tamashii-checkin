@@ -5,7 +5,13 @@ class CheckRecord < ApplicationRecord
 
   belongs_to :attendee
   belongs_to :check_point
-  after_save -> { CheckrecordsChannel.update(self) }
+  after_save do
+    if times.zero?
+      CheckrecordsChannel.set(self)
+    else
+      CheckrecordsChannel.update(self)
+    end
+  end
   scope :active, -> { where(updated_at: MAX_CHECKIN_TIME.ago..Float::INFINITY) }
 
   def increment
