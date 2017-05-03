@@ -71,7 +71,12 @@ class EventDashboard extends React.Component {
     const { Charts, labels } = this.state;
     return Charts.map(
       chart => (
-        <DashboardChart className={"col-sm-6 col-lg-3"} labels={labels} chart={chart} datasets={datasets} />
+        <DashboardChart
+          className="col-sm-6 col-lg-3"
+          labels={labels}
+          chart={chart}
+          datasets={datasets}
+        />
       ),
     );
   }
