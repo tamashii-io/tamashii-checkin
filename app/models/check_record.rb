@@ -6,9 +6,9 @@ class CheckRecord < ApplicationRecord
   belongs_to :attendee
   belongs_to :check_point
   after_save do
-    if times.zero?
+    if times == 1
       CheckrecordsChannel.set(self)
-    else
+    else 
       CheckrecordsChannel.update(self)
     end
   end
@@ -19,7 +19,7 @@ class CheckRecord < ApplicationRecord
     save
   end
 
-  def de_json
+  def to_json
     rtn = as_json
     rtn['check_point'] = check_point
     rtn['attendee'] = attendee
