@@ -4,21 +4,21 @@ import PropTypes from 'prop-types';
 import {
   RECEIVE_ATTENDEES,
   REGISTER_UPDATE,
-  AGAIN_ATTENDEES,
 } from './constants';
-import { fetchAttendees, fetchAttendeesAgain } from './actions';
+import { fetchAttendees } from './actions';
 import { EventAttendeesDashboardChannel } from '../channels';
 import store from './store';
 
 import DashboardChart from './dashboard_chart.jsx';
 
+const updateChartValue = (Charts, attendees) => {
+  const charts = Charts;
+  charts[0].value = attendees.attendees;
+  charts[1].value = attendees.checkin;
+  return charts;
+};
+
 class EventDashboard extends React.Component {
-  static attendees(Charts, attendees) {
-    const charts = Charts;
-    charts[0].value = attendees.attendees;
-    charts[1].value = attendees.checkin;
-    return charts;
-  }
   constructor() {
     super();
     this.state = {
@@ -44,15 +44,10 @@ class EventDashboard extends React.Component {
     const { Charts } = this.state;
     store.on(RECEIVE_ATTENDEES,
       attendees => this.setState({ attendees,
-        Charts: EventDashboard.attendees(Charts, attendees) }),
+        Charts: updateChartValue(Charts, attendees) }),
     );
     store.on(
-      REGISTER_UPDATE, () => fetchAttendeesAgain(this.props.eventId),
-    );
-    store.on(
-      AGAIN_ATTENDEES,
-      attendees => this.setState({ attendees,
-        Charts: EventDashboard.attendees(Charts, attendees) }),
+      REGISTER_UPDATE, () => fetchAttendees(this.props.eventId),
     );
     this.timer = setTimeout(() => { this.updateData(); }, 500);
   }
@@ -76,7 +71,7 @@ class EventDashboard extends React.Component {
     const { Charts, labels } = this.state;
     return Charts.map(
       chart => (
-        <DashboardChart className={'col-sm-6 col-lg-3'} labels={labels} chart={chart} datasets={datasets} />
+        <DashboardChart className={"col-sm-6 col-lg-3"} labels={labels} chart={chart} datasets={datasets} />
       ),
     );
   }

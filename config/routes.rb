@@ -13,6 +13,8 @@ Rails.application.routes.draw do
       resources :actions, only: [:create]
     end
   end
+
+  mount AttendeesApi::V1::Summary => '/attendees/summary'
   resources :events do
     resources :attendees
     resources :check_records, expect: [:show]

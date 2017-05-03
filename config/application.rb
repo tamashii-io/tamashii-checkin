@@ -17,5 +17,8 @@ module TamashiiCheckin
 
     config.sass.load_paths << Rails.root.join('vendor', 'coreui')
     config.autoload_paths << Rails.root.join('app', 'tamashii')
+
+    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
   end
 end

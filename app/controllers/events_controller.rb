@@ -7,14 +7,7 @@ class EventsController < ApplicationController
     @events = current_user.events
   end
 
-  def show
-    @attendees = @event.attendees
-
-    respond_to do |format|
-      format.html
-      format.json { render json: { attendees: @attendees.count, checkin: @attendees.where.not(card_serial: '').count } }
-    end
-  end
+  def show; end
 
   def new
     @event = Event.new

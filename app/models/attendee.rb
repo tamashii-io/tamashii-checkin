@@ -4,7 +4,7 @@ class Attendee < ApplicationRecord
   belongs_to :event
   has_many :check_records
 
-  after_save -> { updatechannel }
+  after_save -> { update_channel }
   after_destroy -> { EventAttendeesDashboardChannel.update(self) }
 
   def register(serial)
@@ -12,7 +12,7 @@ class Attendee < ApplicationRecord
     update_attributes(card_serial: serial)
   end
 
-  def updatechannel
+  def update_channel
     RegistrarChannel.update(self)
     EventAttendeesDashboardChannel.update(self)
   end

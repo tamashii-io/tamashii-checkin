@@ -1,12 +1,11 @@
 import {
   RECEIVE_ATTENDEES,
-  AGAIN_ATTENDEES,
 } from './constants';
 
 import store from './store';
 
 const ENDPOINTS = {
-  attendees: eventId => `/events/${eventId}.json`,
+  attendees: eventId => `/attendees/summary/?event_id=${eventId}`,
 };
 
 export const fetchAttendees = (eventId) => {
@@ -15,13 +14,6 @@ export const fetchAttendees = (eventId) => {
    .done((data) => { store.dispatch({ type: RECEIVE_ATTENDEES, attendees: data }); });
 };
 
-export const fetchAttendeesAgain = (eventId) => {
-  $.get(ENDPOINTS.attendees(eventId))
-   .promise()
-   .done((data) => { store.dispatch({ type: AGAIN_ATTENDEES, attendees: data }); });
-};
-
 export default {
   fetchAttendees,
-  fetchAttendeesAgain,
 };
