@@ -5,6 +5,11 @@ class CheckRecordsController < ApplicationController
   before_action :find_checkrecord, only: [:edit, :update, :destroy]
   def index
     @checkrecords = @event.check_records
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @checkrecords }
+    end
   end
 
   def create
