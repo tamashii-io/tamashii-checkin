@@ -7,6 +7,8 @@ class Attendee < ApplicationRecord
   after_save -> { update_channel }
   after_destroy -> { EventAttendeesDashboardChannel.update(self) }
 
+  scope :not_checked_in, -> { where.not(card_serial: '').count }
+
   def register(serial)
     return if card_serial.present?
     update_attributes(card_serial: serial)
