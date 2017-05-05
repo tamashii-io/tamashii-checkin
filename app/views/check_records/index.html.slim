@@ -6,17 +6,18 @@
         .card
           .card-header = t('.title')
           .card-block
-            table.table.table-bordered.table-striped.table-condensed
-               thead
-                tr
-                  td 會眾
-                  td 打卡點
-                  td 次數
-                  td 時間
-                tbody
-                  - @checkrecords.each do |checkrecord|
-                    tr
-                      td= checkrecord.attendee
-                      td= link_to checkrecord.check_point
-                      td= checkrecord.times
-                      td= l checkrecord.updated_at
+            #checkrecords data-event-id="#{@event.id}"
+              table.table.table-bordered.table-striped.table-condensed
+                 thead
+                  tr
+                    td 會眾
+                    td 打卡點
+                    td 次數
+                    td 時間
+                  tbody
+                    - @checkrecords.each do |checkrecord|
+                      tr
+                        td= checkrecord.attendee
+                        td= link_to checkrecord.check_point
+                        td= checkrecord.times
+                        td= l checkrecord.updated_at
