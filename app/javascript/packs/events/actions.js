@@ -5,7 +5,7 @@ import {
 import store from './store';
 
 const ENDPOINTS = {
-  attendees: eventId => `/events/${eventId}/attendees/summary`,
+  attendees: eventId => `/api/v1/events/${eventId}/attendees/summary`,
 };
 
 export const fetchAttendees = (eventId) => {

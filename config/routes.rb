@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     end
   end
 
-  mount V1::AttendeesAPI::Summary => '/'
+  mount V1::Events::Attendees => '/api/'
   resources :events do
     resources :attendees
     resources :check_records, expect: [:show]
