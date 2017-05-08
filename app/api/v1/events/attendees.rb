@@ -11,10 +11,6 @@ module V1
         requires :id, type: String, desc: 'event id'
       end
 
-      get :id do
-
-      end
-
       get '/v1/events/:id/attendees/summary' do
         attendees = Event.find_by(id: params[:id]).attendees
         { attendees: attendees.count, checkin: attendees.not_checked_in }
@@ -22,4 +18,3 @@ module V1
     end
   end
 end
-
