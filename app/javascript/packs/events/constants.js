@@ -1,0 +1,5 @@
+export const RECEIVE_ATTENDEES = 'RECEIVE_ATTENDEES';
+
+export const REGISTER_UPDATE = 'REGISTER_UPDATE';
+
+export default RECEIVE_ATTENDEES;
