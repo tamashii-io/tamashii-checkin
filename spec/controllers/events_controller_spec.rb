@@ -1,0 +1,123 @@
+# frozen_string_literal: true
+require 'rails_helper'
+
+RSpec.describe EventsController, type: :controller do
+
+  let(:event_a) { create(:event, name: 'name', start_at: '2015-04-11 09:27:00', end_at: '2015-04-13 09:27:00') }
+  let(:event_b) { create(:event, name: 'name', start_at: '2015-04-14 09:27:00', end_at: '2015-04-16 09:27:00') }
+  let(:event_c) { create(:event, name: 'name', start_at: '2015-04-15 09:27:00', end_at: '2015-04-20 09:27:00') }
+  # let(:user) { create(:user, email: Faker::Internet.free_email, password: 'aaaaaa' )}
+  
+  before(:each) do
+    @event_params = {name: "update", start_at: '2015-04-14 09:27:00', end_at: '2017-04-14 09:27:00'}
+    @user = User.create( email: Faker::Internet.free_email, password: 'aaaaaa' )
+    sign_in @user
+  end
+
+  it "#index" do
+    get :index
+    expect(response).to have_http_status(200)
+    expect(response).to render_template(:index)
+  end
+
+  it "#new" do
+    get :new
+    expect(response).to have_http_status(200)
+    expect(response).to render_template(:new)
+  end
+
+  it "#edit" do
+    get :edit, params: { id: event_a[:id] }
+    expect(response).to have_http_status(200)
+    expect(response).to render_template(:edit)
+  end
+
+  describe "#create" do
+
+    it "creates record" do 
+      expect{ post :create, params: { event: @event_params }}.to change{Event.all.size}.by(1)
+    end
+
+    it "redirect on success" do
+      post :create, params: { event: @event_params }
+      expect(response).not_to have_http_status(200)
+      expect(response).to have_http_status(302)
+      expect(response).to redirect_to(events_path)
+    end
+
+    it "render :new on fail" do
+      allow_any_instance_of(Event).to receive(:save).and_return(false)
+      post :create, params: { event: @event_params }
+      expect(response).not_to have_http_status(302)
+      expect(response).to render_template(:new)
+    end
+  end
+
+  describe "#update" do
+    before(:each) do
+      event_a.staffs << @user
+    end
+
+    it "changes record" do 
+      post :update, params: { id: event_a[:id], event: @event_params }
+      expect(Event.find(event_a[:id])[:name]).to eq("update")
+    end
+
+    it "redirect on success" do
+      # sign_in user
+      post :update, params: { id: event_a[:id], event: @event_params }
+      expect(response).not_to have_http_status(200)
+      expect(response).to have_http_status(302)
+      expect(response).to redirect_to(events_path)
+    end
+
+    it "render :new on fail" do
+      # sign_in user
+      allow_any_instance_of(Event).to receive(:save).and_return(false)
+      post :update, params: { id: event_a[:id], event: @event_params }
+      expect(response).not_to have_http_status(302)
+      expect(response).to render_template(:edit)
+    end
+  end
+
+  # describe "#update" do
+  #     before(:all) do
+  #         @post_params = {title: "title_3", content: "content"}
+  #     end
+
+      # it "changes record" do 
+      #     post :update, post: @post_params, id: @post_2[:id]
+      #     expect(Post.find(@post_2[:id])[:title]).to eq("title_3")
+      # end
+
+  #     it "redirect on success" do
+  #         post :update, post: @post_params, id: @post_2[:id]
+  #         expect(response).not_to have_http_status(200)
+  #         expect(response).to have_http_status(302)
+  #         expect(response).to redirect_to(post_path(Post.find(@post_2[:id])))
+  #     end
+
+  #     it "render :edit on fail" do
+  #         allow_any_instance_of(Post).to receive(:update).and_return(false)
+  #         post :update, post: @post_params, id: @post_2[:id]
+  #         expect(response).not_to have_http_status(302)
+  #         expect(response).to render_template(:edit)
+  #     end
+  # end
+
+  # describe "#destroy" do
+  #     before(:each) do
+  #         @post_3 = @post_2 || Post.create(title: "title_3", content: "content_3")
+  #     end
+
+  #     it "destroy record" do
+  #         expect{ delete :destroy, id: @post_3[:id] }.to change{Post.all.count}.by(-1)
+  #     end 
+
+  #     it "redirect_to index after destroy" do
+  #         delete :destroy, id: @post_3[:id]
+  #         expect(response).to have_http_status(302)
+  #         expect(response).to redirect_to(posts_path)
+  #     end
+  # end
+end
