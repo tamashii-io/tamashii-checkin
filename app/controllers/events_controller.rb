@@ -14,7 +14,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    UserEventRelationship.find_by(event_id: params[:id]).delete 
+    UserEventRelationship.find_by(event_id: params[:id]).delete
     @event.destroy
     redirect_to events_path, notice: I18n.t('event.removed')
   end
