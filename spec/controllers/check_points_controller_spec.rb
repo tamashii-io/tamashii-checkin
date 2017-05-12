@@ -5,9 +5,7 @@ RSpec.describe CheckPointsController, type: :controller do
   let(:event_a) { create(:event, name: 'name', start_at: '2015-04-11 09:27:00', end_at: '2030-04-13 09:27:00') }
   let(:machine_a) { create(:machine, name: 'name', serial: '1') }
   let(:check_point_a) { create(:check_point, event_id: event_a.id) }
-
   before(:each) do
-
     @check_point_params = { name: 'A', machine_id: machine_a.id, type: 'registrar' }
     @user = User.create(email: Faker::Internet.free_email, password: 'password')
     sign_in @user
