@@ -11,6 +11,7 @@ RSpec.describe MachinesController, type: :controller do
   end
 
   it '#index' do
+    allow(Tamashii::Machine).to receive(:activities).and_return({})
     get :index
     expect(response).to have_http_status(200)
     expect(response).to render_template(:index)
