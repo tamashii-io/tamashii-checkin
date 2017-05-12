@@ -5,7 +5,6 @@ RSpec.describe EventsController, type: :controller do
 
   let(:event_a) { create(:event, name: 'name', start_at: '2015-04-11 09:27:00', end_at: '2015-04-13 09:27:00') }
   let(:event_b) { create(:event, name: 'name', start_at: '2015-04-14 09:27:00', end_at: '2015-04-16 09:27:00') }
-  let(:event_c) { create(:event, name: 'name', start_at: '2015-04-15 09:27:00', end_at: '2015-04-20 09:27:00') }
   # let(:user) { create(:user, email: Faker::Internet.free_email, password: 'aaaaaa' )}
   
   before(:each) do
@@ -64,7 +63,6 @@ RSpec.describe EventsController, type: :controller do
     end
 
     it "redirect on success" do
-      # sign_in user
       post :update, params: { id: event_a[:id], event: @event_params }
       expect(response).not_to have_http_status(200)
       expect(response).to have_http_status(302)
@@ -72,7 +70,6 @@ RSpec.describe EventsController, type: :controller do
     end
 
     it "render :new on fail" do
-      # sign_in user
       allow_any_instance_of(Event).to receive(:save).and_return(false)
       post :update, params: { id: event_a[:id], event: @event_params }
       expect(response).not_to have_http_status(302)
@@ -80,44 +77,20 @@ RSpec.describe EventsController, type: :controller do
     end
   end
 
-  # describe "#update" do
-  #     before(:all) do
-  #         @post_params = {title: "title_3", content: "content"}
-  #     end
 
-      # it "changes record" do 
-      #     post :update, post: @post_params, id: @post_2[:id]
-      #     expect(Post.find(@post_2[:id])[:title]).to eq("title_3")
-      # end
+  describe "#destroy" do
+    before(:each) do
+      event_b.staffs << @user
+    end
 
-  #     it "redirect on success" do
-  #         post :update, post: @post_params, id: @post_2[:id]
-  #         expect(response).not_to have_http_status(200)
-  #         expect(response).to have_http_status(302)
-  #         expect(response).to redirect_to(post_path(Post.find(@post_2[:id])))
-  #     end
+    it "destroy record" do
+      expect{ delete :destroy, params: { id: event_b[:id], event: event_b } }.to change{Event.all.count}.by(-1)
+    end 
 
-  #     it "render :edit on fail" do
-  #         allow_any_instance_of(Post).to receive(:update).and_return(false)
-  #         post :update, post: @post_params, id: @post_2[:id]
-  #         expect(response).not_to have_http_status(302)
-  #         expect(response).to render_template(:edit)
-  #     end
-  # end
-
-  # describe "#destroy" do
-  #     before(:each) do
-  #         @post_3 = @post_2 || Post.create(title: "title_3", content: "content_3")
-  #     end
-
-  #     it "destroy record" do
-  #         expect{ delete :destroy, id: @post_3[:id] }.to change{Post.all.count}.by(-1)
-  #     end 
-
-  #     it "redirect_to index after destroy" do
-  #         delete :destroy, id: @post_3[:id]
-  #         expect(response).to have_http_status(302)
-  #         expect(response).to redirect_to(posts_path)
-  #     end
-  # end
+    it "redirect_to index after destroy" do
+      delete :destroy, params: { id: event_b[:id] }
+      expect(response).to have_http_status(302)
+      expect(response).to redirect_to(events_path)
+    end
+  end
 end
