@@ -6,7 +6,7 @@ RSpec.describe AttendeesController, type: :controller do
   let(:attendee_a) { create(:attendee, event_id: event_a.id) }
 
   before(:each) do
-    @attendee_params = { serial: '001', code: 'A01', name: 'Bob', email: 'a@a', phone: '0919905295', card_serial: 'aa'}
+    @attendee_params = { serial: '001', code: 'A01', name: 'Bob', email: 'a@a', phone: '0919905295', card_serial: 'aa' }
     @user = User.create(email: Faker::Internet.free_email, password: 'password')
     sign_in @user
     event_a.staffs << @user
@@ -19,7 +19,7 @@ RSpec.describe AttendeesController, type: :controller do
   end
 
   it '#edit' do
-    get :edit, params: { event_id: event_a[:id] , id: attendee_a[:id] }
+    get :edit, params: { event_id: event_a[:id], id: attendee_a[:id] }
     expect(response).to have_http_status(200)
     expect(response).to render_template(:edit)
   end
@@ -53,7 +53,7 @@ RSpec.describe AttendeesController, type: :controller do
   describe '#update' do
     it 'changes record' do
       post :update, params: { event_id: event_a[:id], id: attendee_a[:id], attendee: @attendee_params }
-      expect(Event.find(event_a[:id])[:code]).to eq('A01')
+      expect(Attendee.find(attendee_a[:id])[:code]).to eq('A01')
     end
 
     it 'redirect on success' do
@@ -71,36 +71,16 @@ RSpec.describe AttendeesController, type: :controller do
     end
   end
 
-  #   describe '#update' do
-  #   it 'changes record' do
-  #     post :update, params: { id: event_a[:id], event: @event_params }
-  #     expect(Event.find(event_a[:id])[:name]).to eq('update')
-  #   end
-
-  #   it 'redirect on success' do
-  #     post :update, params: { id: event_a[:id], event: @event_params }
-  #     expect(response).not_to have_http_status(200)
-  #     expect(response).to have_http_status(302)
-  #     expect(response).to redirect_to(events_path)
-  #   end
-
-  #   it 'render :new on fail' do
-  #     allow_any_instance_of(Event).to receive(:save).and_return(false)
-  #     post :update, params: { id: event_a[:id], event: @event_params }
-  #     expect(response).not_to have_http_status(302)
-  #     expect(response).to render_template(:edit)
-  #   end
-  # end
-
   describe '#destroy' do
-    # it 'destroy record' do
-    #   expect { delete :destroy, params: { event_id: event_a[:id], id: attendee_a[:id], attendee: attendee_a } }.to change { Attendee.all.count }.by(-1)
-    # end
+    it 'destroy record' do
+      attendee_a
+      expect { delete :destroy, params: { event_id: event_a[:id], id: attendee_a[:id], attendee: attendee_a } }.to change { Attendee.count }.by(-1)
+    end
 
-    # it 'redirect_to index after destroy' do
-    #   delete :destroy, params: { id: attendee_a[:id] }
-    #   expect(response).to have_http_status(302)
-    #   expect(response).to redirect_to(event_attendees_path)
-    # end
+    it 'redirect_to index after destroy' do
+      delete :destroy, params: { event_id: event_a[:id], id: attendee_a[:id], attendee: attendee_a }
+      expect(response).to have_http_status(302)
+      expect(response).to redirect_to(event_attendees_path)
+    end
   end
 end
