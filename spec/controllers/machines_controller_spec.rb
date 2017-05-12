@@ -2,17 +2,12 @@
 require 'rails_helper'
 
 RSpec.describe MachinesController, type: :controller do
-  # let(:event_a) { create(:event, name: 'name', start_at: '2015-04-11 09:27:00', end_at: '2015-04-13 09:27:00') }
   let(:machine_a) { create(:machine, name: 'name', serial: '1') }
 
-
   before(:each) do
-    # @event_params = { name: 'update', start_at: '2015-04-14 09:27:00', end_at: '2017-04-14 09:27:00' }
     @machine_params = { name: 'update' }
-   
     @user = User.create(email: Faker::Internet.free_email, password: 'password')
     sign_in @user
-    # event_a.staffs << @user
   end
 
   it '#index' do
@@ -81,7 +76,6 @@ RSpec.describe MachinesController, type: :controller do
     end
 
     it 'redirect_to index after destroy' do
-
       delete :destroy, params: { id: machine_a[:id] }
       expect(response).to have_http_status(302)
       expect(response).to redirect_to(machines_path)
