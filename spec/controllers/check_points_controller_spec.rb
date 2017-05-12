@@ -32,12 +32,10 @@ RSpec.describe CheckPointsController, type: :controller do
 
   describe '#create' do
     it 'creates record' do
-      # allow_any_instance_of(CheckPoint).to receive(:save).and_return(true)
       expect { post :create, params: { event_id: event_a[:id], check_point: @check_point_params } }.to change { CheckPoint.count }.by(1)
     end
 
     it 'redirect on success' do
-      # allow_any_instance_of(CheckPoint).to receive(:save).and_return(true)
       post :create, params: { event_id: event_a[:id], check_point: @check_point_params }
       expect(response).not_to have_http_status(200)
       expect(response).to have_http_status(302)
