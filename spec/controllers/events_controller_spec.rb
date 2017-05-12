@@ -37,7 +37,7 @@ RSpec.describe EventsController, type: :controller do
 
   describe '#create' do
     it 'creates record' do
-      expect { post :create, params: { event: @event_params } }.to change { Event.all.size }.by(1)
+      expect { post :create, params: { event: @event_params } }.to change { Event.count }.by(1)
     end
 
     it 'redirect on success' do
@@ -68,7 +68,7 @@ RSpec.describe EventsController, type: :controller do
       expect(response).to redirect_to(events_path)
     end
 
-    it 'render :new on fail' do
+    it 'render :edit on fail' do
       allow_any_instance_of(Event).to receive(:save).and_return(false)
       post :update, params: { id: event_a[:id], event: @event_params }
       expect(response).not_to have_http_status(302)
@@ -78,7 +78,7 @@ RSpec.describe EventsController, type: :controller do
 
   describe '#destroy' do
     it 'destroy record' do
-      expect { delete :destroy, params: { id: event_a[:id], event: event_a } }.to change { Event.all.count }.by(-1)
+      expect { delete :destroy, params: { id: event_a[:id], event: event_a } }.to change { Event.count }.by(-1)
     end
 
     it 'redirect_to index after destroy' do
