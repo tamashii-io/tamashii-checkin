@@ -17,9 +17,9 @@ Rails.application.routes.draw do
   mount V1::Events::Attendees => '/api/'
   resources :events do
     resources :attendees
-    resources :check_records, expect: [:show]
+    resources :check_records, except: [:show]
     resources :check_points
-    resources :staffs, expect: [:show]
+    resources :staffs, except: [:show]
   end
 
   # Start tamashii manager
