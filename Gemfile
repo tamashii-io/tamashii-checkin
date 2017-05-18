@@ -36,7 +36,6 @@ gem 'tamashii-manager'
 gem 'active_model_serializers'
 
 gem 'grape'
-gem 'rails-controller-testing'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -55,6 +54,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'rubocop', require: false
   gem 'scss_lint', require: false
+  gem 'rails-controller-testing'
 end
 
 group :development do
