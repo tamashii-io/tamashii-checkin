@@ -87,4 +87,63 @@ RSpec.describe EventsController, type: :controller do
       expect(response).to redirect_to(events_path)
     end
   end
+#----------
+  shared_examples "http_status test" do
+    it '#index' do
+      get :index
+      expect(response).to have_http_status(200)
+    end
+
+    it '#show' do
+      get :show, params: { id: event_a[:id] }
+      expect(response).to have_http_status(200)
+    end
+
+    it '#edit' do
+      get :edit, params: { id: event_a[:id] }
+      expect(response).to have_http_status(200)
+    end
+
+    it '#new' do
+      get :new
+      expect(response).to have_http_status(200)
+    end
+
+    describe '#create' do
+
+      it 'redirect on success' do
+        post :create, params: { event: @event_params }
+        expect(response).not_to have_http_status(200)
+        expect(response).to have_http_status(302)
+      end
+
+      it 'render :new on fail' do
+        allow_any_instance_of(Event).to receive(:save).and_return(false)
+        post :create, params: { event: @event_params }
+        expect(response).not_to have_http_status(302)
+      end
+    end
+
+    describe '#update' do
+      it 'redirect on success' do
+        post :update, params: { id: event_a[:id], event: @event_params }
+        expect(response).not_to have_http_status(200)
+        expect(response).to have_http_status(302)
+      end
+
+      it 'render :edit on fail' do
+        allow_any_instance_of(Event).to receive(:save).and_return(false)
+        post :update, params: { id: event_a[:id], event: @event_params }
+        expect(response).not_to have_http_status(302)
+      end
+    end
+
+    it 'redirect_to index after destroy' do
+      delete :destroy, params: { id: event_a[:id] }
+      expect(response).to have_http_status(302)
+    end
+  end
+
+  it_behaves_like "http_status test" do
+  end
 end
