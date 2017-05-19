@@ -19,7 +19,7 @@ RSpec.describe CheckRecord, type: :model do
 
   it '#to_json' do
     json = subject.to_json
-    expect(json["check_point"]).to eq(subject.check_point)
-    expect(json["attendee"]).to eq(subject.attendee)
+    expect(json['check_point']).to eq(subject.check_point)
+    expect(json['attendee']).to eq(subject.attendee)
   end
 end
