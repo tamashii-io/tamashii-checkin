@@ -9,18 +9,18 @@ RSpec.describe Event, type: :model do
   it { should have_many(:user_event_relationships) }
   it { should have_many(:staffs) }
 
+  subject { create(:event) }
+  let(:event_without_name) { Event.new(name: nil) }
+
   it 'is not valid without name' do
-    subject { create(:event, name: nil) }
-    expect(subject).to_not be_valid
+    expect(event_without_name).to_not be_valid
   end
 
   it '#peroid' do
-    subject { create(:event) }
     expect(subject.peroid).to eq(Range.new(subject.start_at, subject.end_at))
   end
 
   it '#to_s' do
-    subject { create(:event) }
     expect(subject.to_s).to eq(subject.name)
   end
 
