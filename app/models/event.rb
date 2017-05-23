@@ -5,7 +5,7 @@ class Event < ApplicationRecord
   has_many :check_points
   has_many :check_records, through: :check_points
   has_many :machines, through: :check_points
-  has_many :user_event_relationships
+  has_many :user_event_relationships, dependent: :destroy
   has_many :staffs, through: :user_event_relationships, source: :user
 
   scope :now, -> { where('? BETWEEN start_at AND end_at', Time.zone.now) }
