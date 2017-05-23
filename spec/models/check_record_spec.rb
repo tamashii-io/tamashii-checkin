@@ -7,10 +7,15 @@ RSpec.describe CheckRecord, type: :model do
   it { should belong_to(:check_point) }
 
   subject { create(:check_record) }
-  it '.active' do
-    expect(CheckRecord.active).to include(subject)
-    subject.update_attributes(updated_at: 5.days.ago)
-    expect(CheckRecord.active).not_to include(subject)
+  describe '.active' do
+    it 'not exceed the time limit' do
+      expect(CheckRecord.active).to include(subject)
+    end
+
+    it 'exceed the time limit' do
+      subject.update_attributes(updated_at: 5.days.ago)
+      expect(CheckRecord.active).not_to include(subject)
+    end
   end
 
   it '#increment' do
