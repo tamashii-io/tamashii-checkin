@@ -14,19 +14,16 @@ RSpec.describe CheckPointsController, type: :controller do
 
   it '#index' do
     get :index, params: { event_id: event_a[:id] }
-    expect(response).to have_http_status(200)
     expect(response).to render_template(:index)
   end
 
   it '#edit' do
     get :edit, params: { event_id: event_a[:id], id: check_point_a[:id] }
-    expect(response).to have_http_status(200)
     expect(response).to render_template(:edit)
   end
 
   it '#new' do
     get :new, params: { event_id: event_a[:id] }
-    expect(response).to have_http_status(200)
     expect(response).to render_template(:new)
   end
 
@@ -37,15 +34,12 @@ RSpec.describe CheckPointsController, type: :controller do
 
     it 'redirect on success' do
       post :create, params: { event_id: event_a[:id], check_point: @check_point_params }
-      expect(response).not_to have_http_status(200)
-      expect(response).to have_http_status(302)
       expect(response).to redirect_to(event_check_points_path)
     end
 
     it 'render :new on fail' do
       allow_any_instance_of(CheckPoint).to receive(:save).and_return(false)
       post :create, params: { event_id: event_a[:id], check_point: @check_point_params }
-      expect(response).not_to have_http_status(302)
       expect(response).to render_template(:new)
     end
   end
@@ -58,15 +52,12 @@ RSpec.describe CheckPointsController, type: :controller do
 
     it 'redirect on success' do
       post :update, params: { event_id: event_a[:id], id: check_point_a[:id], check_point: @check_point_params }
-      expect(response).not_to have_http_status(200)
-      expect(response).to have_http_status(302)
       expect(response).to redirect_to(event_check_points_path)
     end
 
     it 'render :edit on fail' do
       allow_any_instance_of(CheckPoint).to receive(:save).and_return(false)
       post :update, params: { event_id: event_a[:id], id: check_point_a[:id], check_point: @check_point_params }
-      expect(response).not_to have_http_status(302)
       expect(response).to render_template(:edit)
     end
   end
@@ -79,8 +70,60 @@ RSpec.describe CheckPointsController, type: :controller do
 
     it 'redirect_to index after destroy' do
       delete :destroy, params: { event_id: event_a[:id], id: check_point_a[:id], check_point: check_point_a }
-      expect(response).to have_http_status(302)
       expect(response).to redirect_to(event_check_points_path)
     end
+  end
+
+  shared_examples 'http_status test' do
+    it '#index' do
+      get :index, params: { event_id: event_a[:id] }
+      expect(response).to have_http_status(200)
+    end
+
+    it '#edit' do
+      get :edit, params: { event_id: event_a[:id], id: check_point_a[:id] }
+      expect(response).to have_http_status(200)
+    end
+
+    it '#new' do
+      get :new, params: { event_id: event_a[:id] }
+      expect(response).to have_http_status(200)
+    end
+
+    describe '#create' do
+      it 'redirect on success' do
+        post :create, params: { event_id: event_a[:id], check_point: @check_point_params }
+        expect(response).not_to have_http_status(200)
+        expect(response).to have_http_status(302)
+      end
+
+      it 'render :new on fail' do
+        allow_any_instance_of(CheckPoint).to receive(:save).and_return(false)
+        post :create, params: { event_id: event_a[:id], check_point: @check_point_params }
+        expect(response).not_to have_http_status(302)
+      end
+    end
+
+    describe '#update' do
+      it 'redirect on success' do
+        post :update, params: { event_id: event_a[:id], id: check_point_a[:id], check_point: @check_point_params }
+        expect(response).not_to have_http_status(200)
+        expect(response).to have_http_status(302)
+      end
+
+      it 'render :edit on fail' do
+        allow_any_instance_of(CheckPoint).to receive(:save).and_return(false)
+        post :update, params: { event_id: event_a[:id], id: check_point_a[:id], check_point: @check_point_params }
+        expect(response).not_to have_http_status(302)
+      end
+    end
+
+    it 'redirect_to index after destroy' do
+      delete :destroy, params: { event_id: event_a[:id], id: check_point_a[:id] }
+      expect(response).to have_http_status(302)
+    end
+  end
+
+  it_behaves_like 'http_status test' do
   end
 end
