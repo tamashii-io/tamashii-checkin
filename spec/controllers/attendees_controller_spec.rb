@@ -4,12 +4,12 @@ require 'rails_helper'
 RSpec.describe AttendeesController, type: :controller do
   let(:event_a) { create(:event, name: 'name', start_at: '2015-04-11 09:27:00', end_at: '2015-04-13 09:27:00') }
   let(:attendee_a) { create(:attendee, event_id: event_a.id) }
+  let(:user) { create(:user) }
 
   before(:each) do
     @attendee_params = { serial: '001', code: 'A01', name: 'Bob', email: 'a@a', phone: '0919905295', card_serial: 'aa' }
-    @user = User.create(email: Faker::Internet.free_email, password: 'password')
-    sign_in @user
-    event_a.staffs << @user
+    sign_in user
+    event_a.staffs << user
   end
 
   it '#index' do
