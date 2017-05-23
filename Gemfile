@@ -55,6 +55,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'rubocop', require: false
   gem 'scss_lint', require: false
+  gem 'rails-controller-testing'
 end
 
 group :development do
