@@ -14,19 +14,16 @@ RSpec.describe AttendeesController, type: :controller do
 
   it '#index' do
     get :index, params: { event_id: event_a[:id] }
-    expect(response).to have_http_status(200)
     expect(response).to render_template(:index)
   end
 
   it '#edit' do
     get :edit, params: { event_id: event_a[:id], id: attendee_a[:id] }
-    expect(response).to have_http_status(200)
     expect(response).to render_template(:edit)
   end
 
   it '#new' do
     get :new, params: { event_id: event_a[:id] }
-    expect(response).to have_http_status(200)
     expect(response).to render_template(:new)
   end
 
@@ -37,15 +34,12 @@ RSpec.describe AttendeesController, type: :controller do
 
     it 'redirect on success' do
       post :create, params: { event_id: event_a[:id], attendee: @attendee_params }
-      expect(response).not_to have_http_status(200)
-      expect(response).to have_http_status(302)
       expect(response).to redirect_to(event_attendees_path)
     end
 
     it 'render :new on fail' do
       allow_any_instance_of(Attendee).to receive(:save).and_return(false)
       post :create, params: { event_id: event_a[:id], attendee: @attendee_params }
-      expect(response).not_to have_http_status(302)
       expect(response).to render_template(:new)
     end
   end
@@ -58,15 +52,12 @@ RSpec.describe AttendeesController, type: :controller do
 
     it 'redirect on success' do
       post :update, params: { event_id: event_a[:id], id: attendee_a[:id], attendee: @attendee_params }
-      expect(response).not_to have_http_status(200)
-      expect(response).to have_http_status(302)
       expect(response).to redirect_to(event_attendees_path)
     end
 
     it 'render :edit on fail' do
       allow_any_instance_of(Attendee).to receive(:save).and_return(false)
       post :update, params: { event_id: event_a[:id], id: attendee_a[:id], attendee: @attendee_params }
-      expect(response).not_to have_http_status(302)
       expect(response).to render_template(:edit)
     end
   end
@@ -79,7 +70,6 @@ RSpec.describe AttendeesController, type: :controller do
 
     it 'redirect_to index after destroy' do
       delete :destroy, params: { event_id: event_a[:id], id: attendee_a[:id], attendee: attendee_a }
-      expect(response).to have_http_status(302)
       expect(response).to redirect_to(event_attendees_path)
     end
   end
