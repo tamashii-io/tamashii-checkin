@@ -3,10 +3,10 @@ require 'rails_helper'
 
 RSpec.describe CheckRecordsController, type: :controller do
   let(:event) { create(:event) }
-  subject { create(:user) }
+  let(:user) { create(:user) }
   it '#index' do
-    sign_in subject
-    event.staffs << subject
+    sign_in user
+    event.staffs << user
     get :index, params: { event_id: event[:id] }
     expect(response).to have_http_status(200)
     expect(response).to render_template(:index)
