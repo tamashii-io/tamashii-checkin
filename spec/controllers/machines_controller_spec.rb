@@ -3,11 +3,11 @@ require 'rails_helper'
 
 RSpec.describe MachinesController, type: :controller do
   let(:machine_a) { create(:machine, name: 'name', serial: '1') }
+  let(:user) { create(:user) }
 
   before(:each) do
     @machine_params = { name: 'update' }
-    @user = User.create(email: Faker::Internet.free_email, password: 'password')
-    sign_in @user
+    sign_in user
   end
 
   it '#index' do
