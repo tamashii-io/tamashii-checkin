@@ -3,12 +3,14 @@ require 'rails_helper'
 
 RSpec.describe EventsController, type: :controller do
   let(:event_a) { create(:event, name: 'name', start_at: '2015-04-11 09:27:00', end_at: '2015-04-13 09:27:00') }
+  let(:user) { create(:user, email: Faker::Internet.free_email, password: 'password') }
 
   before(:each) do
     @event_params = { name: 'update', start_at: '2015-04-14 09:27:00', end_at: '2017-04-14 09:27:00' }
-    @user = User.create(email: Faker::Internet.free_email, password: 'password')
-    sign_in @user
-    event_a.staffs << @user
+    # @user = User.create(email: Faker::Internet.free_email, password: 'password')
+
+    sign_in user
+    event_a.staffs << user
   end
 
   it '#index' do
