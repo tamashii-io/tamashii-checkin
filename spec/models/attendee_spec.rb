@@ -16,10 +16,15 @@ RSpec.describe Attendee, type: :model do
     expect(attendee.to_s).to eq(attendee.name)
   end
 
-  it '#register' do
-    attendee.register('ABCD')
-    attendee_card_serial.register('ABCD')
-    expect(attendee.card_serial).to eq('ABCD')
-    expect(attendee_card_serial.card_serial).to eq('1234')
+  describe '#register' do
+    it 'have card_serial can not override' do
+      attendee_card_serial.register('ABCD')
+      expect(attendee_card_serial.card_serial).not_to eq('ABCD')
+    end
+
+    it 'without card_serial then write serial' do
+      attendee.register('ABCD')
+      expect(attendee.card_serial).to eq('ABCD')
+    end
   end
 end
