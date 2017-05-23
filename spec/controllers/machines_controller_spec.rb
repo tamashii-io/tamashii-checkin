@@ -75,8 +75,8 @@ RSpec.describe MachinesController, type: :controller do
 
   shared_examples 'http_status test' do
     it '#index' do
-      get :index
       allow(Tamashii::Machine).to receive(:activities).and_return({})
+      get :index
       expect(response).to have_http_status(200)
     end
 
