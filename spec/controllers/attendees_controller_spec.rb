@@ -83,4 +83,58 @@ RSpec.describe AttendeesController, type: :controller do
       expect(response).to redirect_to(event_attendees_path)
     end
   end
+
+  shared_examples 'http_status test' do
+    it '#index' do
+      get :index
+      expect(response).to have_http_status(200)
+    end
+
+    # it '#edit' do
+    #   get :edit, params: { id: attendee_a[:id] }
+    #   expect(response).to have_http_status(200)
+    # end
+
+    # it '#new' do
+    #   get :new
+    #   expect(response).to have_http_status(200)
+    # end
+
+    # describe '#create' do
+
+    #   it 'redirect on success' do
+    #     post :create, params: { attendee: @attendee_params }
+    #     expect(response).not_to have_http_status(200)
+    #     expect(response).to have_http_status(302)
+    #   end
+
+    #   it 'render :new on fail' do
+    #     allow_any_instance_of(Attendee).to receive(:save).and_return(false)
+    #     post :create, params: { attendee: @attendee_params }
+    #     expect(response).not_to have_http_status(302)
+    #   end
+    # end
+
+    # describe '#update' do
+    #   it 'redirect on success' do
+    #     post :update, params: { id: attendee_a[:id], attendee: @attendee_params }
+    #     expect(response).not_to have_http_status(200)
+    #     expect(response).to have_http_status(302)
+    #   end
+
+    #   it 'render :edit on fail' do
+    #     allow_any_instance_of(Attendee).to receive(:save).and_return(false)
+    #     post :update, params: { id: attendee_a[:id], attendee: @attendee_params }
+    #     expect(response).not_to have_http_status(302)
+    #   end
+    # end
+
+    # it 'redirect_to index after destroy' do
+    #   delete :destroy, params: { id: attendee_a[:id] }
+    #   expect(response).to have_http_status(302)
+    # end
+  end
+
+  it_behaves_like 'http_status test' do
+  end
 end
