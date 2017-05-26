@@ -331,7 +331,7 @@ GEM
     sshkit (1.13.1)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
-    tamashii (0.3.2)
+    tamashii (0.3.3)
       concurrent-ruby
       logger-colors
       nio4r
