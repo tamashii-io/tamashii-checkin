@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -23,6 +24,6 @@ Rails.application.routes.draw do
   end
 
   # Start tamashii manager
-  mount Tamashii::Manager::Server => '/tamashii'
+  mount Tamashii::Manager.server => '/tamashii'
   mount ActionCable.server => '/cable'
 end
