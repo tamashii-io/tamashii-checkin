@@ -7,6 +7,7 @@ RSpec.describe CheckPoint, type: :model do
   it { should belong_to(:machine) }
   it { should belong_to(:registrar) }
   it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:type) }
 
   subject { create(:check_point) }
   let(:attendee) { create(:attendee, event_id: subject.event_id) }
@@ -68,10 +69,6 @@ RSpec.describe CheckPoint, type: :model do
     end
   end
 
-  it '#to_s' do
-    expect(subject.to_s).to eq(subject.name)
-  end
-
   describe '#latest_record' do
     it 'no active record' do
       expect { subject.latest_record(attendee) }.to change { CheckRecord.count }.by(1)
@@ -81,5 +78,9 @@ RSpec.describe CheckPoint, type: :model do
       create(:check_record, attendee_id: attendee.id, check_point_id: subject.id)
       expect { subject.latest_record(attendee) }.to change { CheckRecord.count }.by(0)
     end
+  end
+
+  it '#to_s' do
+    expect(subject.to_s).to eq(subject.name)
   end
 end
