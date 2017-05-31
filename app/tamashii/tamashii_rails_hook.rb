@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'tamashii/manager/client'
+
 # Tamashii Rails Hook
 class TamashiiRailsHook < Tamashii::Hook
   INTERESTED_TYPES = [Tamashii::Type::RFID_NUMBER, Tamashii::Type::RFID_DATA].freeze
