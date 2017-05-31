@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require_relative 'tamashii/manager/client'
 
 # Tamashii Rails Hook
 class TamashiiRailsHook < Tamashii::Hook

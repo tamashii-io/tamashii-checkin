@@ -1,8 +1,12 @@
 # frozen_string_literal: true
-Tamashii::Manager.config do
-  env Rails.env
-  auth Settings.tamashii.mode
-  token Settings.tamashii.token
+
+# TODO: Set same log path for Tamashii::Manager and Server
+Tamashii::Server.config.log_path = Rails.root.join('log', 'tamashii.log')
+
+Tamashii::Manager.config do |config|
+  config.env = Rails.env
+  config.auth_type = Settings.tamashii.mode
+  config.token = Settings.tamashii.token
 end
 
 Tamashii::Resolver.config do
