@@ -13,6 +13,9 @@ import MachinesTable from './machines/machines_table.jsx';
 import AttendeesTable from './attendees/attendees_table.jsx';
 import CheckrecordsTable from './checkrecords/check_records_table.jsx';
 
+// Normal JavaScript
+import Home from './home';
+
 const modules = [
   new Mounter('#machines', MachinesTable),
   new Mounter('#event', EventDashboard),
@@ -22,8 +25,10 @@ const modules = [
 
 document.addEventListener('turbolinks:before-cache', () => {
   modules.forEach(module => module.unmount());
+  Home.off();
 });
 
 document.addEventListener('turbolinks:load', () => {
   modules.forEach(module => module.mount());
+  Home.on();
 });
