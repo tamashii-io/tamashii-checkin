@@ -18,10 +18,10 @@ module Tamashii
     end
 
     def process(options = nil)
-      raise CommandError, 'Client didn\'t exists' if client.nil?
+      # raise CommandError, 'Client didn\'t exists' if client.nil?
       type, body = build_command(options)
-      packet = Tamashii::Packet.new(type, client.tag, body)
-      client.send(packet.dump)
+      packet = Tamashii::Packet.new(type, 0, body)
+      Tamashii::Manager::Client.send_to(@machine.serial, packet.dump)
     end
 
     private
