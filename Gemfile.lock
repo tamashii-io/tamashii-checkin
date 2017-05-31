@@ -167,6 +167,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
+    logger-colors (1.0.0)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -201,7 +202,7 @@ GEM
       pry (>= 0.9.10)
     public_suffix (2.0.5)
     puma (3.8.2)
-    rack (2.0.1)
+    rack (2.0.3)
     rack-accept (0.4.5)
       rack (>= 0.4)
     rack-test (0.6.3)
@@ -330,12 +331,21 @@ GEM
     sshkit (1.13.1)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    tamashii (0.3.3)
+      concurrent-ruby
+      logger-colors
+      nio4r
+      rack
+      redis
+      tamashii-common
+      websocket-driver
     tamashii-common (0.1.4)
-    tamashii-manager (0.1.7)
+    tamashii-manager (0.2.0)
       concurrent-ruby
       nio4r
       puma
       rack
+      tamashii
       tamashii-common
       websocket-driver
     temple (0.7.7)

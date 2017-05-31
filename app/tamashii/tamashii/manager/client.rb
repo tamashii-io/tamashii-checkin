@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Tamashii
   module Manager
     # Tamashii::Manager::Client
@@ -13,11 +14,11 @@ module Tamashii
       end
 
       # Overrite the shutdown methods
-      alias origin_shutdown shutdown
-      def shutdown(*args, &block)
-        origin_shutdown(*args, &block)
-        Tamashii::Machine.new(id).close
-      end
+      # alias origin_shutdown shutdown
+      # def shutdown(*args, &block)
+      #   origin_shutdown(*args, &block)
+      #   Tamashii::Machine.new(id).close
+      # end
     end
   end
 end
