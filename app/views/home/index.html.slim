@@ -20,4 +20,5 @@
             i.icon-puzzle
           #machine_num.h4.mb-0 = Machine.count
           small.text-muted.text-uppercase.font-weight-bold Machines
-          = progress_bar(value: Machine.recent_update.count, max: Machine.count)
+          #machine_num_bar
+            = progress_bar(value: Tamashii::Machine.activities.count, max: Machine.count)

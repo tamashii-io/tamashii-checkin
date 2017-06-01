@@ -13,12 +13,12 @@ module Tamashii
         # rubocop:enable Rails/SkipsModelValidations
       end
 
-      # Overrite the shutdown methods
-      # alias origin_shutdown shutdown
-      # def shutdown(*args, &block)
-      #   origin_shutdown(*args, &block)
-      #   Tamashii::Machine.new(id).close
-      # end
+      # Overrite the on_close methods
+      alias origin_on_close on_close
+      def on_close
+        Tamashii::Machine.new(id).close
+        origin_on_close
+      end
     end
   end
 end

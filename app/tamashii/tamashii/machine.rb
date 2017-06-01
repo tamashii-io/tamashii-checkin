@@ -46,7 +46,8 @@ module Tamashii
       event = {
         last_active: time,
         serial: @serial,
-        type: 'LAST_ACTIVE_CHANGED'
+        type: 'LAST_ACTIVE_CHANGED',
+        total: Machine.activities.count
       }
 
       cable_broadcast event
@@ -55,7 +56,8 @@ module Tamashii
     def cable_broadcast_close
       event = {
         serial: @serial,
-        type: 'SHUTDOWN'
+        type: 'SHUTDOWN',
+        total: Machine.activities.count
       }
 
       cable_broadcast event
