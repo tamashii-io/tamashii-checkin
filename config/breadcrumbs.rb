@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 crumb :root do
   link 'Home', root_path
 end
@@ -55,6 +56,11 @@ end
 
 crumb :check_records do |event|
   link 'Check Records', event_check_records_path(event)
+  parent :event, event
+end
+
+crumb :accesses do |event|
+  link 'Accesses', event_accesses_path(event)
   parent :event, event
 end
 

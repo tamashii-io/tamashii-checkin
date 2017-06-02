@@ -1,7 +1,8 @@
 # frozen_string_literal: true
+
 module V1
   module Events
-    # missing top-level class documentation comment
+    # :nodoc:
     class Attendees < Grape::API
       format :json
 

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-# Missing top-level class documentation comment.
+
+# :nodoc:
 class Machine < ApplicationRecord
   has_many :check_points
   has_many :events, through: :check_points

@@ -19,7 +19,7 @@ class TamashiiRailsHook < Tamashii::Hook
     Tamashii::Machine.new(@client.id).touch
     # rubocop:enable Rails/SkipsModelValidations
 
-    Tamashii::Manager.logger.debug "Tamashii #{packet.type} Packet captured by Rails, #{packet.body}"
+    # Tamashii::Manager.logger.debug "Tamashii #{packet.type} Packet captured by Rails, #{packet.body}"
     handle(packet)
     # TODO: Save recent update information into Redis
     # machine&.touch

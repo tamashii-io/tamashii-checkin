@@ -7,12 +7,18 @@ class Home {
     this.activated = false;
     this.total_machines = 0;
     this.$machine_status_bar = null;
+    this.$machine_counts = null;
   }
 
   on() {
     this.activated = true;
-    this.total_machines = parseInt(document.querySelector('#machine_num').innerText, 10);
+    this.$machine_counts = document.querySelector('#machine_num');
     this.$machine_status_bar = document.querySelector('#machine_num_bar .progress .progress-bar');
+    if (!this.$machine_counts || !this.$machine_status_bar) {
+      this.activated = false;
+      return;
+    }
+    this.total_machines = parseInt(this.$machine_counts.innerText, 10);
   }
 
   off() {

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Tamashii
   # Tamashii::CardHandler
   class CardHandler
@@ -16,8 +17,8 @@ module Tamashii
 
     def process
       raise InvalidCardError, 'Invalid Card' if card_id.blank?
-      raise UnregisterMachineError, 'Unregister Machine' unless machine.present?
-      return response auth: false, reason: 'No Checkpoint Available' unless check_point.present?
+      raise UnregisterMachineError, 'Unregister Machine' if machine.blank?
+      return response auth: false, reason: 'No Checkpoint Available' if check_point.blank?
       perform
     rescue CardError => e
       response auth: false, reason: e.message
@@ -56,20 +57,22 @@ module Tamashii
     end
 
     def registrar
-      check_point.register(@card_id)
-      response auth: true, reason: 'registrar'
+      result = check_point.register(@card_id)
+      response auth: result, reason: 'registrar'
     end
 
-    def checkin
-      check_point.checkin(attendee)
-      response auth: true, reason: 'checkin'
+    def site
+      result = check_point.checkin(attendee)
+      response auth: result, reason: 'checkin'
+    end
+
+    def gate
+      result = check_point.check_pass(attendee)
+      response auth: result, reason: 'gate'
     end
 
     def perform
-      case check_point.type
-      when 'registrar' then registrar
-      when 'site' then checkin
-      end
+      send(check_point.type)
     end
   end
 end

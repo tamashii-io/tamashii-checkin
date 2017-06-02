@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-# missing top-level class documentation comment
+
+# :nodoc:
 class CheckPoint < ApplicationRecord
   MAX_CHECKIN_TIME = 5.minutes
 
@@ -13,24 +14,44 @@ class CheckPoint < ApplicationRecord
   validates :name, :type, presence: true
   validate :machine_available, on: :create
 
+  # TODO: Implements STI class to work with different behavior
   enum type: {
     registrar: 0,
-    site: 1
+    site: 1,
+    gate: 2
   }
 
   def register(card_serial)
-    return if event.attendees.where(card_serial: card_serial).exists?
-    return unless registrar.present?
+    return false if event.attendees.where(card_serial: card_serial).exists?
+    return false if registrar.blank?
     RegistrarChannel.register([registrar, event], card_serial)
+    true
   end
 
   def checkin(attendee)
-    return unless attendee.present?
+    return false if attendee.blank?
     latest_record(attendee).increment
+    true
+  end
+
+  def check_pass(attendee)
+    AccessesChannel.request(self, attendee)
+    true
+  end
+
+  # TODO: Move to Gate type model
+  def grant_access(attendee, accept = false)
+    if accept
+      accept(attendee)
+    else
+      reject
+    end
+    AccessesChannel.update_access(self)
+    self
   end
 
   def machine_available
-    return unless machine.present?
+    return if machine.blank?
     return unless machine.events.overlap(event.peroid).any?
     errors.add(:machine, '這時間已經有人使用此機器')
   end
@@ -41,5 +62,16 @@ class CheckPoint < ApplicationRecord
 
   def to_s
     name
+  end
+
+  private
+
+  def accept(attendee)
+    latest_record(attendee).increment
+    machine.beep
+  end
+
+  def reject
+    machine.beep('no')
   end
 end

@@ -12,6 +12,7 @@ import EventDashboard from './events/dashboard.jsx';
 import MachinesTable from './machines/machines_table.jsx';
 import AttendeesTable from './attendees/attendees_table.jsx';
 import CheckrecordsTable from './checkrecords/check_records_table.jsx';
+import AccessRecordsTable from './accesses/access_records_table.jsx';
 
 // Normal JavaScript
 import Home from './home';
@@ -21,6 +22,7 @@ const modules = [
   new Mounter('#event', EventDashboard),
   new Mounter('#attendees', AttendeesTable),
   new Mounter('#checkrecords', CheckrecordsTable),
+  new Mounter('#accesses', AccessRecordsTable),
 ];
 
 document.addEventListener('turbolinks:before-cache', () => {

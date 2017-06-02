@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-# missing top-level class documentation comment
+
+# :nodoc:
 class CheckRecordsController < ApplicationController
   before_action :find_event
   def index
