@@ -34,12 +34,20 @@ class CheckPoint < ApplicationRecord
     true
   end
 
-  def pass?(attendee)
-    # TODO: Add access control for attendee
+  def check_pass(attendee)
     AccessesChannel.request(self, attendee)
-    # return false if attendee.id.even?
-    # latest_record(attendee).increment
     true
+  end
+
+  # TODO: Move to Gate type model
+  def grant_access(attendee, accept = false)
+    if accept
+      accept(attendee)
+    else
+      reject
+    end
+    AccessesChannel.update_access(self)
+    self
   end
 
   def machine_available
@@ -54,5 +62,16 @@ class CheckPoint < ApplicationRecord
 
   def to_s
     name
+  end
+
+  private
+
+  def accept(attendee)
+    latest_record(attendee).increment
+    machine.beep
+  end
+
+  def reject
+    machine.beep('no')
   end
 end

@@ -17,12 +17,7 @@ module V1
         # TODO: Implement full features
         event = Event.find(params[:event_id])
         check_point = event.check_points.find(params[:check_point_id])
-        if params[:accept]
-          check_point.machine.beep
-          check_point.latest_record(Attendee.find(params[:attendee_id])).increment
-        else
-          check_point.machine.beep('no')
-        end
+        check_point.grant_access(Attendee.find(params[:attendee_id]), params[:accept])
       end
     end
   end

@@ -67,7 +67,7 @@ module Tamashii
     end
 
     def gate
-      result = check_point.pass?(attendee)
+      result = check_point.check_pass(attendee)
       response auth: result, reason: 'gate'
     end
 

@@ -5,7 +5,8 @@ class AccessesChannel < ApplicationCable::Channel
   EVENTS = {
     update: 'ACCESS_RECORD_UPDATE',
     set: 'ACCESS_RECORD_SET',
-    request: 'REQUEST_ACCESS'
+    request: 'REQUEST_ACCESS',
+    update_access: 'ACCESS_UPDATE'
   }.freeze
 
   class << self
@@ -22,6 +23,11 @@ class AccessesChannel < ApplicationCable::Channel
     def request(check_point, attendee)
       user = check_point.registrar
       broadcast_to([user, check_point], type: EVENTS[:request], record: attendee)
+    end
+
+    def update_access(check_point)
+      user = check_point.registrar
+      broadcast_to([user, check_point], type: EVENTS[:update_access])
     end
   end
 
