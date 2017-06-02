@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Modal, Button, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+
 import {
   RECEIVE_ACCESS_RECORDS,
   ACCESS_RECORD_UPDATE,
   ACCESS_RECORD_SET,
+  REQUEST_ACCESS,
+  CANCEL_REQUEST,
 } from './constants';
 import { fetchAccessRecords } from './actions';
 import { AccessesChannel } from '../channels';
@@ -16,8 +20,11 @@ class AccessRecordsTable extends React.Component {
   constructor() {
     super();
     this.state = {
+      requestAttendee: null,
       accessRecords: [],
     };
+
+    this.closeModal = this.closeModal.bind(this);
   }
 
   componentWillMount() {
@@ -35,6 +42,7 @@ class AccessRecordsTable extends React.Component {
       ACCESS_RECORD_SET,
       accessRecords => this.setState({ accessRecords }),
     );
+    store.on(REQUEST_ACCESS, requestAttendee => this.setState({ requestAttendee }));
   }
 
   componentWillUnmount() {
@@ -49,9 +57,42 @@ class AccessRecordsTable extends React.Component {
     );
   }
 
+  hasAccessRequest() {
+    return this.state.requestAttendee != null;
+  }
+
+  requestAttendeeName() {
+    if (this.state.requestAttendee) {
+      return this.state.requestAttendee.name;
+    }
+
+    return 'Attendee';
+  }
+
+  closeModal() {
+    this.setState({ requestAttendee: null });
+    store.dispatch({ type: CANCEL_REQUEST });
+  }
+
+  acceptRequest() {
+  }
+
+  rejectRequest() {
+  }
+
   render() {
     return (
       <div>
+        <Modal isOpen={this.hasAccessRequest()} toggle={this.closeModal}>
+          <ModalHeader toggle={this.closeModal}>Access Request</ModalHeader>
+          <ModalBody>
+            {this.requestAttendeeName()} is request to access this gate.
+          </ModalBody>
+          <ModalFooter>
+            <Button color="danger" onClick={this.rejectRequest}>Reject</Button>
+            <Button color="success" onClick={this.acceptRequest}>Accept</Button>
+          </ModalFooter>
+        </Modal>
         <table className="table table-bordered table-striped table-condensed">
           <thead>
             <tr>

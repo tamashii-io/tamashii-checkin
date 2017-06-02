@@ -4,18 +4,24 @@
 class AccessesChannel < ApplicationCable::Channel
   EVENTS = {
     update: 'ACCESS_RECORD_UPDATE',
-    set: 'ACCESS_RECORD_SET'
+    set: 'ACCESS_RECORD_SET',
+    request: 'REQUEST_ACCESS'
   }.freeze
 
   class << self
     def update(check_record)
       user = check_record.check_point.registrar
-      broadcast_to([user, check_record.check_point], type: EVENTS[:update], record: check_record.to_json)
+      broadcast_to([user, check_record.check_point], type: EVENTS[:update], record: check_record)
     end
 
     def set(check_record)
       user = check_record.check_point.registrar
-      broadcast_to([user, check_record.check_point], type: EVENTS[:set], record: check_record.to_json)
+      broadcast_to([user, check_record.check_point], type: EVENTS[:set], record: check_record)
+    end
+
+    def request(check_point, attendee)
+      user = check_point.registrar
+      broadcast_to([user, check_point], type: EVENTS[:request], record: attendee)
     end
   end
 

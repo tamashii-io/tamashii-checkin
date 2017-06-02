@@ -36,8 +36,9 @@ class CheckPoint < ApplicationRecord
 
   def pass?(attendee)
     # TODO: Add access control for attendee
-    return false if attendee.id.even?
-    latest_record(attendee).increment
+    AccessesChannel.request(self, attendee)
+    # return false if attendee.id.even?
+    # latest_record(attendee).increment
     true
   end
 

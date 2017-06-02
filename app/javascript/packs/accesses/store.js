@@ -5,6 +5,8 @@ import {
   RECEIVE_ACCESS_RECORDS,
   ACCESS_RECORD_UPDATE,
   ACCESS_RECORD_SET,
+  REQUEST_ACCESS,
+  CANCEL_REQUEST,
 } from './constants';
 import { AccessesChannel } from '../channels';
 
@@ -19,6 +21,11 @@ const AccessRecord = Record({
   check_point: '',
 });
 
+const Attendee = Record({
+  id: 0,
+  name: '',
+});
+
 const accessRecordsToRecord = records => records.map(
   record => new AccessRecord(record),
 );
@@ -28,6 +35,7 @@ class AccessRecordStore extends EventEmitter {
   constructor() {
     super();
     this.accessRecords = fromJS([]);
+    this.requestAttendee = null;
     AccessesChannel.onReceived(action => this.dispatch(action));
   }
 
@@ -57,8 +65,17 @@ class AccessRecordStore extends EventEmitter {
       }
       case ACCESS_RECORD_SET: {
         const record = new AccessRecord(action.record);
-        this.accessRecords = this.check_records.push(record);
+        this.accessRecords = this.accessRecords.push(record);
         this.emit(action.type, this.accessRecords);
+        break;
+      }
+      case REQUEST_ACCESS: {
+        this.requestAttendee = new Attendee(action.record);
+        this.emit(action.type, this.requestAttendee);
+        break;
+      }
+      case CANCEL_REQUEST: {
+        this.requestAttendeeId = null;
         break;
       }
       default: {
