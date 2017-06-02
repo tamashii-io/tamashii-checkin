@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-# missing top-level class documentation comment
+
+# :nodoc:
 class CheckrecordsChannel < ApplicationCable::Channel
   EVENTS = {
     update: 'CHECK_RECORD_UPDATE',

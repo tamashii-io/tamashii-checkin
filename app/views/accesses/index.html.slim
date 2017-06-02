@@ -1,0 +1,21 @@
+- breadcrumb :accesses, @event
+.container-fluid
+  .animated.fadeIn
+    .row
+      .col-lg-12
+        .card
+          .card-header = t('.title')
+          .card-block
+            #accesses data-event-id="#{@event.id}" data-check-point-id="#{@check_point.id}"
+              table.table.table-bordered.table-striped.table-condensed
+                 thead
+                  tr
+                    td 會眾
+                    td 次數
+                    td 時間
+                  tbody
+                    - @records.each do |checkrecord|
+                      tr
+                        td= checkrecord.attendee
+                        td= checkrecord.times
+                        td= l checkrecord.updated_at

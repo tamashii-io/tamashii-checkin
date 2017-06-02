@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resources :check_records, except: [:show]
     resources :check_points
     resources :staffs, except: [:show]
+    resources :accesses, only: [:index]
   end
 
   # Start tamashii manager
