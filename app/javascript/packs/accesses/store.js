@@ -6,6 +6,7 @@ import {
   ACCESS_RECORD_UPDATE,
   ACCESS_RECORD_SET,
   REQUEST_ACCESS,
+  ACCESS_UPDATE,
   CANCEL_REQUEST,
 } from './constants';
 import { AccessesChannel } from '../channels';
@@ -72,6 +73,11 @@ class AccessRecordStore extends EventEmitter {
       case REQUEST_ACCESS: {
         this.requestAttendee = new Attendee(action.record);
         this.emit(action.type, this.requestAttendee);
+        break;
+      }
+      case ACCESS_UPDATE: {
+        this.requestAttendee = null;
+        this.emit(action.type);
         break;
       }
       case CANCEL_REQUEST: {

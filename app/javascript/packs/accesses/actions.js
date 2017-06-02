@@ -1,11 +1,13 @@
 import {
   RECEIVE_ACCESS_RECORDS,
+  ACCESS_UPDATE,
 } from './constants';
 
 import store from './store';
 
 const ENDPOINTS = {
   accessRecords: eventId => `/events/${eventId}/accesses.json`,
+  setAttendeeAccess: eventId => `/api/v1/events/${eventId}/accesses`,
 };
 
 export const fetchAccessRecords = (eventId) => {
@@ -14,6 +16,20 @@ export const fetchAccessRecords = (eventId) => {
    .done((data) => { store.dispatch({ type: RECEIVE_ACCESS_RECORDS, accessRecords: data }); });
 };
 
+export const setAttendeeAccess = (eventId, checkPointId, attendeeId, isAccept) => {
+  $.post(
+    ENDPOINTS.setAttendeeAccess(eventId),
+    { event_id: eventId,
+      check_point_id: checkPointId,
+      attendee_id: attendeeId,
+      accept: isAccept,
+    },
+  )
+   .promise()
+   .done(() => { store.dispatch({ type: ACCESS_UPDATE }); });
+};
+
 export default {
   fetchAccessRecords,
+  setAttendeeAccess,
 };

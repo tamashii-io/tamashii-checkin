@@ -7,10 +7,14 @@ import {
   RECEIVE_ACCESS_RECORDS,
   ACCESS_RECORD_UPDATE,
   ACCESS_RECORD_SET,
+  ACCESS_UPDATE,
   REQUEST_ACCESS,
   CANCEL_REQUEST,
 } from './constants';
-import { fetchAccessRecords } from './actions';
+import {
+  fetchAccessRecords,
+  setAttendeeAccess,
+} from './actions';
 import { AccessesChannel } from '../channels';
 import store from './store';
 
@@ -25,6 +29,8 @@ class AccessRecordsTable extends React.Component {
     };
 
     this.closeModal = this.closeModal.bind(this);
+    this.rejectRequest = this.rejectRequest.bind(this);
+    this.acceptRequest = this.acceptRequest.bind(this);
   }
 
   componentWillMount() {
@@ -43,6 +49,7 @@ class AccessRecordsTable extends React.Component {
       accessRecords => this.setState({ accessRecords }),
     );
     store.on(REQUEST_ACCESS, requestAttendee => this.setState({ requestAttendee }));
+    store.on(ACCESS_UPDATE, () => this.setState({ requestAttendee: null }));
   }
 
   componentWillUnmount() {
@@ -75,9 +82,21 @@ class AccessRecordsTable extends React.Component {
   }
 
   acceptRequest() {
+    setAttendeeAccess(
+      this.props.eventId,
+      this.props.checkPointId,
+      this.state.requestAttendee.id,
+      true,
+    );
   }
 
   rejectRequest() {
+    setAttendeeAccess(
+      this.props.eventId,
+      this.props.checkPointId,
+      this.state.requestAttendee.id,
+      false,
+    );
   }
 
   render() {

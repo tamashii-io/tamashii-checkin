@@ -11,12 +11,12 @@ class AccessesChannel < ApplicationCable::Channel
   class << self
     def update(check_record)
       user = check_record.check_point.registrar
-      broadcast_to([user, check_record.check_point], type: EVENTS[:update], record: check_record)
+      broadcast_to([user, check_record.check_point], type: EVENTS[:update], record: check_record.to_json)
     end
 
     def set(check_record)
       user = check_record.check_point.registrar
-      broadcast_to([user, check_record.check_point], type: EVENTS[:set], record: check_record)
+      broadcast_to([user, check_record.check_point], type: EVENTS[:set], record: check_record.to_json)
     end
 
     def request(check_point, attendee)

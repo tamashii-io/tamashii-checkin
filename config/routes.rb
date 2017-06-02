@@ -15,7 +15,9 @@ Rails.application.routes.draw do
     end
   end
 
+  # TODO: Compact into single endpoint
   mount V1::Events::Attendees => '/api/'
+  mount V1::Events::Accesses => '/api/'
   resources :events do
     resources :attendees
     resources :check_records, except: [:show]
