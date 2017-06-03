@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20170602093829) do
     t.datetime "end_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "admin"
+    t.integer "user_id"
   end
 
   create_table "machines", force: :cascade do |t|
