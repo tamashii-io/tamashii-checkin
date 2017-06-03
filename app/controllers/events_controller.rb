@@ -21,6 +21,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     # TODO: Let admin can manage all events and add new staff
+    # TODO: modified @event.user = current_user
     @event.user_id = current_user.id
     @event.staffs << current_user
     @event.user_event_relationships.first.role = 0
