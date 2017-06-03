@@ -26,3 +26,5 @@ npm-debug.log
 config/database.*.yml
 config/settings.*.yml
 config/secrets.*.yml
+
+attendees_test_data.csv
