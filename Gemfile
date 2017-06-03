@@ -8,7 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 
-gem 'rails', '~> 5.1.0.beta1'
+gem 'rails', '~> 5.1.0'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 gem 'sassc-rails'
@@ -17,7 +17,7 @@ gem 'font-awesome-rails'
 gem 'simple-line-icons-rails'
 
 gem 'uglifier', '>= 1.3.0'
-gem 'webpacker', github: "rails/webpacker"
+gem 'webpacker'
 
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
@@ -30,14 +30,13 @@ gem 'simple_form'
 gem 'gretel'
 
 gem 'devise'
+gem 'pundit'
 
 gem 'settingslogic'
 gem 'tamashii-manager'
 gem 'active_model_serializers'
 
 gem 'grape'
-gem 'rails-controller-testing'
-gem 'pundit'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -57,7 +56,6 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'rubocop', require: false
   gem 'scss_lint', require: false
-  gem 'rails-controller-testing'
 end
 
 group :development do
