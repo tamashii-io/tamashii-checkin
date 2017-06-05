@@ -19,6 +19,6 @@ module TamashiiCheckin
     config.autoload_paths << Rails.root.join('app', 'tamashii')
 
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
-    config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
+    config.autoload_paths << Rails.root.join('app', 'api', '*')
   end
 end
