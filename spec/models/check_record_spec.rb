@@ -21,10 +21,4 @@ RSpec.describe CheckRecord, type: :model do
   it '#increment' do
     expect { subject.increment }.to change { subject.times }.by(1)
   end
-
-  it '#to_json' do
-    json = subject.to_json
-    expect(json['check_point']).to eq(subject.check_point)
-    expect(json['attendee']).to eq(subject.attendee)
-  end
 end
