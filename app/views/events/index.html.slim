@@ -22,5 +22,6 @@
                     td = l event.start_at
                     td = l event.end_at
                     td
-                      = link_to "編輯", edit_event_path(event), class: 'btn btn-primary'
-                      = link_to "刪除", event_path(event), class: 'btn btn-danger', method: "delete", data: { confirm: "確認刪除" }
+                      = edit_button event
+                      = delete_button event
+

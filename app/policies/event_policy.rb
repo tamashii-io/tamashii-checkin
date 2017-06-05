@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# missing top-level class documentation comment
 class EventPolicy < ApplicationPolicy
   # missing top-level class documentation comment
   class Scope < Scope
@@ -9,5 +10,9 @@ class EventPolicy < ApplicationPolicy
         user.events
       end
     end
+  end
+
+  def delete_button?
+    user.admin?
   end
 end
