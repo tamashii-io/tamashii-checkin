@@ -11,7 +11,7 @@ module Tamashii
           requires :check_point_id, type: Integer, desc: 'Check Point id.'
           requires :accept, type: Boolean, desc: 'Is accept this user.'
         end
-        post '/accesses' do
+        post '/' do
           # TODO: Implement full features
           event = Event.find(params[:event_id])
           check_point = event.check_points.find(params[:check_point_id])
