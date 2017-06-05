@@ -77,6 +77,9 @@ group :development do
   gem 'capistrano-rails', '~> 1.2'
   gem 'capistrano-passenger'
   gem 'capistrano-upload-config'
+
+  gem 'grape-swagger'
+  gem 'grape-swagger-rails'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

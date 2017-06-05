@@ -15,9 +15,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # TODO: Compact into single endpoint
-  mount V1::Events::Attendees => '/api/'
-  mount V1::Events::Accesses => '/api/'
   resources :events do
     resources :attendees
     resources :check_records, except: [:show]
@@ -25,6 +22,9 @@ Rails.application.routes.draw do
     resources :staffs, except: [:show]
     resources :accesses, only: [:index]
   end
+
+  mount Tamashii::API => '/'
+  mount GrapeSwaggerRails::Engine => '/swagger' if Rails.env.development?
 
   # Start tamashii manager
   # TODO: Provide Redis-less mode for Tamashii::Manager

@@ -19,11 +19,4 @@ class CheckRecord < ApplicationRecord
     method = times == 1 ? :set : :update
     [CheckrecordsChannel, AccessesChannel].map { |chan| chan.send(method, self) }
   end
-
-  def to_json
-    rtn = as_json
-    rtn['check_point'] = check_point
-    rtn['attendee'] = attendee
-    rtn
-  end
 end
