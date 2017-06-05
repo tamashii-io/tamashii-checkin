@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   before_action :find_event, only: [:show, :edit, :update, :destroy]
 
   def index
-    @events = current_user.events
+    @events = policy_scope(Event)
   end
 
   def show; end
