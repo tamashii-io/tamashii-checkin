@@ -15,4 +15,8 @@ class EventPolicy < ApplicationPolicy
   def delete_button?
     user.admin?
   end
+
+  def edit_button?
+    user.admin? || record.user_id == user.id
+  end
 end

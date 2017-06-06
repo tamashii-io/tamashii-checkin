@@ -14,6 +14,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
+    # TODO: Let user admin can destroy event
     @event.destroy
     redirect_to events_path, notice: I18n.t('event.removed')
   end
@@ -29,6 +30,7 @@ class EventsController < ApplicationController
     render :new
   end
 
+  # TODO: Let admin can edit event
   def edit(); end
 
   def update

@@ -2,7 +2,7 @@
 # EventsHelper
 module EventsHelper
   def edit_button(event)
-    link_to '編輯', edit_event_path(event), class: 'btn btn-primary'
+    link_to '編輯', edit_event_path(event), class: 'btn btn-primary' if policy(event).edit_button?
   end
 
   def delete_button(event)
