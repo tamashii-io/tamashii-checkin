@@ -6,7 +6,7 @@ import {
   CHECK_RECORD_SET,
 } from './constants';
 import { fetchCheckRecords } from './actions';
-import { CheckrecordsChannel } from '../channels';
+import { CheckRecordsChannel } from '../channels';
 import store from './store';
 
 import CheckRecordsTableItem from './check_records_table_item.jsx';
@@ -21,7 +21,7 @@ class CheckRecordsTable extends React.Component {
 
   componentWillMount() {
     fetchCheckRecords(this.props.eventId);
-    CheckrecordsChannel.follow({ event_id: this.props.eventId });
+    CheckRecordsChannel.follow({ event_id: this.props.eventId });
   }
 
   componentDidMount() {
@@ -37,7 +37,7 @@ class CheckRecordsTable extends React.Component {
   }
 
   componentWillUnmount() {
-    CheckrecordsChannel.unfollow();
+    CheckRecordsChannel.unfollow();
     store.off();
   }
 

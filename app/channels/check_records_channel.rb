@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # :nodoc:
-class CheckrecordsChannel < ApplicationCable::Channel
+class CheckRecordsChannel < ApplicationCable::Channel
   EVENTS = {
     update: 'CHECK_RECORD_UPDATE',
     set: 'CHECK_RECORD_SET'
