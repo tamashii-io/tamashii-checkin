@@ -1,20 +1,24 @@
 # frozen_string_literal: true
 # EventsController
 class EventsController < ApplicationController
-  before_action :find_event, only: [:show, :edit, :update, :destroy]
+  before_action :find_event, only: [:edit, :destroy]
+
+  after_action :verify_authorized, only: [:edit, :update, :destroy]
+  after_action :verify_policy_scoped, only: [:index, :show]
 
   def index
     @events = policy_scope(Event)
   end
 
-  def show; end
+  def show
+    @event = policy_scope(Event).find(params[:id])
+  end
 
   def new
     @event = Event.new
   end
 
   def destroy
-    # TODO: Let user admin can destroy event
     @event.destroy
     redirect_to events_path, notice: I18n.t('event.removed')
   end
@@ -30,10 +34,11 @@ class EventsController < ApplicationController
     render :new
   end
 
-  # TODO: Let admin can edit event
   def edit(); end
 
   def update
+    @event = Event.find(params[:id])
+    authorize @event, :edit?
     return redirect_to events_path, notice: I18n.t('event.updated') if @event.update_attributes(event_params)
     render :edit
   end
@@ -45,6 +50,7 @@ class EventsController < ApplicationController
   end
 
   def find_event
-    @event = current_user.events.find_by(id: params[:id])
+    @event = Event.find(params[:id])
+    authorize @event
   end
 end
