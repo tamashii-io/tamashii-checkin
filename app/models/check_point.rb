@@ -36,7 +36,7 @@ class CheckPoint < ApplicationRecord
 
   def check_pass(attendee)
     AccessesChannel.request(self, attendee)
-    true
+    false
   end
 
   # TODO: Move to Gate type model
