@@ -21,11 +21,11 @@ class CheckPoint < ApplicationRecord
     gate: 2
   }
 
-  def register(card_serial)
+  def register(card_serial, packet_id)
     return false if event.attendees.where(card_serial: card_serial).exists?
     return false if registrar.blank?
-    RegistrarChannel.register([registrar, event], card_serial)
-    true
+    RegistrarChannel.register([registrar, event], card_serial, packet_id)
+    nil
   end
 
   def checkin(attendee)
@@ -36,7 +36,7 @@ class CheckPoint < ApplicationRecord
 
   def check_pass(attendee)
     AccessesChannel.request(self, attendee)
-    true
+    false
   end
 
   # TODO: Move to Gate type model
