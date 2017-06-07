@@ -6,7 +6,7 @@ import {
   CHECK_RECORD_UPDATE,
   CHECK_RECORD_SET,
 } from './constants';
-import { CheckrecordsChannel } from '../channels';
+import { CheckRecordsChannel } from '../channels';
 
 const CheckRecord = Record({
   id: 0,
@@ -28,7 +28,7 @@ class CheckRecordStore extends EventEmitter {
   constructor() {
     super();
     this.check_records = fromJS([]);
-    CheckrecordsChannel.onReceived(action => this.dispatch(action));
+    CheckRecordsChannel.onReceived(action => this.dispatch(action));
   }
 
   update(checkRecordId, newCheckRecord) {
