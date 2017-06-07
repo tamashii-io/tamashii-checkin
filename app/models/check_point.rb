@@ -12,6 +12,7 @@ class CheckPoint < ApplicationRecord
   belongs_to :registrar, class_name: 'User', optional: true
 
   validates :name, :type, presence: true
+  validates :registrar, uniqueness: { scope: :event_id }
   validate :machine_available, on: :create
 
   # TODO: Implements STI class to work with different behavior
