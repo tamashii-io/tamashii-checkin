@@ -17,6 +17,6 @@ class CheckRecord < ApplicationRecord
 
   def broadcast
     method = times == 1 ? :set : :update
-    [CheckrecordsChannel, AccessesChannel].map { |chan| chan.send(method, self) }
+    [CheckRecordsChannel, AccessesChannel].map { |chan| chan.send(method, self) }
   end
 end

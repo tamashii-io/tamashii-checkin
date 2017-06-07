@@ -35,7 +35,7 @@ class TamashiiRailsHook < Tamashii::Hook
                  when Tamashii::Type::RFID_NUMBER
                    Tamashii::CardHandler.new(@client, packet).process
                  end
-    response type, data
+    response type, data unless type.nil? || data.nil?
   end
 
   def response(type, data)

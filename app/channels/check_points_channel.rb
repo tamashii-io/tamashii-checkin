@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 # missing top-level class documentation comment
-class CheckpointsChannel < ApplicationCable::Channel
+class CheckPointsChannel < ApplicationCable::Channel
   def subscribed
     stream_for current_user
   end

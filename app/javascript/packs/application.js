@@ -11,7 +11,7 @@ import Mounter from './helpers/mounter.jsx';
 import EventDashboard from './events/dashboard.jsx';
 import MachinesTable from './machines/machines_table.jsx';
 import AttendeesTable from './attendees/attendees_table.jsx';
-import CheckrecordsTable from './checkrecords/check_records_table.jsx';
+import CheckrecordsTable from './check_records/check_records_table.jsx';
 import AccessRecordsTable from './accesses/access_records_table.jsx';
 
 // Normal JavaScript

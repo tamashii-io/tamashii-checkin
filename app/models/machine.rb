@@ -15,6 +15,10 @@ class Machine < ApplicationRecord
     events.now.first
   end
 
+  def write(packet)
+    Tamashii::Manager::Client.send_to(serial, packet.dump)
+  end
+
   # TODO: Use ruby auto generate below code
   def beep(type = 'ok')
     process_command :beep, type
