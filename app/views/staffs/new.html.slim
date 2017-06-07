@@ -6,4 +6,4 @@
         .card
           .card-header = t('.title')
           = simple_form_for @relationship, url: event_staffs_path(@event) do |f|
-            = render partial: "form", locals: {f: f}
+            = render partial: "form", locals: {f: f, relationship: @relationship}

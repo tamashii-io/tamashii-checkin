@@ -10,6 +10,8 @@ class StaffsController < ApplicationController
 
   def new
     @relationship = @event.user_event_relationships.build
+    @relationship.permissions = { staff: false }
+    @relationship.save
   end
 
   def create
@@ -33,7 +35,9 @@ class StaffsController < ApplicationController
   private
 
   def staff_params
-    params.require(:user_event_relationship).permit(:user_id, :role)
+    hash = params.require(:user_event_relationship).permit(:user_id, custom_fields: [:staff]).as_json
+    hash['permissions'] = hash.delete 'custom_fields'
+    hash
   end
 
   def find_event
