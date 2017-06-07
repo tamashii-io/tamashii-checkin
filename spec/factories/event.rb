@@ -7,5 +7,6 @@ FactoryGirl.define do
     end_at { Faker::Date.between(10.days.ago, Time.zone.today) }
     created_at {}
     updated_at {}
+    user_id {}
   end
 end
