@@ -53,11 +53,12 @@ module Tamashii
     end
 
     def attendee
-      machine.current_event.attendees.find_by(card_serial: @card_id)
+      machine.current_event.attendees.find_by(card_serial: card_id)
     end
 
     def registrar
-      result = check_point.register(@card_id)
+      result = check_point.register(card_id, packet_id)
+      return [nil, nil] if result.nil?
       response auth: result, reason: 'registrar'
     end
 

@@ -66,6 +66,7 @@ class AttendeeStore extends EventEmitter {
             {
               attendeeId: this.nextRegisterAttendeeId,
               serial: action.serial,
+              packet_id: action.packet_id,
             },
           );
         }
