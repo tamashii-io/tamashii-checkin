@@ -4,6 +4,10 @@ class StaffsController < ApplicationController
   before_action :find_event
   before_action :find_staff, only: [:edit, :destroy]
   before_action :find_staff_for_update, only: :update
+
+  after_action :verify_authorized, only: [:edit, :update, :destroy]
+  after_action :verify_policy_scoped
+
   def index
     @staffs = @event.staffs
   end
@@ -41,14 +45,16 @@ class StaffsController < ApplicationController
   end
 
   def find_event
-    @event = current_user.events.find(params[:event_id])
+    @event = policy_scope(Event).find(params[:event_id])
   end
 
   def find_staff
     @staff = @event.user_event_relationships.find_by(user_id: params[:id])
+    authorize @staff, :editable?
   end
 
   def find_staff_for_update
     @staff = @event.user_event_relationships.find(params[:id])
+    authorize @staff, :editable?
   end
 end
