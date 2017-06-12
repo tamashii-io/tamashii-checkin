@@ -37,9 +37,10 @@ class CheckPointsController < ApplicationController
 
   def find_checkpoint
     @checkpoint = @event.check_points.find(params[:id])
+    authorize @checkpoint, :editable?
   end
 
   def find_event
-    @event = current_user.events.find(params[:event_id])
+    @event = policy_scope(Event).find(params[:event_id])
   end
 end

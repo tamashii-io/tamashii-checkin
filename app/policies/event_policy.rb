@@ -19,4 +19,8 @@ class EventPolicy < ApplicationPolicy
   def edit?
     user.admin? || record.user_id == user.id
   end
+
+  def admin_or_event_manager?
+    user.admin? || record.user_id == user.id
+  end
 end
