@@ -13,11 +13,13 @@
                 thead
                   tr
                     th 名稱
+                    th 權限
                     th 處理
                 tbody
                   - @staffs.each do |staff|
                     tr
                       td = staff
+                      td = staff.user_event_relationships.first.permissions
                       td
-                        = link_to "編輯", edit_event_staff_path(@event, staff), class: 'btn btn-primary'
-                        = link_to "刪除", event_staff_path(@event, staff), class: 'btn btn-danger', method: "delete", data: { confirm: "確認刪除" }
+                        = edit_button_for_staff @event, staff
+                        = delete_button_for_staff @event, staff
