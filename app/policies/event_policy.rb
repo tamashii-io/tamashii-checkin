@@ -19,4 +19,6 @@ class EventPolicy < ApplicationPolicy
   def edit?
     user.admin? || record.user_id == user.id
   end
+
+  alias manage? edit?
 end
