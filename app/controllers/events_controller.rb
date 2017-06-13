@@ -29,7 +29,6 @@ class EventsController < ApplicationController
     # TODO: modified @event.user = current_user
     @event.user_id = current_user.id
     @event.staffs << current_user
-    @event.user_event_relationships.first.permissions = { staff: true }
     return redirect_to events_path, notice: I18n.t('event.created') if @event.save
     render :new
   end

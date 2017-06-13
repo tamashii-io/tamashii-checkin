@@ -2,6 +2,6 @@
 # missing top-level class documentation comment
 class UserEventRelationshipPolicy < ApplicationPolicy
   def editable?
-    user.admin? || record.user_id = user.id
+    record.user_id != record.event.user_id && (user.admin? || record.event.user_id = user.id)
   end
 end
