@@ -41,7 +41,7 @@ crumb :check_points do
 end
 
 crumb :check_points do |event|
-  link 'Check Records', event_check_points_path(event)
+  link 'Check Points', event_check_points_path(event)
   parent :event, event
 end
 
