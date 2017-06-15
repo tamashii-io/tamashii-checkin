@@ -3,8 +3,12 @@
 class CheckPointsController < ApplicationController
   before_action :find_event, except: [:show]
   before_action :find_checkpoint, only: [:edit, :update, :destroy]
+
+  after_action :verify_authorized, only: [:edit, :update, :destroy]
+  after_action :verify_policy_scoped, except: [:show]
+
   def index
-    @checkpoints = @event.check_points
+    @checkpoints = policy_scope(@event.check_points)
   end
 
   def new
