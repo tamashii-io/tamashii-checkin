@@ -2,7 +2,7 @@
 # User Event Relationship
 class UserEventRelationship < ApplicationRecord
   DEFAULT_PERMISSIONS = {
-    check_point_staff: false,
+    read_check_point: false,
     write_check_point: false,
     write_attendee: false,
     read_attendee: false

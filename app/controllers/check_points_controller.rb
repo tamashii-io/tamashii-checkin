@@ -24,7 +24,7 @@ class CheckPointsController < ApplicationController
   def edit; end
 
   def update
-    return redirect_to event_check_points_path, notice: I18n.t('checkPoint.updated') if @checkpoint.update_attributes(checkpoint_params)
+    return redirect_to event_check_points_path, notice: I18n.t('checkPoint.updated') if @checkpoint.update_attributes(permitted_attributes(@checkpoint))
     render :edit
   end
 
@@ -41,7 +41,7 @@ class CheckPointsController < ApplicationController
 
   def find_checkpoint
     @checkpoint = @event.check_points.find(params[:id])
-    authorize @checkpoint, :editable?
+    authorize @checkpoint
   end
 
   def find_event

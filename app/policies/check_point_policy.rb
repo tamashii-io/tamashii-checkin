@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 # missing top-level class documentation comment
 class CheckPointPolicy < ApplicationPolicy
+  include Pundit
   # missing top-level class documentation comment
   class Scope < Scope
     include Pundit
@@ -26,13 +27,30 @@ class CheckPointPolicy < ApplicationPolicy
     end
   end
 
-  def editable?
-    user.admin? || record.event.user_id == user.id || policy(find_relationship).write_check_point?
+  def edit?
+    user.admin? || record.event.user_id == user.id || write_check_point? || record.registrar_id == user.id
+  end
+
+  alias update? edit?
+
+  def manage?
+    user.admin? || record.event.user_id == user.id || write_check_point?
+  end
+
+  alias destroy? manage?
+
+  def permitted_attributes_for_update
+    if manage?
+      [:name, :type, :machine_id, :registrar_id]
+    else
+      [:name, :type, :machine_id]
+    end
   end
 
   private
 
-  def find_relationship(event = record.event)
-    UserEventRelationship.find_by(event_id: event.id, user_id: user.id)
+  def write_check_point?
+    relationship = UserEventRelationship.find_by(event_id: record.event.id, user_id: user.id)
+    UserEventRelationshipPolicy.new(user, relationship).write_check_point?
   end
 end
