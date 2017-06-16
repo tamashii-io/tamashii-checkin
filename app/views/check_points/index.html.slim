@@ -15,6 +15,7 @@
                   th 打卡類型
                   th 對應機器
                   th 對應的活動
+                  th 對應的工作人員
                   th 處理
               tbody
                 - @checkpoints.each do |checkpoint|
@@ -23,6 +24,7 @@
                     td= checkpoint.type
                     td= checkpoint.machine
                     td= checkpoint.event
+                    td= checkpoint.registrar
                     td
-                      = link_to "編輯", edit_event_check_point_path(params[:event_id],checkpoint), class:"btn btn-primary"
-                      = link_to "刪除", event_check_point_path(params[:event_id],checkpoint), method: "delete", data: { confirm: "確認刪除" }, class:"btn btn-danger"
+                      = edit_button_for_check_point @event, checkpoint
+                      = delete_button_for_check_point @event, checkpoint

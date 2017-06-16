@@ -9,6 +9,8 @@ RSpec.describe CheckPointsController, type: :controller do
   before(:each) do
     @check_point_params = { name: 'A', machine_id: machine_a.id, type: 'registrar' }
     sign_in user
+    event_a.user_id = user.id
+    event_a.save
     event_a.staffs << user
   end
 

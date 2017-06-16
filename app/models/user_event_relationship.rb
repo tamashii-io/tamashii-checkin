@@ -2,9 +2,9 @@
 # User Event Relationship
 class UserEventRelationship < ApplicationRecord
   DEFAULT_PERMISSIONS = {
+    read_check_point: false,
     write_check_point: false,
     write_attendee: false,
-    read_check_point: false,
     read_attendee: false
   }.freeze
   before_create { self.permissions = DEFAULT_PERMISSIONS.merge(permissions || {}) }

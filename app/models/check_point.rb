@@ -9,6 +9,7 @@ class CheckPoint < ApplicationRecord
   has_many :check_records
   belongs_to :event
   belongs_to :machine
+  # TODO: wait !77 PR, only have permissions User can choice
   belongs_to :registrar, class_name: 'User', optional: true
 
   validates :name, :type, presence: true
