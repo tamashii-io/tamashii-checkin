@@ -13,6 +13,12 @@ module Tamashii
         # rubocop:enable Rails/SkipsModelValidations
       end
 
+      alias origin_accept accept
+      def accept(type, id)
+        origin_accept(type, id)
+        ::Machine.find_by(serial: id).on_accept
+      end
+
       # Overrite the on_close methods
       alias origin_on_close on_close
       def on_close

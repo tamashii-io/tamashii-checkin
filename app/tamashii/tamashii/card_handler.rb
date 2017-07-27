@@ -59,17 +59,17 @@ module Tamashii
     def registrar
       result = check_point.register(card_id, packet_id)
       return [nil, nil] if result.nil?
-      response auth: result, reason: 'registrar'
+      response auth: result, reason: 'registrar', message: "New card\nDetected."
     end
 
     def site
       result = check_point.checkin(attendee)
-      response auth: result, reason: 'checkin'
+      response auth: result, reason: 'checkin', message: result ? "Hello, #{attendee.name}!\nChecking success" : "Unknown card"
     end
 
     def gate
       result = check_point.check_pass(attendee)
-      response auth: result, reason: 'gate'
+      response auth: result, reason: 'gate', message: "Hi, #{attendee.name}\nRequest sent."
     end
 
     def perform

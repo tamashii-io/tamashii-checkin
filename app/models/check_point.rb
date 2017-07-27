@@ -70,10 +70,12 @@ class CheckPoint < ApplicationRecord
 
   def accept(attendee)
     latest_record(attendee).increment
+    machine.lcd_message("Hi, #{attendee.name}\nAccess granted")
     machine.beep
   end
 
   def reject
+    machine.lcd_message("Sorry!\nAccess denind")
     machine.beep('no')
   end
 end
