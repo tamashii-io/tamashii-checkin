@@ -64,7 +64,7 @@ module Tamashii
 
     def site
       result = check_point.checkin(attendee)
-      response auth: result, reason: 'checkin', message: result ? "Hello, #{attendee.name}!\nChecking success" : "Unknown card"
+      response auth: result, reason: 'checkin', message: result ? "Hello, #{attendee.name}!\nChecking success" : 'Unknown card'
     end
 
     def gate

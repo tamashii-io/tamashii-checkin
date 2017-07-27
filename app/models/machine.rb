@@ -18,7 +18,7 @@ class Machine < ApplicationRecord
   def write(packet)
     Tamashii::Manager::Client.send_to(serial, packet.dump)
   end
-  
+
   def on_accept
     process_command :lcd_set_idle_text, "Tamashii Checkin\nSystem Ready"
   end

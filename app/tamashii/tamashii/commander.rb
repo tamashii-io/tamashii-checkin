@@ -11,7 +11,7 @@ module Tamashii
       poweroff:          Tamashii::Type::POWEROFF,
       update:            Tamashii::Type::UPDATE,
       lcd_message:       Tamashii::Type::LCD_MESSAGE,
-      lcd_set_idle_text: Tamashii::Type::LCD_SET_IDLE_TEXT,
+      lcd_set_idle_text: Tamashii::Type::LCD_SET_IDLE_TEXT
     }.freeze
 
     def initialize(machine, command)
