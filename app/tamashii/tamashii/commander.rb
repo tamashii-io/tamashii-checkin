@@ -5,11 +5,13 @@ module Tamashii
     class CommandError < RuntimeError; end
 
     COMMANDS = {
-      beep:     Tamashii::Type::BUZZER_SOUND,
-      restart:  Tamashii::Type::RESTART,
-      reboot:   Tamashii::Type::REBOOT,
-      poweroff: Tamashii::Type::POWEROFF,
-      update:   Tamashii::Type::UPDATE
+      beep:              Tamashii::Type::BUZZER_SOUND,
+      restart:           Tamashii::Type::RESTART,
+      reboot:            Tamashii::Type::REBOOT,
+      poweroff:          Tamashii::Type::POWEROFF,
+      update:            Tamashii::Type::UPDATE,
+      lcd_message:       Tamashii::Type::LCD_MESSAGE,
+      lcd_set_idle_text: Tamashii::Type::LCD_SET_IDLE_TEXT
     }.freeze
 
     def initialize(machine, command)
