@@ -34,7 +34,7 @@ gem 'pundit'
 
 gem 'settingslogic'
 gem 'tamashii-common', ">=0.1.5"
-gem 'tamashii-manager', ">=0.2.2"
+gem 'tamashii-manager', ">=0.2.3"
 gem 'active_model_serializers'
 
 gem 'grape'

@@ -221,8 +221,8 @@ GEM
     pry-rails (0.3.6)
       pry (>= 0.10.4)
     public_suffix (2.0.5)
-    puma (3.9.0)
-    puma (3.9.0-java)
+    puma (3.9.1)
+    puma (3.9.1-java)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
     rack (2.0.3)
@@ -368,7 +368,7 @@ GEM
       tamashii-common
       websocket-driver
     tamashii-common (0.1.5)
-    tamashii-manager (0.2.2)
+    tamashii-manager (0.2.3)
       concurrent-ruby
       nio4r
       puma
@@ -472,7 +472,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   tamashii-common (>= 0.1.5)
-  tamashii-manager (>= 0.2.2)
+  tamashii-manager (>= 0.2.3)
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
