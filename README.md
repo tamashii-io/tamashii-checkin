@@ -58,5 +58,6 @@ $ ./bin/webpack-dev-server
 ## Contributes
 
 * Aotoki <elct9620@frost.tw>
-
-Ririko <k5241219@kyoto-wu.ac.jp>
+* Ririko <k5241219@kyoto-wu.ac.jp>
+* Midori <k5241103@kyoto-wu.ac.jp>
+* jun <k5241284@kyoto-wu.ac.jp>
