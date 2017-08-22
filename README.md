@@ -60,4 +60,3 @@ $ ./bin/webpack-dev-server
 * Aotoki <elct9620@frost.tw>
 
 Ririko <k5241219@kyoto-wu.ac.jp>
-aaa
