@@ -58,4 +58,4 @@ $ ./bin/webpack-dev-server
 ## Contributes
 
 * Aotoki <elct9620@frost.tw>
-* jun SSSS<k5241284@kyoto-wu.ac.jp>
+* jun <k5241284@kyoto-wu.ac.jp>
