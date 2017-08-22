@@ -55,6 +55,9 @@ or
 $ ./bin/webpack-dev-server
 ```
 
+## Contributes
 
-build_tamashii<k5241219@kyoto-wu.ac.jp>
+* Aotoki <elct9620@frost.tw>
+
+Ririko <k5241219@kyoto-wu.ac.jp>
 aaa
