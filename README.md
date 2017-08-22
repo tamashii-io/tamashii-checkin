@@ -58,4 +58,4 @@ $ ./bin/webpack-dev-server
 ## Contributes
 
 * Aotoki <elct9620@frost.tw>
-create new branch
+*Midori <k5241103@kyoto-wu.ac.jp>
