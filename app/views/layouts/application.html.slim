@@ -16,7 +16,8 @@ html lang="zh-TW"
     = render "shared/sidebar"
     .app-body
       main.main
+        - if flash[:error]
+          .alert.alert-danger role="alert"
+            = flash[:error]
         = render "shared/breadcrumb"
         = yield
-
-
