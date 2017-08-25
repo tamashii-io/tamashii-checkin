@@ -5,12 +5,11 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :deny_access
   before_action :authenticate_user!
 
-
- protected
+  protected
 
   def deny_access
-   flash[:error] = 'access denied'
-   redirect_to action: :index
+    flash[:error] = 'access denied'
+    redirect_to action: :index
   end
 
   protect_from_forgery with: :exception
