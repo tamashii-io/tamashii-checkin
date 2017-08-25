@@ -6,6 +6,6 @@ module EventsHelper
   end
 
   def delete_button(event)
-    link_to '刪除', event_path(event), class: 'btn btn-danger', method: 'delete', data: { confirm: '確認刪除' } #if policy(event).destroy?
+    link_to '刪除', event_path(event), class: 'btn btn-danger', method: 'delete', data: { confirm: '確認刪除' } if policy(event).destroy?
   end
 end
