@@ -19,7 +19,7 @@
                   - @staffs.each do |staff|
                     tr
                       td = staff
-                      td = staff.user_event_relationships.first.permissions 
+                      td = staff.user_event_relationships.first.permissions
                       td
                         = edit_button_for_staff @event, staff
                         = delete_button_for_staff @event, staff
