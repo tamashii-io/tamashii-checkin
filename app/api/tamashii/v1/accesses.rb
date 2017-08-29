@@ -14,7 +14,7 @@ module Tamashii
         post '/' do
           # TODO: Implement full features
           event = Event.find(params[:event_id])
-          check_point = event.check_points.find(params[:check_point_id])
+          check_point = event.check_points.find(_params[:check_point_id])
           check_point.grant_access(Attendee.find(params[:attendee_id]), params[:accept])
         end
       end

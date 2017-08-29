@@ -13,7 +13,7 @@ class EventPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin?
+    user.admin? || record.user_id == user.id
   end
 
   def edit?

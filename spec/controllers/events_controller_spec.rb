@@ -129,7 +129,7 @@ RSpec.describe EventsController, type: :controller do
     end
 
     # TODO: pundit spec
-    xit 'redirect_to index after destroy' do
+    it 'redirect_to index after destroy' do
       delete :destroy, params: { id: event_a[:id] }
       expect(response).to have_http_status(302)
     end
