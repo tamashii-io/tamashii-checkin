@@ -7,7 +7,6 @@ class AccessesController < ApplicationController
 
   def index
     # TODO: Reject user didn't have Gate checkpoint
-    # @records = @check_point.check_records
     @records = @check_point.check_records
     respond_to do |format|
       format.html
