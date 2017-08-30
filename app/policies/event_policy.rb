@@ -12,6 +12,10 @@ class EventPolicy < ApplicationPolicy
     end
   end
 
+  def has_gate_for?(current_user)
+    current_user.admin? || record.user_id == user.id
+  end
+
   def destroy?
     user.admin? || record.user_id == user.id
   end
