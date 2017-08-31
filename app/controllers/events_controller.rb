@@ -52,9 +52,4 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     authorize @event
   end
-
-  def gate_for
-    current_user.admin? || record.user_id == user.id
-    redirect_to :root
-  end
 end
