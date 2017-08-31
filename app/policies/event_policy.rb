@@ -12,7 +12,7 @@ class EventPolicy < ApplicationPolicy
     end
   end
 
-  def gate_for?(current_user)
+  def gate_for?(_current_user)
     record.user_id == user.id
   end
 
