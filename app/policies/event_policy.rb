@@ -16,7 +16,7 @@ class EventPolicy < ApplicationPolicy
   def gate_for?(user)
     check_point = record.check_points.find_by(registrar_id: user.id)
     return false if check_point.nil?
-    check_point.type == 'gate'
+    check_point&.gate?
   end
 
   def destroy?
