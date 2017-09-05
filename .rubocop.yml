@@ -10,6 +10,7 @@ AllCops:
     - node_modules/**/*
     - db/*
     - vendor/ruby/**/*
+    - vendor/bundle/**/*
     - config/initializers/simple_form_bootstrap.rb
     - node_modules/**/*
 Rails:

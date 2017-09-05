@@ -1,4 +1,4 @@
-Tamashii Checkin
+Tamashii Checkin [![Build Status](https://travis-ci.org/tamashii-io/tamashii-checkin.svg?branch=develop)](https://travis-ci.org/tamashii-io/tamashii-checkin)
 ===
 
 ## Requirements
