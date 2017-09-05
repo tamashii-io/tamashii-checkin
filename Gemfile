@@ -55,7 +55,7 @@ group :development, :test do
   gem 'fuubar', require: false
 
   gem 'dotenv-rails'
-  gem 'rubocop', require: false
+  gem 'rubocop', '~> 0.47.1', require: false
   gem 'scss_lint', require: false
 end
 
