@@ -17,6 +17,8 @@
 //= require tether
 //= require bootstrap-sprockets
 //= require chart.js/dist/Chart.bundle
+//= require select2
+//= require select2-full
 //= require_tree .
 
 // Main navigation

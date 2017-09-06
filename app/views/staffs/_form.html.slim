@@ -1,8 +1,13 @@
   .card-block
-    = f.association :user
+    = f.association :user, as: :select
+
     - permissions = CustomFieldsDecorator.new(relationship.permissions)
     = f.simple_fields_for(permissions) do |field|
       - permissions.each do |key, value|
         = field.input key, as: :boolean
   .card-footer
     = f.button :submit, class: 'btn btn-primary'
+
+	script[type="text/javascript"]
+		|  $(document).ready(function() { $("#user_event_relationship_user_id").select2(); });
+
