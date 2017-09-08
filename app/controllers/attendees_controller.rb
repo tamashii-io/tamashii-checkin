@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-# AttendeesController
+
 class AttendeesController < ApplicationController
   before_action :find_event
   before_action :find_attendee, only: [:edit, :destroy, :update]
@@ -33,6 +33,12 @@ class AttendeesController < ApplicationController
   def update
     return redirect_to event_attendees_path, notice: I18n.t('attendee.updated') if @attendee.update_attributes(attendee_params)
     render :edit
+  end
+
+  # TODO: Support all third-party system
+  def sync
+    @event.sync_pansci_attendees
+    redirect_to event_attendees_path
   end
 
   private

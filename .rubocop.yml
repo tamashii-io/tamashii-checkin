@@ -11,8 +11,9 @@ AllCops:
     - db/*
     - vendor/ruby/**/*
     - vendor/bundle/**/*
-    - config/initializers/simple_form_bootstrap.rb
+    - config/**/*
     - node_modules/**/*
+    - bin
 Rails:
   Enabled: true
 Metrics/BlockLength:
