@@ -1,5 +1,6 @@
 - breadcrumb :attendees, @event
 - content_for :breadcrumb_actions
+  = link_to "同步", sync_event_attendees_path(@event), class: 'btn btn-secondary', method: :post if @event.pansci_event?
   = link_to "新增會眾", new_event_attendee_path(@event), class:"btn btn-secondary"
 .container-fluid
   .animated.fadeIn

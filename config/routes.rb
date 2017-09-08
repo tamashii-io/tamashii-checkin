@@ -16,7 +16,11 @@ Rails.application.routes.draw do
   end
 
   resources :events do
-    resources :attendees
+    resources :attendees do
+      collection do
+        post :sync
+      end
+    end
     resources :check_records, except: [:show]
     resources :check_points
     resources :staffs, except: [:show]
