@@ -13,7 +13,8 @@ AllCops:
     - vendor/bundle/**/*
     - config/**/*
     - node_modules/**/*
-    - bin
+    - bin/**/*
+    - test/**/*
 Rails:
   Enabled: true
 Metrics/BlockLength:
