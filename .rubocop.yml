@@ -22,3 +22,11 @@ Style/FileName:
   Exclude:
     - Gemfile
     - Capfile
+Style/Documentation:
+  Exclude:
+    - app/**/*
+    - db/**/*
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - db/**/*
+
