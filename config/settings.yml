@@ -5,6 +5,8 @@ default: &default
   tamashii:
     mode: token
     token: <%= ENV['TAMASHII_TOKEN'] %>
+  pansci:
+    api_uri: http://stage.events.panmedia.asia
 
 development:
   <<: *default
