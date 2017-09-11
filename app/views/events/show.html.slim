@@ -3,7 +3,7 @@
   = link_to "打卡點", event_check_points_path(@event), class: "btn btn-secondary" if policy(UserEventRelationship.find_by(event_id: @event.id, user_id: current_user.id)).read_check_point?
   = link_to "會眾管理", event_attendees_path(@event), class: "btn btn-secondary"
   = link_to "打卡記錄", event_check_records_path(@event), class: "btn btn-secondary"
-  = link_to "門禁管制", event_accesses_path(@event), class: "btn btn-secondary"
+  = link_to "門禁管制", event_accesses_path(@event), class: "btn btn-secondary" if policy(@event).gate_for?(current_user)
 - breadcrumb :event, @event
 
 .container-fluid
@@ -46,4 +46,3 @@
               p Active attendees
             .chart-wrapper.px-3 style="height: 70px;"
               canvas#checkin-chart.chart.chart-line.fake-chart height="70" data-color="brandDanger"
-
