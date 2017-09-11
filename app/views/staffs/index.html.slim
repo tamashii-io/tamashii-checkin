@@ -16,10 +16,10 @@
                     th 權限
                     th 處理
                 tbody
-                  - @staffs.each do |staff|
+                  - @relationships.each do |relationship|
                     tr
-                      td = staff
-                      td = staff.user_event_relationships.first.permissions
+                      td = relationship.user
+                      td = display_staff_permission_for(relationship)
                       td
-                        = edit_button_for_staff @event, staff
-                        = delete_button_for_staff @event, staff
+                        = edit_button_for_staff @event, relationship.user
+                        = delete_button_for_staff @event, relationship.user
