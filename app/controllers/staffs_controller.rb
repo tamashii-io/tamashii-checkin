@@ -9,7 +9,7 @@ class StaffsController < ApplicationController
   after_action :verify_policy_scoped
 
   def index
-    @staffs = @event.staffs
+    @relationships = @event.user_event_relationships.includes(:user)
   end
 
   def new

@@ -3,6 +3,6 @@
     - permissions = CustomFieldsDecorator.new(relationship.permissions)
     = f.simple_fields_for(permissions) do |field|
       - permissions.each do |key, value|
-        = field.input key, as: :boolean
+        = field.input key, as: :switch
   .card-footer
     = f.button :submit, class: 'btn btn-primary'
