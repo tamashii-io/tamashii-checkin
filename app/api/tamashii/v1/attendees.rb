@@ -14,6 +14,10 @@ module Tamashii
             checkin: attendees.not_checked_in.count
           }
         end
+        desc 'Attendees List'
+        get '/' do
+          Event.find(params[:event_id]).attendees.as_json(only: [:id, :serial, :name, :email, :phone])
+        end
       end
     end
   end
