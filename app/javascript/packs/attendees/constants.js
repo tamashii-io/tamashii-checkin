@@ -5,5 +5,6 @@ export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_UPDATE = 'REGISTER_UPDATE';
 export const START_REGISTER = 'START_REGISTER';
 export const CANCEL_REGISTER = 'CANCEL_REGISTER';
+export const FILTER = 'FILTER';
 
 export default RECEIVE_ATTENDEES;

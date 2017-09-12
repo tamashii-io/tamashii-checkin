@@ -8,6 +8,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_UPDATE,
   CANCEL_REGISTER,
+  FILTER,
 } from './constants';
 import { RegistrarChannel } from '../channels';
 
@@ -26,12 +27,26 @@ const Attendee = Record({
 });
 
 const attendeesToRecord = attendees => attendees.map(attendee => new Attendee(attendee));
+const contains = (attendee, search) => {
+  if (search.length === 0) {
+    return true;
+  }
+
+  return (
+    attendee.code.indexOf(search) > -1 ||
+    attendee.email.indexOf(search) > -1 ||
+    attendee.name.indexOf(search) > -1 ||
+    attendee.phone.indexOf(search) > -1 ||
+    (attendee.serial || '').toString().indexOf(search) > -1
+  );
+};
 
 class AttendeeStore extends EventEmitter {
   constructor() {
     super();
     this.attendees = fromJS([]);
     this.nextRegisterAttendeeId = 0;
+    this.search = '';
     RegistrarChannel.onReceived(action => this.dispatch(action));
   }
 
@@ -46,11 +61,15 @@ class AttendeeStore extends EventEmitter {
     return this.attendees.findIndex(attendee => attendee.id === attendeeId);
   }
 
+  getAttendees() {
+    return this.attendees.filter(attendee => contains(attendee, this.search));
+  }
+
   dispatch(action) {
     switch (action.type) {
       case RECEIVE_ATTENDEES: {
         this.attendees = fromJS(attendeesToRecord(action.attendees));
-        this.emit(action.type, this.attendees);
+        this.emit(action.type, this.getAttendees());
         break;
       }
       case START_REGISTER: {
@@ -75,7 +94,7 @@ class AttendeeStore extends EventEmitter {
       case REGISTER_SUCCESS: {
         this.nextRegisterAttendeeId = 0;
         this.update(action.attendee.id, new Attendee(action.attendee));
-        this.emit(action.type, this.attendees);
+        this.emit(action.type, this.getAttendees());
         break;
       }
       case REGISTER_UPDATE: {
@@ -84,11 +103,16 @@ class AttendeeStore extends EventEmitter {
         if (this.nextRegisterAttendeeId === attendee.id) {
           this.nextRegisterAttendeeId = 0;
         }
-        this.emit(action.type, this.attendees, this.nextRegisterAttendeeId);
+        this.emit(action.type, this.getAttendees(), this.nextRegisterAttendeeId);
         break;
       }
       case CANCEL_REGISTER: {
         this.nextRegisterAttendeeId = 0;
+        break;
+      }
+      case FILTER: {
+        this.search = action.search;
+        this.emit(action.type, this.getAttendees());
         break;
       }
       default: {
