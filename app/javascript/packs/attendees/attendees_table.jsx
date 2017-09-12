@@ -52,7 +52,13 @@ class AttendeesTable extends React.Component {
 
   attendees() {
     const attendees = this.state.attendees;
-    return attendees.map(attendee => <AttendeesTableItem key={attendee.id} attendee={attendee} />);
+    return attendees
+           .sort((a, b) => {
+             if (a.serial > b.serial) return -1;
+             if (a.serial < b.serial) return 1;
+             return 0;
+           })
+           .map(attendee => <AttendeesTableItem key={attendee.id} attendee={attendee} />);
   }
 
   hasNextAttendee() {
