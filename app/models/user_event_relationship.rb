@@ -15,8 +15,20 @@ class UserEventRelationship < ApplicationRecord
   belongs_to :event
 
   # TODO: Mapping permissions
+  def read_attendee?
+    permissions['read_attendee']
+  end
+
   def write_attendee?
     permissions['write_attendee']
+  end
+
+  def read_check_point?
+    permissions['read_check_point']
+  end
+
+  def write_check_point?
+    permissions['write_check_point']
   end
 
   private
