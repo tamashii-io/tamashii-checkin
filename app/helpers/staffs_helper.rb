@@ -10,6 +10,10 @@ module StaffsHelper
     end
   end
 
+  def staff_permission_from(relationship)
+    CustomFieldsDecorator.new(UserEventRelationship::DEFAULT_PERMISSIONS.merge(relationship.permissions.symbolize_keys))
+  end
+
   def edit_button_for_staff(event, staff)
     link_to '編輯', edit_event_staff_path(event, staff), class: 'btn btn-primary' if policy(event).manage?
   end
