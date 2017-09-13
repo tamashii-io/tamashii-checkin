@@ -10,7 +10,7 @@ html lang="zh-TW"
     = action_cable_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'application'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': true
   body.app.header-fixed.sidebar-hidden.aside-menu-fixed.aside-menu-hidden
     = render "shared/header"
     = render "shared/sidebar"

@@ -35,6 +35,11 @@ class AttendeesController < ApplicationController
     render :edit
   end
 
+  # TODO: Use ajax to load this page
+  def unbind
+    render json: @event.attendees.find(params[:attendee_id]).update(card_serial: '')
+  end
+
   # TODO: Support all third-party system
   def sync
     @event.sync_pansci_attendees

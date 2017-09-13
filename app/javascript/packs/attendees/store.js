@@ -22,6 +22,7 @@ const Attendee = Record({
   phone: '',
   links: {
     edit: '',
+    unbind: '',
     self: '',
   },
 });
