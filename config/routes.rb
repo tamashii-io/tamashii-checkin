@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   resources :events do
     resources :attendees do
+      post :unbind
+
       collection do
         post :sync
       end
