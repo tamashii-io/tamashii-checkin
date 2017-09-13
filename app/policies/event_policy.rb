@@ -12,20 +12,41 @@ class EventPolicy < ApplicationPolicy
     end
   end
 
-  # TODO: It should be has_gate_for? because rubocop error. Plesee fix it in the future.
-  def gate_for?(user)
-    check_point = record.check_points.find_by(registrar_id: user.id)
-    return false if check_point.nil?
-    check_point&.gate?
+  # TODO: Rewrite this to check by user
+  def staff_owned_gate?
+    record.check_points.where(registrar: user).map(&:gate?).reduce(:|)
   end
 
-  def destroy?
-    user.admin? || record.user_id == user.id
+  def read_check_point?
+    owner? || permissions.read_check_point?
   end
 
-  def edit?
-    user.admin? || record.user_id == user.id
+  def write_check_point?
+    owner? || permissions.write_check_point?
   end
 
-  alias manage? edit?
+  def read_attendee?
+    owner? || permissions.read_attendee?
+  end
+
+  def write_attendee?
+    owner? || permissions.write_attendee?
+  end
+
+  def manage?
+    user.admin? || owner?
+  end
+
+  alias edit? manage?
+  alias destroy? manage?
+
+  def owner?
+    record.user_id == user.id
+  end
+
+  protected
+
+  def permissions
+    record.user_event_relationships.find_by(user: user)
+  end
 end
