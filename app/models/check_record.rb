@@ -25,5 +25,4 @@ class CheckRecord < ApplicationRecord
       hash['count'] = hash.delete('times')
     end
   end
-
 end

@@ -8,7 +8,7 @@ module Tamashii
         desc 'Update attendee access for check records'
         get '/' do
           event = Event.find(params[:event_id])
-          check_records = event.check_records.as_json(only: [:attendee_id, :check_point_id, :times, :created_at, :updated_at])
+          event.check_records.as_json(only: [:attendee_id, :check_point_id, :times, :created_at, :updated_at])
         end
       end
     end
