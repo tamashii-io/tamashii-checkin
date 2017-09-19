@@ -70,7 +70,7 @@ class CheckPoint < ApplicationRecord
 
   def accept(attendee)
     latest_record(attendee).increment
-    machine.lcd_message("Hi, #{attendee.name}\nAccess granted")
+    machine.lcd_message("Hi, #{attendee.email.slice!(/[^@]+/)}\nAccess granted")
     machine.beep
   end
 
