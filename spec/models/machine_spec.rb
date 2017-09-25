@@ -2,6 +2,8 @@
 require 'rails_helper'
 RSpec.describe Machine, type: :model do
   it { should have_many(:check_points) }
+  it { should validate_uniqueness_of(:serial) }
+
   describe 'current_event_check_point' do
     let(:machine_a) { create(:machine, name: 'qquio') }
     let(:machine_b) { create(:machine) }
