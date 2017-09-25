@@ -368,7 +368,7 @@ GEM
       tamashii-common
       websocket-driver
     tamashii-common (0.1.6)
-    tamashii-manager (0.2.4)
+    tamashii-manager (0.2.5)
       concurrent-ruby
       nio4r
       puma
@@ -484,4 +484,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   1.15.3
+   1.15.4
