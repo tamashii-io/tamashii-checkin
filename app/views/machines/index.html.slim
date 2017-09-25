@@ -24,8 +24,9 @@
                     td
                       .btn-group
                         = machine_command_button machine, :beep, :warning
-                        = machine_command_button machine, :restart
-                        = machine_command_button machine, :reboot
+                        = machine_command_button machine, :update, :info
+                        = machine_command_button machine, :restart, :primary
+                        = machine_command_button machine, :reboot, :success
                         = machine_command_button machine, :poweroff, :danger
                     td.time = format_machine_active_time @machine_activities[machine.serial]
                     td

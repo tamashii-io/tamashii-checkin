@@ -6,6 +6,7 @@ import CommandButton from './command_button.jsx';
 
 const COMMANDS = [
   { command: 'beep', name: 'Beep', skin: 'warning' },
+  { command: 'update', name: 'Update', skin: 'info' },
   { command: 'restart', name: 'Restart', skin: 'primary' },
   { command: 'reboot', name: 'Reboot', skin: 'success' },
   { command: 'poweroff', name: 'Poweroff', skin: 'danger' },
