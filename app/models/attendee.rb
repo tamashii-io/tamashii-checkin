@@ -22,4 +22,8 @@ class Attendee < ApplicationRecord
   def to_s
     name
   end
+
+  def username
+    email.slice(/[^@]+/)
+  end
 end
