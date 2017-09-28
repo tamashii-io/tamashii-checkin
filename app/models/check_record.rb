@@ -23,6 +23,7 @@ class CheckRecord < ApplicationRecord
   def as_json(*args)
     super.tap do |hash|
       hash['count'] = hash.delete('times')
+      hash['user_serial'] = hash.delete('attendee_id')
     end
   end
 end
