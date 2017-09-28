@@ -6,7 +6,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :lockable
 
-  has_many :user_event_relationships
+  has_many :user_event_relationships, dependent: :destroy
   has_many :events, through: :user_event_relationships
 
   def username
