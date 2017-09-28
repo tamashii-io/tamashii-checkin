@@ -16,11 +16,18 @@ class StaffsController < ApplicationController
     @relationship = @event.user_event_relationships.build(permissions: UserEventRelationship::DEFAULT_PERMISSIONS)
   end
 
+  # rubocop:disable Lint/AssignmentInCondition
   def create
-    @relationship = @event.user_event_relationships.build(staff_params)
-    return redirect_to event_staffs_path(@event) if @relationship.save
+    if staff_params_after_transform = transform_user_id(staff_params)
+      @relationship = @event.user_event_relationships.build(staff_params_after_transform)
+      return redirect_to event_staffs_path(@event) if @relationship.save
+    else
+      @relationship = @event.user_event_relationships.build(permissions: UserEventRelationship::DEFAULT_PERMISSIONS)
+      @relationship.errors.add(:user, "無法建立新的使用者。所提供的email已存在或者格式錯誤: #{staff_params['user_id']}")
+    end
     render :new
   end
+  # rubocop:enable Lint/AssignmentInCondition
 
   def edit; end
 
@@ -35,6 +42,23 @@ class StaffsController < ApplicationController
   end
 
   private
+
+  def create_new_staff(email)
+    password = Devise.friendly_token.first(8)
+    new_user = User.create!(email: email, password: password, admin: false)
+    UserMailer.notify_new_staff(@event, current_user, new_user, password).deliver_later
+    new_user
+  end
+
+  def transform_user_id(params)
+    unless User.exists?(params['user_id'])
+      email_field = params['user_id']
+      params[:user_id] = create_new_staff(email_field).id
+    end
+    params
+  rescue
+    nil
+  end
 
   def staff_params
     hash = params.require(:user_event_relationship).permit(:user_id, custom_fields: UserEventRelationship::DEFAULT_PERMISSIONS.keys).as_json

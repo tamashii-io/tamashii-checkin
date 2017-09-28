@@ -1,11 +1,34 @@
   .card-block
-    = f.association :user
+    = f.association :user, label_method: :email
     = f.simple_fields_for(staff_permission_from(relationship)) do |field|
       - UserEventRelationship::DEFAULT_PERMISSIONS.keys.each do |key|
         = field.input key, as: :switch
   .card-footer
     = f.button :submit, class: 'btn btn-primary'
 
-	script[type="text/javascript"]
-		|  $(document).ready(function() { $("#user_event_relationship_user_id").select2(); });
+	javascript:
+	  $(document).ready(function() {
+      $("#user_event_relationship_user_id").select2(
+        {
+          tags: true,
+          createTag: function (params) {
+            return {
+              id: params.term,
+              text: params.term,
+              newOption: true
+            }
+          },
+          templateResult: function (data) {
+            var $result = $("<span></span>");
+
+            $result.text(data.text);
+
+            if (data.newOption) {
+              $result.prepend("<strong>Create new user: </strong>");
+            }
+
+            return $result;
+          }
+        }
+      );});
 
