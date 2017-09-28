@@ -13,7 +13,8 @@ class RegistrarChannel < ApplicationCable::Channel
     end
 
     def update(attendee)
-      broadcast_to(attendee.event, type: EVENTS[:update], attendee: attendee)
+      serializable_attendee = ActiveModelSerializers::SerializableResource.new(attendee)
+      broadcast_to(attendee.event, type: EVENTS[:update], attendee: serializable_attendee.as_json)
     end
   end
 

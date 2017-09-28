@@ -11,8 +11,10 @@ AllCops:
     - db/*
     - vendor/ruby/**/*
     - vendor/bundle/**/*
-    - config/initializers/simple_form_bootstrap.rb
+    - config/**/*
     - node_modules/**/*
+    - bin/**/*
+    - test/**/*
 Rails:
   Enabled: true
 Metrics/BlockLength:
@@ -22,3 +24,11 @@ Style/FileName:
   Exclude:
     - Gemfile
     - Capfile
+Style/Documentation:
+  Exclude:
+    - app/**/*
+    - db/**/*
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - db/**/*
+

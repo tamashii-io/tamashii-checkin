@@ -9,6 +9,7 @@ module Tamashii
           mount Tamashii::V1::Attendees
           mount Tamashii::V1::Accesses
           mount Tamashii::V1::CheckRecords
+          mount Tamashii::V1::CheckPoints
         end
       end
     end

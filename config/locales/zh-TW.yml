@@ -19,6 +19,9 @@ zh-TW:
         name: '活動名稱'
         start_at: '開始時間'
         end_at: '結束時間'
+        pansci_event: 泛科學活動
+        pansci_event_id: 泛科學活動編號
+        pansci_event_secret: 泛科學活動密鑰
       attendee:
         serial: '報名序號'
         code: '報到代碼'
@@ -79,7 +82,7 @@ zh-TW:
     created: '新增打卡記錄成功!'
     updated: '打卡記錄資料更新成功!'
     removed: '打卡記錄資料已刪除'
-    
+
   activerecord:
     errors:
       messages:

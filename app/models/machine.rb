@@ -5,6 +5,8 @@ class Machine < ApplicationRecord
   has_many :check_points
   has_many :events, through: :check_points
 
+  validates :serial, uniqueness: true
+
   scope :recent_update, -> { where(updated_at: 5.minutes.ago..Float::INFINITY) }
 
   def current_event_check_point

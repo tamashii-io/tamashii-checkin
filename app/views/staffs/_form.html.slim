@@ -1,8 +1,7 @@
   .card-block
     = f.association :user
-    - permissions = CustomFieldsDecorator.new(relationship.permissions)
-    = f.simple_fields_for(permissions) do |field|
-      - permissions.each do |key, value|
-        = field.input key, as: :boolean
+    = f.simple_fields_for(staff_permission_from(relationship)) do |field|
+      - UserEventRelationship::DEFAULT_PERMISSIONS.keys.each do |key|
+        = field.input key, as: :switch
   .card-footer
     = f.button :submit, class: 'btn btn-primary'

@@ -27,4 +27,8 @@ RSpec.describe Attendee, type: :model do
       expect(attendee.card_serial).to eq('ABCD')
     end
   end
+
+  it '#username' do
+    expect(attendee.username).to eq(attendee.email.slice(/[^@]+/))
+  end
 end
