@@ -31,4 +31,14 @@ RSpec.describe Attendee, type: :model do
   it '#username' do
     expect(attendee.username).to eq(attendee.email.slice(/[^@]+/))
   end
+
+  describe '#checked_in' do
+    it 'returns false for attendees without card serial' do
+      expect(attendee.checked_in).to be false
+    end
+
+    it 'returns true for attendess with card sertial' do
+      expect(attendee_card_serial.checked_in).to be true
+    end
+  end
 end

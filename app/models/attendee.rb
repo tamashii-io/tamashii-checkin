@@ -19,6 +19,14 @@ class Attendee < ApplicationRecord
     EventAttendeesDashboardChannel.update(self)
   end
 
+  def checked_in
+    card_serial.present?
+  end
+
+  def attributes
+    super.merge('checked_in' => checked_in)
+  end
+
   def to_s
     name
   end
