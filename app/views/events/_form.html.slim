@@ -1,7 +1,9 @@
 = simple_form_for(@event) do |f|
   .card-block
-      = f.input :name
-      = f.input :start_at
-      = f.input :end_at
+    = f.input :name
+    = f.input :start_at
+    = f.input :end_at
+    hr
+    = render 'pansci_settings', f: f
   .card-footer
-      = f.button :submit, class: 'btn btn-primary'
+    = f.button :submit, class: 'btn btn-primary'

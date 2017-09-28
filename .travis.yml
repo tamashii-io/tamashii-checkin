@@ -1,0 +1,22 @@
+language: ruby
+rvm:
+  - 2.4.1
+services:
+  - postgres
+cache:
+  bundler: true
+  directories:
+    - node_modules
+before_install:
+  - nvm install 8.0.0
+  - npm install -g yarn
+before_script:
+  - yarn install
+  - bundle exec rake db:create
+  - bundle exec rake db:schema:load
+script:
+  - yarn eslint
+  - bundle exec scss-lint app/assets/stylesheets/
+  - bundle exec rubocop
+  - bundle exec rspec
+

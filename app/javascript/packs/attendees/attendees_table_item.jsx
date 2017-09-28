@@ -9,8 +9,25 @@ class AttendeesTableItem extends React.Component {
     startRegister(attendee.id);
   }
 
+  unbindButton() {
+    const attendee = this.props.attendee;
+
+    if (!attendee.card_serial || attendee.card_serial.length <= 0) {
+      return null;
+    }
+
+    return (
+      <a
+        href={attendee.links.unbind}
+        className="btn btn-secondary"
+        data-method="post"
+        data-remote="true"
+      >解除</a>
+    );
+  }
+
   renderCardSerial(value) {
-    if (value.length > 0) {
+    if (value && value.length > 0) {
       return value;
     }
 
@@ -43,6 +60,7 @@ class AttendeesTableItem extends React.Component {
             data-method="delete"
             data-confirm="Are you sure?"
           >刪除</a>
+          { this.unbindButton() }
         </td>
       </tr>
     );

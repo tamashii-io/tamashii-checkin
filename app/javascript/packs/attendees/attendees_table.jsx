@@ -9,6 +9,7 @@ import {
   CANCEL_REGISTER,
   REGISTER_SUCCESS,
   REGISTER_UPDATE,
+  FILTER,
 } from './constants';
 import { fetchAttendees } from './actions';
 import { RegistrarChannel } from '../channels';
@@ -22,9 +23,12 @@ class AttendeesTable extends React.Component {
     this.state = {
       attendees: [],
       nextRegisterAttendeeId: 0,
+      search: '',
     };
 
+    this.searchTimer = null;
     this.closeModal = this.closeModal.bind(this);
+    this.onSearch = this.onSearch.bind(this);
   }
 
   componentWillMount() {
@@ -43,6 +47,7 @@ class AttendeesTable extends React.Component {
       REGISTER_SUCCESS,
       attendees => this.setState({ attendees, nextRegisterAttendeeId: 0 }),
     );
+    store.on(FILTER, attendees => this.setState({ attendees }));
   }
 
   componentWillUnmount() {
@@ -50,9 +55,24 @@ class AttendeesTable extends React.Component {
     store.off();
   }
 
+  onSearch(ev) {
+    this.setState({ search: ev.target.value });
+    // TODO: Above code can be improved
+    clearTimeout(this.searchTimer);
+    this.searchTimer = setTimeout(() => {
+      store.dispatch({ type: FILTER, search: this.state.search });
+    }, 100);
+  }
+
   attendees() {
     const attendees = this.state.attendees;
-    return attendees.map(attendee => <AttendeesTableItem key={attendee.id} attendee={attendee} />);
+    return attendees
+           .sort((a, b) => {
+             if (a.serial > b.serial) return -1;
+             if (a.serial < b.serial) return 1;
+             return 0;
+           })
+           .map(attendee => <AttendeesTableItem key={attendee.id} attendee={attendee} />);
   }
 
   hasNextAttendee() {
@@ -70,6 +90,19 @@ class AttendeesTable extends React.Component {
         <Modal isOpen={this.hasNextAttendee()} toggle={this.closeModal}>
           <ModalBody>Please scan your RFID card to check-in</ModalBody>
         </Modal>
+        <div className="row">
+          <div className="ml-auto col-md-4">
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search..."
+                onChange={this.onSearch}
+                value={this.state.search}
+              />
+            </div>
+          </div>
+        </div>
         <table className="table table-bordered table-striped table-condensed">
           <thead>
             <tr>
