@@ -16,7 +16,7 @@ module Tamashii
         end
         desc 'Attendees List'
         get '/' do
-          Event.find(params[:event_id]).attendees.as_json(only: [:id, :serial, :name, :email, :phone])
+          Event.find(params[:event_id]).attendees.as_json(only: [:id, :serial, :name, :email, :phone, :checked_in])
         end
       end
     end
