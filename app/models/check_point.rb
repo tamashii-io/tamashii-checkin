@@ -13,7 +13,7 @@ class CheckPoint < ApplicationRecord
   belongs_to :registrar, class_name: 'User', optional: true
 
   validates :name, :type, presence: true
-  validates :registrar, uniqueness: { scope: :event_id }
+  validates :registrar, uniqueness: { scope: :event_id }, allow_nil: true
   validate :machine_available, on: :create
 
   # TODO: Implements STI class to work with different behavior
@@ -64,6 +64,10 @@ class CheckPoint < ApplicationRecord
 
   def to_s
     name
+  end
+
+  def checkin_records_in_interval(time_interval)
+    check_records.where('updated_at >= ?', Time.zone.now - time_interval)
   end
 
   private

@@ -32,7 +32,7 @@ DashboardChart.propTypes = {
   className: PropTypes.string.isRequired,
   labels: PropTypes.node.isRequired,
   chart: PropTypes.shape({}).isRequired,
-  datasets: PropTypes.shape({}).isRequired,
+  datasets: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 export default DashboardChart;

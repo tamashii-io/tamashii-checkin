@@ -22,4 +22,12 @@ class Event < ApplicationRecord
   def to_s
     name
   end
+
+  def check_point_summary(time_interval)
+    check_points.each_with_object({}) do |check_point, result|
+      result[check_point.id] = {
+        count: check_point.checkin_records_in_interval(time_interval).count
+      }
+    end
+  end
 end

@@ -4,34 +4,76 @@ import PropTypes from 'prop-types';
 import {
   RECEIVE_ATTENDEES,
   REGISTER_UPDATE,
+  RECEIVE_CHECK_POINTS,
+  SUMMARY_UPDATE,
+  SUMMARY_INTERVAL,
+  REALTIME_INTERVAL,
 } from './constants';
-import { fetchAttendees } from './actions';
+import {
+  fetchAttendees,
+  fetchCheckPoints,
+} from './actions';
 import { EventAttendeesDashboardChannel } from '../channels';
 import store from './store';
 
-import DashboardChart from './dashboard_chart.jsx';
+import DashboardCheckPoint from './dashboard_check_point.jsx';
 
-const updateChartValue = (Charts, attendees) => {
-  const charts = Charts;
-  charts[0].value = attendees.attendees;
-  charts[1].value = attendees.checkin;
-  return charts;
+const updateCheckPointsData = (srcCheckPointsData, summary, timeInterval) => {
+  let dataField = 'none';
+  switch (timeInterval) {
+    case SUMMARY_INTERVAL: {
+      dataField = 'summary';
+      break;
+    }
+    case REALTIME_INTERVAL: {
+      dataField = 'realtime';
+      break;
+    }
+    default: {
+      break;
+    }
+  }
+  if (dataField !== 'none') {
+    const checkPointsData = srcCheckPointsData.map((srcCheckPointData) => {
+      const checkPointData = srcCheckPointData;
+      if (Date.now() - checkPointData[dataField].lastUpdateTime >= timeInterval - 5) {
+        checkPointData[dataField].lastUpdateTime = Date.now();
+        const count = summary[checkPointData.id].count;
+
+        checkPointData[dataField].chart.value = count;
+
+        const data = checkPointData[dataField].data;
+        data.shift();
+        data.push(count);
+
+        const labels = checkPointData[dataField].labels;
+        labels.shift();
+        labels.push(new Date().toLocaleTimeString());
+      }
+      return checkPointData;
+    });
+    return checkPointsData;
+  }
+
+  return srcCheckPointsData;
+};
+
+const fetchSummary = (eventId, timeInterval) => {
+  EventAttendeesDashboardChannel.perform(
+    'update_summary',
+    {
+      event_id: eventId,
+      time_interval: timeInterval,
+    },
+  );
 };
 
 class EventDashboard extends React.Component {
   constructor() {
     super();
     this.state = {
-      attendees: [],
-      Charts: [
-        { name: 'Attendees', value: 0, icon: 'icon-settings', skin: 'primary' },
-        { name: 'New Register', value: 0, icon: 'icon-location-pin', skin: 'info' },
-        { name: 'Members online', value: 0, icon: 'icon-user', skin: 'success' },
-        { name: 'Active members', value: 0, icon: 'icon-layers', skin: 'warning' },
-      ],
-      // TODO: Use real-time data
-      labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      attendees: {},
+      checkPointsData: [],
     };
   }
 
@@ -41,58 +83,83 @@ class EventDashboard extends React.Component {
   }
 
   componentDidMount() {
-    const { Charts } = this.state;
     store.on(RECEIVE_ATTENDEES,
-      attendees => this.setState({ attendees,
-        Charts: updateChartValue(Charts, attendees) }),
+      attendees => this.setState({ attendees }),
+    );
+    store.on(RECEIVE_CHECK_POINTS,
+      (checkPoints) => {
+        const checkPointsData = checkPoints.map(checkPoint => ({
+          id: checkPoint.id,
+          name: checkPoint.name,
+          realtime: {
+            labels: ['N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            chart: { name: `Realtime (past ${REALTIME_INTERVAL} seconds)`, value: 0, icon: 'icon-location-pin', skin: 'info' },
+            lastUpdateTime: 0,
+          },
+          summary: {
+            labels: ['N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            chart: { name: `Summary (past ${SUMMARY_INTERVAL} seconds)`, value: 0, icon: 'icon-settings', skin: 'primary' },
+            lastUpdateTime: 0,
+          },
+        }));
+        this.setState(
+          { checkPointsData },
+        );
+      },
     );
     store.on(
       REGISTER_UPDATE, () => fetchAttendees(this.props.eventId),
     );
-    this.timer = setTimeout(() => { this.updateData(); }, 500);
+    store.on(SUMMARY_UPDATE, (summary, timeInterval) => {
+      this.setState({
+        checkPointsData: updateCheckPointsData(this.state.checkPointsData, summary, timeInterval),
+      });
+    });
+    this.updateSummaryData();
+    this.updateRealtimeData();
+    fetchCheckPoints(this.props.eventId);
   }
 
   componentWillUnmount() {
     EventAttendeesDashboardChannel.unfollow();
     store.off();
-    clearTimeout(this.timer);
+    clearTimeout(this.summaryTimer);
+    clearTimeout(this.realtimeTimer);
   }
 
-  // TODO: Use real-time data
-  updateData() {
-    const data = this.state.data;
-    data.shift();
-    data.push(Math.floor(Math.random() * 100));
-    this.setState({ data });
-    this.timer = setTimeout(() => { this.updateData(); }, 1000);
+  updateSummaryData() {
+    fetchSummary(this.props.eventId, SUMMARY_INTERVAL);
+    this.summaryTimer = setTimeout(() => { this.updateSummaryData(); }, SUMMARY_INTERVAL * 1000);
   }
 
-  buildCharts(datasets) {
-    const { Charts, labels } = this.state;
-    return Charts.map(
-      chart => (
-        <DashboardChart
-          className="col-sm-6 col-lg-3"
-          labels={labels}
-          chart={chart}
-          datasets={datasets}
+  updateRealtimeData() {
+    fetchSummary(this.props.eventId, REALTIME_INTERVAL);
+    this.realtimeTimer = setTimeout(() => { this.updateRealtimeData(); }, REALTIME_INTERVAL * 1000);
+  }
+
+  buildCharts() {
+    const { checkPointsData } = this.state;
+    return checkPointsData.map(
+      checkPointData => (
+        <DashboardCheckPoint
+          name={checkPointData.name}
+          summary={checkPointData.summary}
+          realtime={checkPointData.realtime}
+          key={checkPointData.name}
         />
       ),
     );
   }
 
-  buildDatasets() {
-    return [{
-      backgroundColor: 'rgba(255, 255, 255, .2)',
-      borderColor: 'rgba(255,255,255,.55)',
-      data: this.state.data,
-    }];
-  }
-
   render() {
     return (
-      <div className="row">
-        { this.buildCharts(this.buildDatasets()) }
+      <div>
+        <p>Total attendees: {this.state.attendees.attendees}</p>
+        <p>Checked-in attendees: {this.state.attendees.checkin}</p>
+        <hr />
+        { this.buildCharts() }
       </div>
     );
   }
