@@ -9,11 +9,11 @@ class CheckRecordsChannel < ApplicationCable::Channel
 
   class << self
     def update(check_record)
-      broadcast_to(check_record.check_point.event, type: EVENTS[:update], check_record: check_record.as_json(include: :attendee))
+      broadcast_to(check_record.check_point.event, type: EVENTS[:update], check_record: check_record.as_json(include: [:attendee, :check_point]))
     end
 
     def set(check_record)
-      broadcast_to(check_record.check_point.event, type: EVENTS[:set], check_record: check_record.as_json(include: :attendee))
+      broadcast_to(check_record.check_point.event, type: EVENTS[:set], check_record: check_record.as_json(include: [:attendee, :check_point]))
     end
   end
 
