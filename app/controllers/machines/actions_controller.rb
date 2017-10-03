@@ -7,6 +7,7 @@ module Machines
     before_action :check_machine_permission!
     before_action -> { @machine = Machine.find(params[:machine_id]) }
     
+    # TODO: should also hide buttons in views
     def create
       @machine.send(command) if @machine.respond_to?(command)
     end
