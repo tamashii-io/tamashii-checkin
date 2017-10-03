@@ -14,6 +14,7 @@
                   td 活動名稱
                   td 開始時間
                   td 結束時間
+                  td API Token
                   td 處理
               tbody
                 - @events.each do |event|
@@ -21,6 +22,7 @@
                     td = link_to event.name, event_path(event.id)
                     td = l event.start_at
                     td = l event.end_at
+                    td = event.api_token
                     td
                       = edit_button event
                       = delete_button event

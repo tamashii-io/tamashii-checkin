@@ -15,12 +15,18 @@ class Event < ApplicationRecord
 
   validates :name, presence: true
 
+  before_save :ensure_api_token_exists
+
   def peroid
     start_at..end_at
   end
 
   def to_s
     name
+  end
+
+  def ensure_api_token_exists
+    self.api_token = Devise.friendly_token if api_token.blank?
   end
 
   # Note: if no records available, the pair will NOT exist in the hash

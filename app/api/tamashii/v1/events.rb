@@ -6,6 +6,8 @@ module Tamashii
     class Events < Grape::API
       resources :events do
         route_param :event_id do
+          auth :event_auth
+
           mount Tamashii::V1::Attendees
           mount Tamashii::V1::Accesses
           mount Tamashii::V1::CheckRecords
