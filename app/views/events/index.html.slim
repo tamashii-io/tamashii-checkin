@@ -11,6 +11,7 @@
             table.table.table-bordered.table-striped.table-condensed
               thead
                 tr
+                  td 活動ID
                   td 活動名稱
                   td 開始時間
                   td 結束時間
@@ -19,6 +20,7 @@
               tbody
                 - @events.each do |event|
                   tr
+                    td = event.id
                     td = link_to event.name, event_path(event.id)
                     td = l event.start_at
                     td = l event.end_at
