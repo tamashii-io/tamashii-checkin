@@ -16,8 +16,12 @@ html lang="zh-TW"
     = render "shared/sidebar"
     .app-body
       main.main
+        / TODO: Refactor to flash message helper with bootstrap style
         - if flash[:error]
           .alert.alert-danger role="alert"
             = flash[:error]
+        - if flash[:notice]
+          .alert.alert-danger role="alert"
+            = flash[:notice]
         = render "shared/breadcrumb"
         = yield
