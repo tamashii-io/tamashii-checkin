@@ -8,10 +8,9 @@ module Tamashii
         desc 'Get attendees summary'
         get '/summary' do
           attendees = Event.find(params[:event_id]).attendees
-          # TODO: Why this is "NOT CHECKED INT" called "CHECKIN"
           {
             attendees: attendees.count,
-            checkin: attendees.not_checked_in.count
+            checkin: attendees.checked_in.count
           }
         end
         desc 'Attendees List'
