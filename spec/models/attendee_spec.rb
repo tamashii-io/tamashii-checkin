@@ -6,10 +6,11 @@ RSpec.describe Attendee, type: :model do
   it { should belong_to(:event) }
 
   let!(:attendee) { create(:attendee) }
+  let!(:attendee2) { create(:attendee) }
   let!(:attendee_card_serial) { create(:attendee, card_serial: '1234') }
 
-  it '.not_checked_in' do
-    expect(Attendee.not_checked_in.count).to eq(1)
+  it '.checked_in' do
+    expect(Attendee.checked_in.count).to eq(1)
   end
 
   it '#to_s' do

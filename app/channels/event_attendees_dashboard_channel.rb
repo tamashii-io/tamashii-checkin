@@ -2,7 +2,8 @@
 # Registrar Channel
 class EventAttendeesDashboardChannel < ApplicationCable::Channel
   EVENTS = {
-    update: 'REGISTER_UPDATE'
+    update: 'REGISTER_UPDATE',
+    poll_summary: 'POLL_SUMMARY'
   }.freeze
 
   class << self
@@ -20,5 +21,12 @@ class EventAttendeesDashboardChannel < ApplicationCable::Channel
 
   def unfollow
     stop_all_streams
+  end
+
+  def update_summary(data)
+    time_interval = data['time_interval'] || 1.minute
+    event = Event.find(data['event_id'])
+    data = event.check_point_summary(time_interval)
+    self.class.broadcast_to(event, type: EVENTS[:poll_summary], summary: data, time_interval: time_interval)
   end
 end

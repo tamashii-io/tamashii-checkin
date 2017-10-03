@@ -7,7 +7,10 @@ class Attendee < ApplicationRecord
   after_save -> { update_channel }
   after_destroy -> { EventAttendeesDashboardChannel.update(self) }
 
-  scope :not_checked_in, -> { where.not(card_serial: '') }
+  # TODO: this is a workaround for handle card_serial is NULL
+  # After adding database default and model validation, it should be `where.not(card_serial: '')`
+  # Validation could be: `validates :card_serial, prensence: { allow_blank: true }``
+  scope :checked_in, -> { where("card_serial is not NULL and card_serial != ''") }
 
   def register(serial)
     return if card_serial.present?
