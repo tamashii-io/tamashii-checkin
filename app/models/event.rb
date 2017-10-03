@@ -15,11 +15,17 @@ class Event < ApplicationRecord
 
   validates :name, presence: true
 
+  before_save :ensure_api_token_exists
+
   def peroid
     start_at..end_at
   end
 
   def to_s
     name
+  end
+
+  def ensure_api_token_exists
+    self.api_token = Devise.friendly_token if api_token.blank?
   end
 end
