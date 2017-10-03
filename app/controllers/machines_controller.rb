@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 # missing top-level class documentation comment
 class MachinesController < ApplicationController
+  include MachineConcern
+
+  before_action :check_machine_permission!, except: [:index]
   before_action :find_machine, only: [:edit, :update, :destroy]
+  
 
   def index
     @machines = Machine.all

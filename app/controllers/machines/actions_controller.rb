@@ -2,8 +2,11 @@
 module Machines
   # Machine::ActionsController
   class ActionsController < ApplicationController
+    include MachineConcern
+    
+    before_action :check_machine_permission!
     before_action -> { @machine = Machine.find(params[:machine_id]) }
-
+    
     def create
       @machine.send(command) if @machine.respond_to?(command)
     end
