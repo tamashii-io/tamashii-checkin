@@ -5,7 +5,7 @@ import {
   RECEIVE_ATTENDEES,
   REGISTER_UPDATE,
   RECEIVE_CHECK_POINTS,
-  SUMMARY_UPDATE,
+  POLL_SUMMARY,
   SUMMARY_INTERVAL,
   REALTIME_INTERVAL,
 } from './constants';
@@ -112,7 +112,7 @@ class EventDashboard extends React.Component {
     store.on(
       REGISTER_UPDATE, () => fetchAttendees(this.props.eventId),
     );
-    store.on(SUMMARY_UPDATE, (summary, timeInterval) => {
+    store.on(POLL_SUMMARY, (summary, timeInterval) => {
       this.setState({
         checkPointsData: updateCheckPointsData(this.state.checkPointsData, summary, timeInterval),
       });

@@ -3,7 +3,7 @@
 class EventAttendeesDashboardChannel < ApplicationCable::Channel
   EVENTS = {
     update: 'REGISTER_UPDATE',
-    summary_update: 'SUMMARY_UPDATE'
+    poll_summary: 'POLL_SUMMARY'
   }.freeze
 
   class << self
@@ -27,6 +27,6 @@ class EventAttendeesDashboardChannel < ApplicationCable::Channel
     time_interval = data['time_interval'] || 1.minute
     event = Event.find(data['event_id'])
     data = event.check_point_summary(time_interval)
-    self.class.broadcast_to(event, type: EVENTS[:summary_update], summary: data, time_interval: time_interval)
+    self.class.broadcast_to(event, type: EVENTS[:poll_summary], summary: data, time_interval: time_interval)
   end
 end

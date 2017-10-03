@@ -5,7 +5,7 @@ import {
   RECEIVE_ATTENDEES,
   RECEIVE_CHECK_POINTS,
   REGISTER_UPDATE,
-  SUMMARY_UPDATE,
+  POLL_SUMMARY,
 } from './constants';
 import { EventAttendeesDashboardChannel } from '../channels';
 
@@ -31,7 +31,7 @@ class AttendeeStore extends EventEmitter {
         this.emit(action.type, action.check_points);
         break;
       }
-      case SUMMARY_UPDATE: {
+      case POLL_SUMMARY: {
         this.emit(action.type, action.summary, action.time_interval);
         break;
       }
@@ -45,7 +45,7 @@ class AttendeeStore extends EventEmitter {
     this.removeAllListeners(RECEIVE_ATTENDEES);
     this.removeAllListeners(REGISTER_UPDATE);
     this.removeAllListeners(RECEIVE_CHECK_POINTS);
-    this.removeAllListeners(SUMMARY_UPDATE);
+    this.removeAllListeners(POLL_SUMMARY);
   }
 }
 
