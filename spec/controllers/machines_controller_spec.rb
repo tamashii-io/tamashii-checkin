@@ -3,7 +3,7 @@ require 'rails_helper'
 
 RSpec.describe MachinesController, type: :controller do
   let(:machine_a) { create(:machine, name: 'name', serial: '1') }
-  let(:user) { create(:user) }
+  let(:user) { create(:user, admin: true) }
 
   before(:each) do
     @machine_params = { name: 'update' }

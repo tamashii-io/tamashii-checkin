@@ -4,8 +4,7 @@ class MachinesController < ApplicationController
   include MachineConcern
 
   before_action :check_machine_permission!, except: [:index] # TODO: should also hide buttons in views
-  before_action :find_machine, only: [:edit, :update, :destroy] 
-  
+  before_action :find_machine, only: [:edit, :update, :destroy]
 
   def index
     @machines = Machine.all
