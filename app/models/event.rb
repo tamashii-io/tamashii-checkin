@@ -23,11 +23,16 @@ class Event < ApplicationRecord
     name
   end
 
+  # Note: if no records available, the pair will NOT exist in the hash
+  # Namely, there will be no records with value is 0
   def check_point_summary(time_interval)
-    check_points.each_with_object({}) do |check_point, result|
-      result[check_point.id] = {
-        count: check_point.checkin_records_in_interval(time_interval).count
-      }
+    check_records.where('check_records.updated_at >= ?', Time.zone.now - time_interval)
+                 .group(:check_point_id)
+                 .count
+                 .tap do |hash|
+      hash.each do |k, v|
+        hash[k] = { count: v }
+      end
     end
   end
 end

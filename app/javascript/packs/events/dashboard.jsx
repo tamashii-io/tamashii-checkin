@@ -38,7 +38,12 @@ const updateCheckPointsData = (srcCheckPointsData, summary, timeInterval) => {
       const checkPointData = srcCheckPointData;
       if (Date.now() - checkPointData[dataField].lastUpdateTime >= timeInterval - 5) {
         checkPointData[dataField].lastUpdateTime = Date.now();
-        const count = summary[checkPointData.id].count;
+        let count = 0;
+        const summaryData = summary[checkPointData.id];
+        // if there is no data, the summary[checkPointData.id] will be undefined
+        if (summaryData) {
+          count = summary[checkPointData.id].count;
+        }
 
         checkPointData[dataField].chart.value = count;
 

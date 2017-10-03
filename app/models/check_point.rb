@@ -66,10 +66,6 @@ class CheckPoint < ApplicationRecord
     name
   end
 
-  def checkin_records_in_interval(time_interval)
-    check_records.where('updated_at >= ?', Time.zone.now - time_interval)
-  end
-
   private
 
   def accept(attendee)
