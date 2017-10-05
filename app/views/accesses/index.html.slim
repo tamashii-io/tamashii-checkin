@@ -6,7 +6,7 @@
         .card
           .card-header = t('.title')
           .card-block
-            #accesses data-event-id="#{@event.id}" data-check-point-id="#{@check_point.id}"
+            #accesses data-event-id="#{@event.id}" data-check-point-id="#{@check_point.id}" data-event-api-token="#{@event.api_token}"
               table.table.table-bordered.table-striped.table-condensed
                  thead
                   tr
