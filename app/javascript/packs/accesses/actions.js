@@ -16,15 +16,19 @@ export const fetchAccessRecords = (eventId) => {
    .done((data) => { store.dispatch({ type: RECEIVE_ACCESS_RECORDS, accessRecords: data }); });
 };
 
-export const setAttendeeAccess = (eventId, checkPointId, attendeeId, isAccept) => {
-  $.post(
-    ENDPOINTS.setAttendeeAccess(eventId),
-    { event_id: eventId,
+export const setAttendeeAccess = (eventId, eventApiToken, checkPointId, attendeeId, isAccept) => {
+  $.ajax({
+    url: ENDPOINTS.setAttendeeAccess(eventId),
+    type: 'POST',
+    headers: {
+      Authorization: `Bearer ${eventApiToken}`,
+    },
+    data: { event_id: eventId,
       check_point_id: checkPointId,
       attendee_id: attendeeId,
       accept: isAccept,
     },
-  )
+  })
    .promise()
    .done(() => { store.dispatch({ type: ACCESS_UPDATE }); });
 };

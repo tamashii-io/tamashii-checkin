@@ -84,6 +84,7 @@ class AccessRecordsTable extends React.Component {
   acceptRequest() {
     setAttendeeAccess(
       this.props.eventId,
+      this.props.eventApiToken,
       this.props.checkPointId,
       this.state.requestAttendee.id,
       true,
@@ -93,6 +94,7 @@ class AccessRecordsTable extends React.Component {
   rejectRequest() {
     setAttendeeAccess(
       this.props.eventId,
+      this.props.eventApiToken,
       this.props.checkPointId,
       this.state.requestAttendee.id,
       false,
@@ -132,6 +134,7 @@ class AccessRecordsTable extends React.Component {
 AccessRecordsTable.propTypes = {
   checkPointId: PropTypes.string.isRequired,
   eventId: PropTypes.string.isRequired,
+  eventApiToken: PropTypes.string.isRequired,
 };
 
 export default AccessRecordsTable;

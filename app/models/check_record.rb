@@ -16,13 +16,14 @@ class CheckRecord < ApplicationRecord
   end
 
   def broadcast
+    # Note: records with times <= 0 is considered not exists
+    return unless times.positive?
     method = times == 1 ? :set : :update
     [CheckRecordsChannel, AccessesChannel].map { |chan| chan.send(method, self) }
   end
 
   def as_json(*args)
     super.tap do |hash|
-      hash['count'] = hash.delete('times')
       hash['user_serial'] = hash.delete('attendee_id')
     end
   end

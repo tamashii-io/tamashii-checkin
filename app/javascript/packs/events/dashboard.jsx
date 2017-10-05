@@ -10,8 +10,8 @@ import {
   REALTIME_INTERVAL,
 } from './constants';
 import {
-  fetchAttendees,
-  fetchCheckPoints,
+  fetchAttendeesFromApi,
+  fetchCheckPointsFromApi,
 } from './actions';
 import { EventAttendeesDashboardChannel } from '../channels';
 import store from './store';
@@ -83,7 +83,7 @@ class EventDashboard extends React.Component {
   }
 
   componentWillMount() {
-    fetchAttendees(this.props.eventId);
+    fetchAttendeesFromApi(this.props.eventId, this.props.eventApiToken);
     EventAttendeesDashboardChannel.follow({ event_id: this.props.eventId });
   }
 
@@ -115,7 +115,7 @@ class EventDashboard extends React.Component {
       },
     );
     store.on(
-      REGISTER_UPDATE, () => fetchAttendees(this.props.eventId),
+      REGISTER_UPDATE, () => fetchAttendeesFromApi(this.props.eventId, this.props.eventApiToken),
     );
     store.on(POLL_SUMMARY, (summary, timeInterval) => {
       this.setState({
@@ -124,7 +124,7 @@ class EventDashboard extends React.Component {
     });
     this.updateSummaryData();
     this.updateRealtimeData();
-    fetchCheckPoints(this.props.eventId);
+    fetchCheckPointsFromApi(this.props.eventId, this.props.eventApiToken);
   }
 
   componentWillUnmount() {
@@ -172,6 +172,7 @@ class EventDashboard extends React.Component {
 
 EventDashboard.propTypes = {
   eventId: PropTypes.string.isRequired,
+  eventApiToken: PropTypes.string.isRequired,
 };
 
 export default EventDashboard;
