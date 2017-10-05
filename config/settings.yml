@@ -1,4 +1,5 @@
 default: &default
+  login_url: <%= ENV['LOGIN_URL'] %>
   mailer:
     url:
       host: <%= ENV['MAILER_HOST'] %>
