@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'net/http'
 
 class PansciEventService
   def initialize(event_id, secret)
