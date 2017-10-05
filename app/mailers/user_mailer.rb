@@ -6,6 +6,6 @@ class UserMailer < ApplicationMailer
     @user = user
     @password = password
 
-    mail to: @user.email, from: "noreply@5xruby.tw", subject: "New staff notification for #{@event.name}"
+    mail to: @user.email, from: 'noreply@5xruby.tw', subject: "New staff notification for #{@event.name}"
   end
 end
