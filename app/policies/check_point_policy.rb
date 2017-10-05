@@ -2,13 +2,11 @@
 # missing top-level class documentation comment
 class CheckPointPolicy < ApplicationPolicy
   include Pundit
-  # missing top-level class documentation comment
+  # Policy is incorrect should be fixed and discuss
   class Scope < Scope
     include Pundit
     def resolve
-      if scope.empty?
-        scope
-      elsif user.admin? || event_owner? || write_check_point?
+      if user.admin? || event_owner?
         scope
       else
         scope.where(registrar_id: user.id)
@@ -19,11 +17,6 @@ class CheckPointPolicy < ApplicationPolicy
 
     def event_owner?
       scope.first.event.user_id == user.id
-    end
-
-    def write_check_point?
-      relationship = UserEventRelationship.find_by(event_id: scope.first.event.id, user_id: user.id)
-      UserEventRelationshipPolicy.new(user, relationship).write_check_point?
     end
   end
 
@@ -49,8 +42,8 @@ class CheckPointPolicy < ApplicationPolicy
 
   private
 
+  # TODO: Refactor this
   def write_check_point?
-    relationship = UserEventRelationship.find_by(event_id: record.event.id, user_id: user.id)
-    UserEventRelationshipPolicy.new(user, relationship).write_check_point?
+    EventPolicy.new(user, record.event).write_check_point?
   end
 end
