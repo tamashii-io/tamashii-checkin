@@ -6,7 +6,9 @@ class CheckPointPolicy < ApplicationPolicy
   class Scope < Scope
     include Pundit
     def resolve
-      if user.admin? || event_owner?
+      if scope.empty?
+        scope
+      elsif user.admin? || event_owner?
         scope
       else
         scope.where(registrar_id: user.id)
