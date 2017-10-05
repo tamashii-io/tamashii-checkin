@@ -21,10 +21,4 @@ class CheckRecord < ApplicationRecord
     method = times == 1 ? :set : :update
     [CheckRecordsChannel, AccessesChannel].map { |chan| chan.send(method, self) }
   end
-
-  def as_json(*args)
-    super.tap do |hash|
-      hash['user_serial'] = hash.delete('attendee_id')
-    end
-  end
 end
