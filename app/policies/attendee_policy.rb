@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 class AttendeePolicy < ApplicationPolicy
   class Scope < Scope
+    # TODO: refactor this policy, seems a little weird
     def resolve
-      if EventPolicy.new(user, scope.first.event).read_attendee?
+      first_attendee = scope.first
+      if first_attendee && EventPolicy.new(user, first_attendee).read_attendee?
         scope.all
       else
         []
