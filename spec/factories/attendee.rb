@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :attendee do
     id { Faker::Number.number(6) }
-    serial { Faker::Number.number(6) }
+    sequence :serial
     name { Faker::Name.name }
     code { Faker::Code.asin }
     email { Faker::Code.asin }
