@@ -1,4 +1,6 @@
 zh-TW:
+  permission:
+    denied: '您沒有權限進行此操作'
   events:
     index:
       title: '活動列表'
@@ -8,11 +10,11 @@ zh-TW:
       title: '編輯活動'
   attendees:
     index:
-      title: '成員列表'
+      title: '會眾列表'
     new:
-      title: '新增成員'
+      title: '新增會眾'
     edit:
-      title: '編輯成員'
+      title: '編輯會眾'
   simple_form:
     labels:
       event:
@@ -43,12 +45,13 @@ zh-TW:
         times: '次數'
   event:
     created: '新增活動成功!'
-    updated: '資料更新成功!'
-    removed: '資料已刪除'
+    updated: '活動資料更新成功!'
+    removed: '活動資料已刪除'
   attendee:
-    created: '新增成員成功!'
-    updated: '資料更新成功!'
-    removed: '資料已刪除'
+    created: '新增會眾成功!'
+    updated: '會眾資料更新成功!'
+    removed: '會眾資料已刪除'
+    synced: '會眾資料同步完成'
   machines:
     index:
       title: '機器列表'
@@ -74,11 +77,11 @@ zh-TW:
     created: '新增機器成功!'
     updated: '機器資料更新成功!'
     removed: '機器資料已刪除'
-  checkpoint:
+  checkPoint:
     created: '新增打卡點成功!'
     updated: '打卡點資料更新成功!'
     removed: '打卡點資料已刪除'
-  checkrecord:
+  checkRecord:
     created: '新增打卡記錄成功!'
     updated: '打卡記錄資料更新成功!'
     removed: '打卡記錄資料已刪除'

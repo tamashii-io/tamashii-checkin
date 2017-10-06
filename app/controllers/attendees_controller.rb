@@ -50,7 +50,7 @@ class AttendeesController < ApplicationController
   # TODO: Support all third-party system
   def sync
     @event.sync_pansci_attendees
-    redirect_to event_attendees_path
+    redirect_to event_attendees_path, notice: I18n.t('attendee.synced')
   end
 
   private

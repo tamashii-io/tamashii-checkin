@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def deny_access
-    flash[:error] = 'access denied'
+    flash[:error] = I18n.t('permission.denied')
     redirect_to action: :index
   end
 

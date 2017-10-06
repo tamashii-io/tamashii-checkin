@@ -4,7 +4,7 @@ module MachineConcern
 
   def check_machine_permission!
     return if has_machine_permission?
-    flash[:error] = 'You have no permission to manage machines.'
+    flash[:error] = I18n.t('permission.denied')
     redirect_to machines_path
   end
 
