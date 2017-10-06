@@ -10,7 +10,7 @@ RSpec.describe AttendeesController, type: :controller do
     @attendee_params = { serial: '001', code: 'A01', name: 'Bob', email: 'a@a', phone: '0919905295', card_serial: 'aa' }
     sign_in user
     event_a.staffs << user
-    UserEventRelationship.find_by(event_id: event_a.id, user_id: user.id).update(permissions: {'read_attendee' => true, 'write_attendee' => true})
+    UserEventRelationship.find_by(event_id: event_a.id, user_id: user.id).update(permissions: { 'read_attendee' => true, 'write_attendee' => true })
   end
 
   it '#index' do
