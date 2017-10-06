@@ -1,6 +1,6 @@
 - breadcrumb :check_points, @event
 - content_for :breadcrumb_actions
-  = link_to "新增打卡點", new_event_check_point_path, class:"btn btn-secondary"
+  = new_button_for_check_point @event
 .container-fluid
   .animated.fadeIn
     .row
