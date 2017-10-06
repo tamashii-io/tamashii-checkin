@@ -9,10 +9,18 @@ class AttendeesTableItem extends React.Component {
     startRegister(attendee.id);
   }
 
+  isAttendeeWritable() {
+    return this.props.attendeeWritable === 'true';
+  }
+
   unbindButton() {
     const attendee = this.props.attendee;
 
     if (!attendee.card_serial || attendee.card_serial.length <= 0) {
+      return null;
+    }
+
+    if (!this.isAttendeeWritable()) {
       return null;
     }
 
@@ -31,6 +39,10 @@ class AttendeesTableItem extends React.Component {
       return value;
     }
 
+    if (!this.isAttendeeWritable()) {
+      return null;
+    }
+
     const onClick = (ev) => {
       ev.preventDefault();
       this.registerAttendee();
@@ -38,6 +50,25 @@ class AttendeesTableItem extends React.Component {
 
     return (
       <a href="" onClick={onClick} className="btn btn-success">報到</a>
+    );
+  }
+
+  renderManageButtons(attendee) {
+    if (!this.isAttendeeWritable()) {
+      return <td />;
+    }
+
+    return (
+      <td>
+        <a href={attendee.links.edit} className="btn btn-primary">編輯</a>
+        <a
+          href={attendee.links.self}
+          className="btn btn-danger"
+          data-method="delete"
+          data-confirm="Are you sure?"
+        >刪除</a>
+        { this.unbindButton() }
+      </td>
     );
   }
 
@@ -52,16 +83,7 @@ class AttendeesTableItem extends React.Component {
         <td>{attendee.email}</td>
         <td>{attendee.phone}</td>
         <td>{this.renderCardSerial(attendee.card_serial)}</td>
-        <td>
-          <a href={attendee.links.edit} className="btn btn-primary">編輯</a>
-          <a
-            href={attendee.links.self}
-            className="btn btn-danger"
-            data-method="delete"
-            data-confirm="Are you sure?"
-          >刪除</a>
-          { this.unbindButton() }
-        </td>
+        {this.renderManageButtons(attendee)}
       </tr>
     );
   }
@@ -69,6 +91,7 @@ class AttendeesTableItem extends React.Component {
 
 AttendeesTableItem.propTypes = {
   attendee: PropTypes.shape({}).isRequired,
+  attendeeWritable: PropTypes.string.isRequired,
 };
 
 export default AttendeesTableItem;

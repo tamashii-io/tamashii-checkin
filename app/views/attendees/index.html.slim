@@ -1,7 +1,7 @@
 - breadcrumb :attendees, @event
 - content_for :breadcrumb_actions
-  = link_to "同步", sync_event_attendees_path(@event), class: 'btn btn-secondary', method: :post if @event.pansci_event?
-  = link_to "新增會眾", new_event_attendee_path(@event), class:"btn btn-secondary"
+  = sync_button_for_event(@event)
+  = new_attendee_button_for_event(@event)
 .container-fluid
   .animated.fadeIn
     .row
@@ -9,26 +9,6 @@
         .card
           .card-header = t('.title')
           .card-block
-            #attendees data-event-id="#{@event.id}"
-              table.table.table-bordered.table-striped.table-condensed
-                thead
-                  tr
-                    th 報名序號
-                    th 報到代碼
-                    th 姓名
-                    th 信箱
-                    th 手機
-                    th 卡片序號
-                    th 處理
-                tbody
-                  - @attendees.each do |attendee|
-                    tr
-                      td = attendee.serial
-                      td = attendee.code
-                      td = attendee.name
-                      td = attendee.email
-                      td = attendee.phone
-                      td = attendee.card_serial
-                      td
-                        = link_to "編輯", edit_event_attendee_path(params[:event_id],attendee), class: 'btn btn-primary'
-                        = link_to "刪除", event_attendee_path(params[:event_id],attendee), class: 'btn btn-danger', method: "delete", data: { confirm: "確認刪除" }
+            / TODO: should fetch permission in a better way
+            #attendees data-event-id="#{@event.id}" data-attendee-writable="#{policy(@event).write_attendee?}"
+              p Loading Attendees...

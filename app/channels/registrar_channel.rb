@@ -30,12 +30,14 @@ class RegistrarChannel < ApplicationCable::Channel
   end
 
   # TODO: Improve this method AbcSize
+  # TODO: Improve policy usage
   # rubocop:disable Metrics/AbcSize
   def register(data)
     attendee = Attendee.find(data['attendeeId'])
     packet_id = data['packet_id']
     serial = data['serial']
     machine = attendee.event.machines.find_by(check_points: { registrar: current_user })
+    return response_register_status(machine, packet_id, false) unless EventPolicy.new(current_user, attendee.event).write_attendee?
     return response_register_status(machine, packet_id, false) unless attendee.register(serial)
     RegistrarChannel.broadcast_to([current_user, attendee.event], type: EVENTS[:success], attendee: attendee)
     response_register_status(machine, packet_id, true)
