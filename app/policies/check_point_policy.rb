@@ -8,7 +8,7 @@ class CheckPointPolicy < ApplicationPolicy
     def resolve
       if scope.empty?
         scope
-      elsif user.admin? || event_owner?
+      elsif user.admin? || event_owner? || read_check_point?
         scope
       else
         scope.where(registrar_id: user.id)
@@ -17,22 +17,28 @@ class CheckPointPolicy < ApplicationPolicy
 
     private
 
+    # TODO: Refactor this
+    def read_check_point?
+      EventPolicy.new(user, scope.first.event).read_check_point?
+    end
+
     def event_owner?
       scope.first.event.user_id == user.id
     end
   end
 
   def edit?
-    user.admin? || record.event.user_id == user.id || write_check_point? || record.registrar_id == user.id
+    user.admin? || event_owner? || write_check_point? || record.registrar_id == user.id
   end
 
   alias update? edit?
 
   def manage?
-    user.admin? || record.event.user_id == user.id || write_check_point?
+    user.admin? || event_owner? || write_check_point?
   end
 
   alias destroy? manage?
+  alias create? manage?
 
   def permitted_attributes_for_update
     if manage?
@@ -43,6 +49,10 @@ class CheckPointPolicy < ApplicationPolicy
   end
 
   private
+
+  def event_owner?
+    record.event.user_id == user.id
+  end
 
   # TODO: Refactor this
   def write_check_point?

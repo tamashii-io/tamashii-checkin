@@ -4,7 +4,7 @@ class CheckPointsController < ApplicationController
   before_action :find_event, except: [:show]
   before_action :find_checkpoint, only: [:edit, :update, :destroy]
 
-  after_action :verify_authorized, only: [:edit, :update, :destroy]
+  after_action :verify_authorized, only: [:new, :create, :edit, :update, :destroy]
   after_action :verify_policy_scoped, except: [:show]
 
   def index
@@ -13,10 +13,12 @@ class CheckPointsController < ApplicationController
 
   def new
     @checkpoint = @event.check_points.build
+    authorize @checkpoint
   end
 
   def create
     @checkpoint = @event.check_points.build(checkpoint_params)
+    authorize @checkpoint
     return redirect_to event_check_points_path, notice: I18n.t('checkPoint.created') if @checkpoint.save
     render :new
   end
