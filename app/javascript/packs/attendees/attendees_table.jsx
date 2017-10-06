@@ -72,7 +72,11 @@ class AttendeesTable extends React.Component {
              if (a.serial < b.serial) return 1;
              return 0;
            })
-           .map(attendee => <AttendeesTableItem key={attendee.id} attendee={attendee} />);
+           .map(attendee => <AttendeesTableItem
+             key={attendee.id}
+             attendee={attendee}
+             attendeeWritable={this.props.attendeeWritable}
+           />);
   }
 
   hasNextAttendee() {
@@ -126,6 +130,7 @@ class AttendeesTable extends React.Component {
 
 AttendeesTable.propTypes = {
   eventId: PropTypes.string.isRequired,
+  attendeeWritable: PropTypes.string.isRequired,
 };
 
 export default AttendeesTable;
