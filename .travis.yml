@@ -3,6 +3,8 @@ rvm:
   - 2.4.1
 services:
   - postgres
+addons:
+  postgresql: '9.6'
 cache:
   bundler: true
   directories:
