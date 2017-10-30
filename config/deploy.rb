@@ -42,4 +42,4 @@ set :default_env, path: '/usr/local/ruby-2.4.1/bin:$PATH'
 # set :keep_releases, 5
 
 # set :passenger_restart_with_touch, true
-set :passenger_environment_variables, { PASSENGER_INSTANCE_REGISTRY_DIR: '/var/lib/passenger-instreg' }
+
