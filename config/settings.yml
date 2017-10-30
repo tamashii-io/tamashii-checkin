@@ -2,7 +2,7 @@ default: &default
   login_url: <%= ENV['LOGIN_URL'] %>
   mailer:
     url:
-      host: <%= ENV['MAILER_HOST'] %>
+      host: <%= ENV['MAILER_HOST'] || 'localhost' %>
   tamashii:
     mode: token
     token: <%= ENV['TAMASHII_TOKEN'] %>
