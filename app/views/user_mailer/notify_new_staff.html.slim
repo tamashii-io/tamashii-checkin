@@ -5,7 +5,7 @@ ul
   li Username: #{@user.email}
   li Password: #{@password}
 p Please change your password after login. Thank you.
-a href="#{Settings.login_url}" Login from here
+= link_to 'Login from here', root_url
 
 p Note: please do not reply to this address
 
