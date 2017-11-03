@@ -368,7 +368,7 @@ GEM
       tamashii-common
       websocket-driver
     tamashii-common (0.1.6)
-    tamashii-manager (0.2.6)
+    tamashii-manager (0.2.7)
       concurrent-ruby
       nio4r
       puma
@@ -473,7 +473,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   tamashii-common (>= 0.1.5)
-  tamashii-manager (>= 0.2.6)
+  tamashii-manager (>= 0.2.7)
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
