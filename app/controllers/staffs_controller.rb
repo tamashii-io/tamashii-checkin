@@ -4,6 +4,7 @@ class StaffsController < ApplicationController
   before_action :find_event
   before_action :find_staff, only: [:edit, :destroy]
   before_action :find_staff_for_update, only: :update
+  before_action :set_host_from_request, only: [:create] # TODO: this is a workround for detecting server host name
 
   after_action :verify_authorized, only: [:edit, :update, :destroy]
   after_action :verify_policy_scoped
@@ -42,6 +43,10 @@ class StaffsController < ApplicationController
   end
 
   private
+
+  def set_host_from_request
+    ActionMailer::Base.default_url_options = { host: request.host_with_port }
+  end
 
   def create_new_staff(email)
     password = Devise.friendly_token.first(8)
