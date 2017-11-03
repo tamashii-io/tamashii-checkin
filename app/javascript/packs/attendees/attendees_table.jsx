@@ -115,6 +115,7 @@ class AttendeesTable extends React.Component {
               <th>姓名</th>
               <th>信箱</th>
               <th>手機</th>
+              <th>註記</th>
               <th>卡片序號</th>
               <th>處理</th>
             </tr>

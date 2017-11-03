@@ -82,6 +82,7 @@ class AttendeesTableItem extends React.Component {
         <td>{attendee.name}</td>
         <td>{attendee.email}</td>
         <td>{attendee.phone}</td>
+        <td>{attendee.note}</td>
         <td>{this.renderCardSerial(attendee.card_serial)}</td>
         {this.renderManageButtons(attendee)}
       </tr>

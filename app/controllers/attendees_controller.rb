@@ -56,7 +56,7 @@ class AttendeesController < ApplicationController
   private
 
   def attendee_params
-    params.require(:attendee).permit(:serial, :code, :name, :email, :phone, :card_serial)
+    params.require(:attendee).permit(:serial, :code, :name, :email, :phone, :note, :card_serial)
   end
 
   def find_attendee
