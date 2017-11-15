@@ -4,6 +4,7 @@ module Tamashii
   # Tamashii::Machine
   class Machine
     HASH_KEY = 'tamashii-machines'
+    LAST_UPDATE_KEY = 'tamashii-last-broadcast'
 
     def initialize(serial)
       @serial = serial
@@ -42,16 +43,33 @@ module Tamashii
       Redis.current
     end
 
-    def cable_broadcast_update(time)
-      return if @serial.match?(/Unauthorized/)
-      event = {
-        last_active: time,
-        serial: @serial,
-        type: 'LAST_ACTIVE_CHANGED',
-        total: Machine.activities.count
-      }
+    def broadcast_update?
+      last_time = redis.get(LAST_UPDATE_KEY) || (Time.current - 1.minute).to_s
+      Time.current >= Time.zone.parse(last_time) + 1.minute
+    end
 
-      cable_broadcast event
+    def build_broadcast_event(serial, time, activites)
+      {
+        last_active: time,
+        serial: serial,
+        type: 'LAST_ACTIVE_CHANGED',
+        total: activites
+      }
+    end
+
+    def broadcast_all_update
+      serials = ::Machine.all.pluck(:serial)
+      serials.each do |serial|
+        time = redis.hget(HASH_KEY, serial)
+        cable_broadcast build_broadcast_event(serial, time, serials.size) if time
+      end
+      redis.set(LAST_UPDATE_KEY, Time.current)
+    end
+
+    def cable_broadcast_update(_time)
+      return if @serial.match?(/Unauthorized/)
+      return unless broadcast_update?
+      broadcast_all_update
     end
 
     def cable_broadcast_close
