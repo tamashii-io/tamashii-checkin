@@ -74,7 +74,7 @@ deploy_to_staging:
   only:
     - develop
   before_script:
-    - gem install bundler -v 1.13.7 --no-ri --no-rdoc
+    - gem install bundler -v 1.13.7
     - bundle install -j $(nproc) --path vendor
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
