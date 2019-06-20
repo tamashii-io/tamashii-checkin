@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # StaffsHelper
 module StaffsHelper
   def display_staff_permission_for(relationship)

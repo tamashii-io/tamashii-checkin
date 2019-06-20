@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # Attendee Serializer
 class AttendeeSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # missing top-level class documentation comment
 class CheckPointPolicy < ApplicationPolicy
   include Pundit
@@ -42,9 +43,9 @@ class CheckPointPolicy < ApplicationPolicy
 
   def permitted_attributes_for_update
     if manage?
-      [:name, :type, :machine_id, :registrar_id]
+      %i[name type machine_id registrar_id]
     else
-      [:name, :type, :machine_id]
+      %i[name type machine_id]
     end
   end
 

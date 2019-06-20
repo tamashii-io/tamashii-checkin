@@ -1,10 +1,11 @@
 # frozen_string_literal: true
+
 # missing top-level class documentation comment
 class CheckPointsController < ApplicationController
   before_action :find_event, except: [:show]
-  before_action :find_checkpoint, only: [:edit, :update, :destroy]
+  before_action :find_checkpoint, only: %i[edit update destroy]
 
-  after_action :verify_authorized, only: [:new, :create, :edit, :update, :destroy]
+  after_action :verify_authorized, only: %i[new create edit update destroy]
   after_action :verify_policy_scoped, except: [:show]
 
   def index
@@ -20,13 +21,15 @@ class CheckPointsController < ApplicationController
     @checkpoint = @event.check_points.build(checkpoint_params)
     authorize @checkpoint
     return redirect_to event_check_points_path, notice: I18n.t('checkPoint.created') if @checkpoint.save
+
     render :new
   end
 
   def edit; end
 
   def update
-    return redirect_to event_check_points_path, notice: I18n.t('checkPoint.updated') if @checkpoint.update_attributes(permitted_attributes(@checkpoint))
+    return redirect_to event_check_points_path, notice: I18n.t('checkPoint.updated') if @checkpoint.update(permitted_attributes(@checkpoint))
+
     render :edit
   end
 

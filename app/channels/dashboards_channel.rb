@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # missing top-level class documentation comment
 class DashboardsChannel < ApplicationCable::Channel
   def subscribed

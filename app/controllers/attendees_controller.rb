@@ -2,10 +2,10 @@
 
 class AttendeesController < ApplicationController
   before_action :find_event
-  before_action :find_attendee, only: [:edit, :destroy, :update]
-  before_action :verify_writable, only: [:new, :create, :sync]
+  before_action :find_attendee, only: %i[edit destroy update]
+  before_action :verify_writable, only: %i[new create sync]
 
-  after_action :verify_authorized, only: [:edit, :update, :destroy, :unbind]
+  after_action :verify_authorized, only: %i[edit update destroy unbind]
 
   def index
     @attendees = policy_scope(@event.attendees)
@@ -30,13 +30,15 @@ class AttendeesController < ApplicationController
     @attendee = @event.attendees.new(attendee_params)
     authorize @attendee
     return redirect_to event_attendees_path, notice: I18n.t('attendee.created') if @attendee.save
+
     render :new
   end
 
   def edit; end
 
   def update
-    return redirect_to event_attendees_path, notice: I18n.t('attendee.updated') if @attendee.update_attributes(attendee_params)
+    return redirect_to event_attendees_path, notice: I18n.t('attendee.updated') if @attendee.update(attendee_params)
+
     render :edit
   end
 
@@ -70,6 +72,7 @@ class AttendeesController < ApplicationController
 
   def verify_writable
     return if policy(@event).write_attendee?
+
     deny_access
   end
 end

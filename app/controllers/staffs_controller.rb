@@ -1,12 +1,13 @@
 # frozen_string_literal: true
+
 # Staffs Controller
 class StaffsController < ApplicationController
   before_action :find_event
-  before_action :find_staff, only: [:edit, :destroy]
+  before_action :find_staff, only: %i[edit destroy]
   before_action :find_staff_for_update, only: :update
   before_action :set_host_from_request, only: [:create] # TODO: this is a workround for detecting server host name
 
-  after_action :verify_authorized, only: [:edit, :update, :destroy]
+  after_action :verify_authorized, only: %i[edit update destroy]
   after_action :verify_policy_scoped
 
   def index
@@ -33,7 +34,8 @@ class StaffsController < ApplicationController
   def edit; end
 
   def update
-    return redirect_to event_staffs_path(@event) if @staff.update_attributes(staff_params)
+    return redirect_to event_staffs_path(@event) if @staff.update(staff_params)
+
     render :edit
   end
 
@@ -61,7 +63,7 @@ class StaffsController < ApplicationController
       params[:user_id] = create_new_staff(email_field).id
     end
     params
-  rescue
+  rescue StandardError
     nil
   end
 

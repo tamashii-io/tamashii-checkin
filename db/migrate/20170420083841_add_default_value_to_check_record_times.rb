@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # Add Default to Check Record Times
 class AddDefaultValueToCheckRecordTimes < ActiveRecord::Migration[5.1]
   def change

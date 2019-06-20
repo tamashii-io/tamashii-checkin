@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # Navigation Helper
 module NavigationHelper
   def nav_item(name, target, options = nil)
@@ -12,6 +13,7 @@ module NavigationHelper
   def current_path_under?(path)
     path = url_for(path)
     return false if path == root_path && request.path != path # Exclude / outside home page
+
     request.path.start_with?(path)
   end
 end

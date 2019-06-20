@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # missing top-level class documentation comment
 class ApplicationPolicy
   attr_reader :user, :record

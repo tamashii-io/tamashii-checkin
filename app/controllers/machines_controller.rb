@@ -1,10 +1,11 @@
 # frozen_string_literal: true
+
 # missing top-level class documentation comment
 class MachinesController < ApplicationController
   include MachineConcern
 
   before_action :check_machine_permission!, except: [:index] # TODO: should also hide buttons in views
-  before_action :find_machine, only: [:edit, :update, :destroy]
+  before_action :find_machine, only: %i[edit update destroy]
 
   def index
     @machines = Machine.all
@@ -24,13 +25,15 @@ class MachinesController < ApplicationController
     @machine = Machine.new(machine_params)
 
     return redirect_to machines_path, notice: I18n.t('machine.created') if @machine.save
+
     render :new
   end
 
   def edit; end
 
   def update
-    return redirect_to machines_path, notice: I18n.t('machine.updated') if @machine.update_attributes(machine_params)
+    return redirect_to machines_path, notice: I18n.t('machine.updated') if @machine.update(machine_params)
+
     render :edit
   end
 

@@ -7,7 +7,7 @@ module Tamashii
       resources :check_points do
         desc 'CheckPoint List'
         get '/' do
-          Event.find(params[:event_id]).check_points.as_json(only: [:id, :name])
+          Event.find(params[:event_id]).check_points.as_json(only: %i[id name])
         end
 
         desc 'CheckPoint Summary'

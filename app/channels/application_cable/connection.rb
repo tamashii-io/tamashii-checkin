@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module ApplicationCable
   # ActionCable Connection
   class Connection < ActionCable::Connection::Base
@@ -12,7 +13,8 @@ module ApplicationCable
     protected
 
     def find_verified_user
-      return reject_unauthorized_connection unless verified_user.present?
+      return reject_unauthorized_connection if verified_user.blank?
+
       verified_user
     end
 

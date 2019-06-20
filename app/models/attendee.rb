@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # missing top-level class documentation comment
 class Attendee < ApplicationRecord
   belongs_to :event
@@ -14,7 +15,8 @@ class Attendee < ApplicationRecord
 
   def register(serial)
     return if card_serial.present?
-    update_attributes(card_serial: serial)
+
+    update(card_serial: serial)
   end
 
   def update_channel

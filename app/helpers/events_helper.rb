@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # EventsHelper
 module EventsHelper
   def edit_button(event)

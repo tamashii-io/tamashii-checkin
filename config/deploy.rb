@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # config valid only for current version of Capistrano
 lock '3.8.1'
 
@@ -42,4 +43,3 @@ set :default_env, path: '/usr/local/ruby-2.4.1/bin:$PATH'
 # set :keep_releases, 5
 
 # set :passenger_restart_with_touch, true
-

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # Create User Event Relationships
 class CreateUserEventRelationships < ActiveRecord::Migration[5.1]
   def change

@@ -18,6 +18,7 @@ class CheckRecord < ApplicationRecord
   def broadcast
     # Note: records with times <= 0 is considered not exists
     return unless times.positive?
+
     method = times == 1 ? :set : :update
     [CheckRecordsChannel, AccessesChannel].map { |chan| chan.send(method, self) }
   end

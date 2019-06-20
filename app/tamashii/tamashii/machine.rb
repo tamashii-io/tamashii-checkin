@@ -69,6 +69,7 @@ module Tamashii
     def cable_broadcast_update(_time)
       return if @serial.match?(/Unauthorized/)
       return unless broadcast_update?
+
       broadcast_all_update
     end
 

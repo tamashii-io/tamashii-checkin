@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'csv'
 
 # :nodoc:
@@ -12,8 +13,8 @@ class RubyConfTWImporter
 
   def import!
     event.attendees.import attendees, on_duplicate_key_update: {
-      conflict_target: [:event_id, :code],
-      columns: [:name, :email, :phone, :note]
+      conflict_target: %i[event_id code],
+      columns: %i[name email phone note]
     }
 
     puts "Total #{attendees.count} attendees imported."
@@ -45,7 +46,7 @@ end
 
 namespace :rubyconftw do
   desc 'Import RubyConf Taiwan attendees data from csv'
-  task :import, [:event, :file] => [:environment] do |_, args|
+  task :import, %i[event file] => [:environment] do |_, args|
     event = Event.find(args[:event])
     RubyConfTWImporter.new(event, args[:file]).import!
   end

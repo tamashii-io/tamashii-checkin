@@ -1,34 +1,46 @@
 inherit_from: .rubocop_todo.yml
+require:
+  - rubocop-performance
+  - rubocop-rails
 AllCops:
+  TargetRubyVersion: 2.6.0
   DisplayCopNames: true
-  TargetRubyVersion: 2.4
-  Include:
-    - Rakefile
-    - config.ru
-    - lib/**/*.rake
   Exclude:
-    - node_modules/**/*
-    - db/*
+    - bin/*
     - vendor/ruby/**/*
-    - vendor/bundle/**/*
-    - config/**/*
     - node_modules/**/*
-    - bin/**/*
-    - test/**/*
+    - db/schema.rb
+    - .licenses/**/*
 Rails:
   Enabled: true
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - staging
+    - development
+    - test
+Metrics:
+  Exclude:
+    - db/migrate/*
+    - Rakefile
+    - Gemfile
+    - config/**/*
+    - spec/**/*
+    - lib/tasks/**/*
 Metrics/BlockLength:
   Exclude:
-    - spec/**/*_spec.rb
-Style/FileName:
+    - config/environments/*
+    - lib/tasks/**/*
+    - spec/**/*
+Layout:
   Exclude:
-    - Gemfile
-    - Capfile
+    - config/environments/*
+Style:
+  Exclude:
+    - spec/*_helper.rb
+Style/BlockComments:
+  Exclude:
+    - config/**/*
+    - spec/**/*
 Style/Documentation:
-  Exclude:
-    - app/**/*
-    - db/**/*
-Style/FrozenStringLiteralComment:
-  Exclude:
-    - db/**/*
-
+  Enabled: false
