@@ -80,7 +80,7 @@ group :development do
 
   gem 'letter_opener'
 
-  gem 'capistrano', '~> 3.6'
+  gem 'capistrano', '~> 3.8.1'
   gem 'capistrano-passenger'
   gem 'capistrano-rails', '~> 1.2'
   gem 'capistrano-upload-config'

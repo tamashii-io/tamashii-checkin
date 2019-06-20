@@ -74,8 +74,9 @@ deploy_to_staging:
   only:
     - develop
   before_script:
-    - gem install bundler -v 1.13.7
+    - gem install bundler -v 1.17.3
     - bundle install -j $(nproc) --path vendor
+    - gem install capistrano -v 3.8.1
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
     - ssh-add <(echo "$SSH_PRIVATE_KEY")

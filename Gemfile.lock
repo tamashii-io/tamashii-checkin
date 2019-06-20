@@ -440,7 +440,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootstrap (~> 4.0.0.alpha6)
   byebug
-  capistrano (~> 3.6)
+  capistrano (~> 3.8.1)
   capistrano-passenger
   capistrano-rails (~> 1.2)
   capistrano-upload-config
