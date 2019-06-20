@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Machines
   # Machine::ActionsController
   class ActionsController < ApplicationController

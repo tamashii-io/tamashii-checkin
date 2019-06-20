@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # User Event Relationship
 class UserEventRelationship < ApplicationRecord
   DEFAULT_PERMISSIONS = {

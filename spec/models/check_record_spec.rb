@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe CheckRecord, type: :model do
@@ -13,7 +14,7 @@ RSpec.describe CheckRecord, type: :model do
     end
 
     it 'exceed the time limit' do
-      subject.update_attributes(updated_at: 5.days.ago)
+      subject.update(updated_at: 5.days.ago)
       expect(CheckRecord.active).not_to include(subject)
     end
   end

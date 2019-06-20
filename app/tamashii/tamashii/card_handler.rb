@@ -19,6 +19,7 @@ module Tamashii
       raise InvalidCardError, 'Invalid Card' if card_id.blank?
       raise UnregisterMachineError, 'Unregister Machine' if machine.blank?
       return response auth: false, reason: 'No Checkpoint Available' if check_point.blank?
+
       perform
     rescue CardError => e
       response auth: false, reason: e.message
@@ -59,6 +60,7 @@ module Tamashii
     def registrar
       result = check_point.register(card_id, packet_id)
       return [nil, nil] if result.nil?
+
       response auth: result, reason: 'registrar', message: "New card\nDetected."
     end
 

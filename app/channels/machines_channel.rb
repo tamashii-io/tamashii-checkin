@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # Machines Channel
 class MachinesChannel < ApplicationCable::Channel
   def subscribed

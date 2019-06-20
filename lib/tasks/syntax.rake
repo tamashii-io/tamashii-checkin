@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 namespace :syntax do
   desc 'Fix frozen string error'
   task :frozen do

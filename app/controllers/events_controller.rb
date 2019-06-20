@@ -1,10 +1,11 @@
 # frozen_string_literal: true
+
 # EventsController
 class EventsController < ApplicationController
-  before_action :find_event, only: [:edit, :destroy]
+  before_action :find_event, only: %i[edit destroy]
 
-  after_action :verify_authorized, only: [:edit, :update, :destroy]
-  after_action :verify_policy_scoped, only: [:index, :show]
+  after_action :verify_authorized, only: %i[edit update destroy]
+  after_action :verify_policy_scoped, only: %i[index show]
 
   def index
     @events = policy_scope(Event)
@@ -30,6 +31,7 @@ class EventsController < ApplicationController
     @event.user_id = current_user.id
     @event.staffs << current_user
     return redirect_to events_path, notice: I18n.t('event.created') if @event.save
+
     render :new
   end
 
@@ -38,7 +40,8 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
     authorize @event, :edit?
-    return redirect_to events_path, notice: I18n.t('event.updated') if @event.update_attributes(event_params)
+    return redirect_to events_path, notice: I18n.t('event.updated') if @event.update(event_params)
+
     render :edit
   end
 

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class AttendeePolicy < ApplicationPolicy
   class Scope < Scope
     # TODO: refactor this policy, seems a little weird

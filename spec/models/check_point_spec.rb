@@ -1,11 +1,12 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe CheckPoint, type: :model do
   it { should have_many(:check_records) }
   it { should belong_to(:event) }
   it { should belong_to(:machine) }
-  it { should belong_to(:registrar) }
+  it { should belong_to(:registrar).optional }
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:type) }
 

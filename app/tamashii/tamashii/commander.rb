@@ -1,16 +1,17 @@
 # frozen_string_literal: true
+
 module Tamashii
   # Tamashii::Commander
   class Commander
     class CommandError < RuntimeError; end
 
     COMMANDS = {
-      beep:              Tamashii::Type::BUZZER_SOUND,
-      restart:           Tamashii::Type::RESTART,
-      reboot:            Tamashii::Type::REBOOT,
-      poweroff:          Tamashii::Type::POWEROFF,
-      update:            Tamashii::Type::UPDATE,
-      lcd_message:       Tamashii::Type::LCD_MESSAGE,
+      beep: Tamashii::Type::BUZZER_SOUND,
+      restart: Tamashii::Type::RESTART,
+      reboot: Tamashii::Type::REBOOT,
+      poweroff: Tamashii::Type::POWEROFF,
+      update: Tamashii::Type::UPDATE,
+      lcd_message: Tamashii::Type::LCD_MESSAGE,
       lcd_set_idle_text: Tamashii::Type::LCD_SET_IDLE_TEXT
     }.freeze
 
@@ -32,6 +33,7 @@ module Tamashii
       type = command_to_type
       body = pack(options)
       raise CommandError, 'Invalid Command' if type.nil?
+
       [type, body]
     end
 
@@ -42,6 +44,7 @@ module Tamashii
     def pack(options)
       return options if options.is_a?(String)
       return options.to_json if options.is_a?(Hash) || options.is_a?(Array)
+
       ''
     end
 

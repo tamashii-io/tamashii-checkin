@@ -26,12 +26,14 @@ class CheckPoint < ApplicationRecord
   def register(card_serial, packet_id)
     return false if event.attendees.where(card_serial: card_serial).exists?
     return false if registrar.blank?
+
     RegistrarChannel.register([registrar, event], card_serial, packet_id)
     nil
   end
 
   def checkin(attendee)
     return false if attendee.blank?
+
     latest_record(attendee).increment
     true
   end
@@ -55,6 +57,7 @@ class CheckPoint < ApplicationRecord
   def machine_available
     return if machine.blank?
     return unless machine.events.overlap(event.peroid).any?
+
     errors.add(:machine, '這時間已經有人使用此機器')
   end
 

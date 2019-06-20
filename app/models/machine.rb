@@ -42,9 +42,10 @@ class Machine < ApplicationRecord
     process_command :poweroff
   end
 
-  def update
-    process_command :update
-  end
+  # TODO: Fix conflict with ActiveModel#update
+  # def update
+  #   process_command :update
+  # end
 
   def lcd_message(message)
     process_command :lcd_message, message

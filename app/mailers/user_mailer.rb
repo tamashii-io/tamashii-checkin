@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class UserMailer < ApplicationMailer
   def notify_new_staff(event, inviter, user, password)
     @event = event

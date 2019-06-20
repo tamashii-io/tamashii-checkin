@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # Machine Helper
 module MachinesHelper
   def machine_command_button(machine, command, style = 'primary', _options = nil)
@@ -6,7 +7,8 @@ module MachinesHelper
   end
 
   def format_machine_active_time(time)
-    return unless time.present?
+    return if time.blank?
+
     l Time.zone.parse(time)
   rescue ArgumentError
     nil

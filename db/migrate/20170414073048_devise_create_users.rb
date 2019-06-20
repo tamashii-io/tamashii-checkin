@@ -1,8 +1,7 @@
 # frozen_string_literal: true
+
 # Add User via Devise
 class DeviseCreateUsers < ActiveRecord::Migration[5.1]
-  # rubocop:disable Metrics/MethodLength
-  # rubocop:disable Metrics/AbcSize
   def change
     create_table :users do |t|
       ## Database authenticatable

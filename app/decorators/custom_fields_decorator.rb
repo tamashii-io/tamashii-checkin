@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # missing top-level class documentation comment
 class CustomFieldsDecorator
   MODEL_NAME = ActiveModel::Name.new(self.class, nil, 'custom_fields')

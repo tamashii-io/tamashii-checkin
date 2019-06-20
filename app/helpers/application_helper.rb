@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # ApplicationHelper
 module ApplicationHelper
   def text_with_icon(icon, text)

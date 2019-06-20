@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 FactoryGirl.define do
   factory :check_record do
     id { Faker::Number.number(6) }

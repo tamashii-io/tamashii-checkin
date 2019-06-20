@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe UserMailer, type: :mailer do
@@ -11,8 +12,8 @@ RSpec.describe UserMailer, type: :mailer do
     let(:mail) { UserMailer.notify_new_staff(event, inviter, invitee, invitee_password) }
 
     it "contains new user's email and password" do
-      expect(mail.body.encoded).to match(invitee.email)
-      expect(mail.body.encoded).to match(invitee_password)
+      expect(mail.body).to include(invitee.email)
+      expect(mail.body).to include(invitee_password)
     end
   end
 end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # Machine Serializer
 class MachineSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers

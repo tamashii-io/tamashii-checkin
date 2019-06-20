@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # Registrar Channel
 class EventAttendeesDashboardChannel < ApplicationCable::Channel
   EVENTS = {
