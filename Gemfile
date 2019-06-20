@@ -13,7 +13,7 @@ gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
-gem 'rails', '~> 5.1.0'
+gem 'rails', '~> 5.2.3'
 gem 'sassc-rails'
 gem 'simple-line-icons-rails'
 
@@ -54,7 +54,8 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'rspec'
   gem 'rspec-rails'
-  gem 'shoulda'
+  gem 'shoulda', require: false
+  gem 'shoulda-matchers', require: false
   gem 'simplecov', require: false
 
   gem 'dotenv-rails'
