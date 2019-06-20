@@ -13,6 +13,7 @@ before_install:
   - nvm install 8.1.0
   - npm install -g yarn
 before_script:
+  - gem install bundler -v 1.13.7
   - yarn install
   - bundle exec rake db:create
   - bundle exec rake db:schema:load
