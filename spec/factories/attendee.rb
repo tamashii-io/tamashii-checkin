@@ -8,6 +8,7 @@ FactoryGirl.define do
     code { Faker::Code.asin }
     email { Faker::Code.asin }
     phone { Faker::Code.asin }
+    note { Faker::Code.asin }
     card_serial {}
     event_id {}
     created_at {}

@@ -2,7 +2,7 @@
 # Attendee Serializer
 class AttendeeSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :serial, :code, :name, :email, :phone, :card_serial
+  attributes :id, :serial, :code, :name, :email, :phone, :note, :card_serial
 
   attribute :links do
     {

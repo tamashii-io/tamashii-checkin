@@ -30,6 +30,7 @@ zh-TW:
         name: '會眾名字'
         email: '會眾信箱'
         phone: '會眾手機'
+        note: '註記'
         card_serial: '卡片序號'
       machine:
         serial: '機器序號'

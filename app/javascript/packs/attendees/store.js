@@ -20,6 +20,7 @@ const Attendee = Record({
   email: '',
   name: '',
   phone: '',
+  note: '',
   links: {
     edit: '',
     unbind: '',
@@ -38,6 +39,7 @@ const contains = (attendee, search) => {
     attendee.email.indexOf(search) > -1 ||
     attendee.name.indexOf(search) > -1 ||
     attendee.phone.indexOf(search) > -1 ||
+    attendee.note.indexOf(search) > -1 ||
     (attendee.serial || '').toString().indexOf(search) > -1
   );
 };

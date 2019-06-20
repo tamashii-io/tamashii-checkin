@@ -5,5 +5,7 @@ class UserEventRelationshipPolicy < ApplicationPolicy
     record.event.user_id == user.id
   end
 
-  alias editable? owner?
+  def editable?
+    user.admin? || owner?
+  end
 end

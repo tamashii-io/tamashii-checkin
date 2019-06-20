@@ -1,5 +1,5 @@
 - content_for :breadcrumb_actions
-  = link_to "工作人員", event_staffs_path(@event), class: "btn btn-secondary" if policy(@event).owner?
+  = link_to "工作人員", event_staffs_path(@event), class: "btn btn-secondary" if policy(@event).owner? || current_user.admin?
   = link_to "打卡點", event_check_points_path(@event), class: "btn btn-secondary" if policy(@event).read_check_point?
   = link_to "會眾管理", event_attendees_path(@event), class: "btn btn-secondary" if policy(@event).read_attendee?
   = link_to "打卡記錄", event_check_records_path(@event), class: "btn btn-secondary"

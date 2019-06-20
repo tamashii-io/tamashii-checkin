@@ -18,19 +18,19 @@ class EventPolicy < ApplicationPolicy
   end
 
   def read_check_point?
-    owner? || permissions.read_check_point?
+    user.admin? || owner? || permissions.read_check_point?
   end
 
   def write_check_point?
-    owner? || permissions.write_check_point?
+    user.admin? || owner? || permissions.write_check_point?
   end
 
   def read_attendee?
-    owner? || permissions.read_attendee?
+    user.admin? || owner? || permissions.read_attendee?
   end
 
   def write_attendee?
-    owner? || permissions.write_attendee?
+    user.admin? || owner? || permissions.write_attendee?
   end
 
   def manage?
