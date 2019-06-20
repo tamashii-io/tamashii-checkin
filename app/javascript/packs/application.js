@@ -7,6 +7,9 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
+import 'bootstrap';
+import 'chart.js';
+
 import Mounter from './helpers/mounter.jsx';
 import EventDashboard from './events/dashboard.jsx';
 import MachinesTable from './machines/machines_table.jsx';

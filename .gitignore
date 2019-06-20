@@ -28,3 +28,10 @@ config/settings.*.yml
 config/secrets.*.yml
 
 attendees_test_data.csv
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
