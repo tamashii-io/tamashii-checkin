@@ -1,5 +1,5 @@
 # base image
-image: "ruby:2.4.1"
+image: "ruby:2.6.2"
 
 # Services
 services:
@@ -9,8 +9,8 @@ services:
 variables:
   RAILS_ENV: test
   POSTGRES_DB: tamashii
-  NODE_VERSION: 7.4.0
-  YARN_VERSION: 0.21.3
+  NODE_VERSION: 8.10.0
+  YARN_VERSION: 1.15.2
   DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/$POSTGRES_DB"
 
 # build stages
@@ -28,15 +28,10 @@ cache:
 # services such as redis or postgres
 before_script:
   - if [[ ! -f /usr/local/bin/node ]]; then curl -SLO https://nodejs.org/dist/v$NODE_VERSION/node-v${NODE_VERSION}-linux-x64.tar.xz && tar -xJf node-v${NODE_VERSION}-linux-x64.tar.xz -C /usr/local --strip-components=1; fi
-  - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-  - apt-get update && apt-get install apt-transport-https
-  - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-  - apt-get update && apt-get install yarn
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH=$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
   - gem install bundler -v 1.13.7 --no-ri --no-rdoc    # bundler is not installed with the image
-  - ruby -v
-  - node -v
-  - yarn -v
-  - bundle install -j $(nproc) --path vendor  # install dependencies into ./vendor/ruby
+  - bundle install --without development -j $(nproc) --path vendor  # install dependencies into ./vendor/ruby
   - yarn install
 
 # jobs
@@ -56,7 +51,7 @@ rubocop:
 
 eslint:
   stage: test
-  image: "node:7.4"
+  image: "node:8.1"
   services: []
   before_script:
     - npm install
@@ -72,17 +67,17 @@ scsslint:
   script:
     - scss-lint app/assets/stylesheets/
 
-deploy_to_staging:
-  stage: staging
-  only:
-    - develop
-  before_script:
-    - gem install bundler -v 1.13.7 --no-ri --no-rdoc
-    - bundle install -j $(nproc) --path vendor
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-    - eval $(ssh-agent -s)
-    - ssh-add <(echo "$SSH_PRIVATE_KEY")
-    - mkdir -p ~/.ssh
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-  script:
-    - cap staging deploy
+# deploy_to_staging:
+#   stage: staging
+#   only:
+#     - develop
+#   before_script:
+#     - gem install bundler -v 1.13.7 --no-ri --no-rdoc
+#     - bundle install -j $(nproc) --path vendor
+#     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+#     - eval $(ssh-agent -s)
+#     - ssh-add <(echo "$SSH_PRIVATE_KEY")
+#     - mkdir -p ~/.ssh
+#     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+#   script:
+#     - cap staging deploy
