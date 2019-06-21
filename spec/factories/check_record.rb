@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :check_record do
     times { 1 }
-    association :check_point, factory: :check_point
-    association :attendee, factory: :attendee
+    check_point { create(:check_point) }
+    attendee { create(:attendee) }
   end
 end

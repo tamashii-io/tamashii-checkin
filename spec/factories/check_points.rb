@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :check_point do
     name { Faker::Name.name }
     type { :site }
-    association :event, factory: :event
-    association :machine, factory: :machine
+    event { create(:event) }
+    machine { create(:machine) }
   end
 end
