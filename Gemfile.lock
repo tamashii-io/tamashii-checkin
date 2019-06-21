@@ -101,6 +101,7 @@ GEM
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
+    database_rewinder (0.9.1)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     devise (4.6.2)
@@ -468,6 +469,7 @@ DEPENDENCIES
   capistrano-rails (~> 1.2)
   capistrano-upload-config
   capybara (~> 2.7.0)
+  database_rewinder
   devise
   dotenv-rails
   factory_girl_rails
