@@ -25,7 +25,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'redis', '~> 3.0'
 gem 'turbolinks', '~> 5'
 
-gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'gretel'
 gem 'simple_form'
 gem 'slim-rails'
@@ -49,7 +48,7 @@ group :development, :test do
   gem 'selenium-webdriver'
 
   gem 'database_rewinder'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'faker'
   gem 'fuubar', require: false
   gem 'rails-controller-testing'

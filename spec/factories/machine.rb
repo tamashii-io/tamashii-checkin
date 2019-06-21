@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :machine do
     name { Faker::Name.name }
-    serial { Faker::Device.serial }
+    serial { Faker::Device.unique.serial }
   end
 end

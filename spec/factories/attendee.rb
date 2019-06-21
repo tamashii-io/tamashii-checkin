@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :attendee do
     sequence :serial
     name { Faker::Name.name }
     code { Faker::Code.asin }
     email { Faker::Internet.email }
     phone { Faker::PhoneNumber.cell_phone }
-    association :event, factory: :event
+    event { create(:event) }
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :event do
     name { Faker::Name.name }
     start_at { Faker::Date.between(100.days.ago, 11.days.ago) }
