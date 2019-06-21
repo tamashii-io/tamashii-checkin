@@ -16,7 +16,7 @@ variables:
 # build stages
 stages:
   - test
-  - staging
+  - deploy
 
 # cache gems in between builds
 cache:
@@ -69,8 +69,8 @@ scsslint:
   script:
     - scss-lint app/assets/stylesheets/
 
-deploy_to_staging:
-  stage: staging
+deploy:staging:
+  stage: deploy
   only:
     - develop
   before_script:
@@ -83,4 +83,4 @@ deploy_to_staging:
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   environment: production
   script:
-    - bundle exec cap production deploy
+    - bundle exec cap staging deploy
