@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :check_point do
     name { Faker::Name.name }
-    type 1
+    type { :site }
     association :event, factory: :event
     association :machine, factory: :machine
   end

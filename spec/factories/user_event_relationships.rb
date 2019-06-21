@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :user_event_relationship do
-    user nil
-    event nil
+    user { create(:user) }
+    event { create(:event) }
   end
 end

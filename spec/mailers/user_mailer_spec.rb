@@ -4,9 +4,9 @@ require 'rails_helper'
 
 RSpec.describe UserMailer, type: :mailer do
   describe 'notify_new_staff' do
-    let(:event) { FactoryGirl.create(:event) }
-    let(:inviter) { FactoryGirl.create(:user) }
-    let(:invitee) { FactoryGirl.create(:user, password: invitee_password) }
+    let(:event) { FactoryBot.create(:event) }
+    let(:inviter) { FactoryBot.create(:user) }
+    let(:invitee) { FactoryBot.create(:user, password: invitee_password) }
     let(:invitee_password) { Devise.friendly_token.first(8) }
 
     let(:mail) { UserMailer.notify_new_staff(event, inviter, invitee, invitee_password) }
