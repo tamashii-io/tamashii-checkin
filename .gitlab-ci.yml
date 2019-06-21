@@ -74,14 +74,13 @@ deploy_to_staging:
   only:
     - develop
   before_script:
-    - gem install capistrano -v 3.8.1
-    - gem install capistrano-rails
-    - gem install capistrano-passenger
-    - gem install capistrano-upload-config
+    - gem install bundler -v 1.17.3
+    - bundle install -j $(nproc) --path vendor
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
     - ssh-add <(echo "$SSH_PRIVATE_KEY")
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  environment: production
   script:
-    - cap staging deploy
+    - bundle exec cap production deploy
