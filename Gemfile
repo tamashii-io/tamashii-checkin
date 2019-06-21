@@ -48,6 +48,7 @@ group :development, :test do
   gem 'capybara', '~> 2.7.0'
   gem 'selenium-webdriver'
 
+  gem 'database_rewinder'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'fuubar', require: false
