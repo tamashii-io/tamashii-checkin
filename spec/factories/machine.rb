@@ -2,9 +2,8 @@
 
 FactoryGirl.define do
   factory :machine do
-    id { Faker::Number.number(6) }
     name { Faker::Name.name }
-    serial { Faker::Code.asin }
+    serial { Faker::Device.serial }
     created_at {}
     updated_at {}
   end
