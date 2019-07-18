@@ -45,11 +45,9 @@ rubocop:
   stage: test
   services: []
   before_script:
-    - gem install rubocop -v 0.71
-    - gem install rubocop-rails
-    - gem install rubocop-performance
+    - bundle install --without development -j $(nproc) --path vendor
   script:
-    - rubocop
+    - bundle exec rubocop
 
 eslint:
   stage: test
