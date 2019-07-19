@@ -1,5 +1,5 @@
 = simple_form_for [@event, @checkpoint] do |f|
-  .card-block
+  .card-body
     = f.input :name
     = f.input :type, collection: CheckPoint.types.keys
     = f.association :machine

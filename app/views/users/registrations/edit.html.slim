@@ -9,7 +9,7 @@
             .card-header
               | Edit&nbsp;
               = resource_name.to_s.humanize
-            .card-block
+            .card-body
               = f.input :email, required: true, autofocus: true
               = f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false
               = f.input :password_confirmation, required: false

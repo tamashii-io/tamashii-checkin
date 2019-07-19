@@ -42,12 +42,16 @@ export default class Chart extends React.Component {
   }
 
   render() {
-    return <canvas height={this.props.height} ref={(el) => { this.context = el; }} />;
+    return (<canvas
+      height={this.props.height}
+      ref={(el) => { this.context = el; }}
+      className="chartjs-render-monitor"
+    />);
   }
 }
 
 Chart.defaultProps = {
-  height: 70,
+  height: 227,
   options: {},
 };
 
