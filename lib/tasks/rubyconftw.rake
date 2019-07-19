@@ -21,7 +21,6 @@ class RubyConfTWImporter
   end
 
   def attendees
-    csv.rewind
     @attendees ||=
       csv
       .select { |row| row['報名序號'].present? }
@@ -35,11 +34,12 @@ class RubyConfTWImporter
   def transform_attendee(attendee)
     event.attendees.build(
       serial: attendee['報名序號'],
-      code: attendee['檢查碼'],
+      code: "#{attendee['報名序號']}-#{attendee['檢查碼']}",
       name: attendee['姓名'],
       email: attendee['Email'],
       phone: attendee['手機'],
-      note: attendee['T-Shirt Size（Please look T-Shirt Size Section）']
+      t_shirt: attendee['T-Shirt'],
+      ticket_type: attendee['票種']
     )
   end
 end

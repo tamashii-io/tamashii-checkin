@@ -2,6 +2,8 @@
 
 # missing top-level class documentation comment
 class Attendee < ApplicationRecord
+  store :note, accessors: %i[t_shirt ticket_type]
+
   belongs_to :event
   has_many :check_records
 
