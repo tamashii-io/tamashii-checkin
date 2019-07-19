@@ -1,2 +1,6 @@
 @import '@coreui/coreui/scss/coreui';
 @import 'select2/dist/css/select2';
+
+form .switch-label {
+  vertical-align: middle;
+}

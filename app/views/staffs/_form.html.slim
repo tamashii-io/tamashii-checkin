@@ -1,8 +1,8 @@
-  .card-block
+  .card-body
     = f.association :user, label_method: :email
     = f.simple_fields_for(staff_permission_from(relationship)) do |field|
       - UserEventRelationship::DEFAULT_PERMISSIONS.keys.each do |key|
-        = field.input key, as: :switch
+        = field.input key, as: :ui_switch
   .card-footer
     = f.button :submit, class: 'btn btn-primary'
 
