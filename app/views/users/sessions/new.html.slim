@@ -2,7 +2,7 @@
   = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
     .card-group
       .card.p-4
-        .card-block
+        .card-body
           h1 Login
           p.text-muted Sign In to your account
           .input-group.mb-3
@@ -19,7 +19,7 @@
             .col-md-6.text-md-right
               = link_to "Forgot password?", new_password_path(resource_name), class: 'btn btn-link px-0'
       .card.card-inverse.card-primary.py-5 style="width:44%"
-        .card-block.text-md-center
+        .card-body.text-md-center
             h2 Sign up
             p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             = link_to "Register Now!", '#', class: "btn btn-primary active mt-3"

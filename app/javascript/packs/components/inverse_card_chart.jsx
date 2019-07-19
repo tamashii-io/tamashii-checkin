@@ -18,20 +18,20 @@ const InverseCardChart = ({
   fullWidth,
 }) => (
   <InverseCard skin={skin}>
-    <div className="card-block pb-2">
+    <div className="card-body pb-2">
       <span className="pa-2 pull-right">
         <i className={icon} />
       </span>
       <h4 className="mb-2">{value}</h4>
       <p>{label}</p>
-    </div>
-    <div className={chartWrapperClass(fullWidth)} style={{ height: '70px' }}>
-      <Chart
-        datasets={datasets}
-        options={options}
-        labels={labels}
-        type={type}
-      />
+      <div className={chartWrapperClass(fullWidth)} style={{ height: '227px' }}>
+        <Chart
+          datasets={datasets}
+          options={options}
+          labels={labels}
+          type={type}
+        />
+      </div>
     </div>
   </InverseCard>
 );
