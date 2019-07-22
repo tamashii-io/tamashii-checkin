@@ -1,5 +1,5 @@
 # base image
-image: "ruby:2.6.2"
+image: "circleci/ruby:2.6.2-node-browsers"
 
 # Services
 services:
@@ -9,8 +9,6 @@ services:
 variables:
   RAILS_ENV: test
   POSTGRES_DB: tamashii
-  NODE_VERSION: 8.10.0
-  YARN_VERSION: 1.15.2
   DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/$POSTGRES_DB"
 
 # build stages
@@ -27,10 +25,7 @@ cache:
 # this is a basic example for a gem or script which doesn't use
 # services such as redis or postgres
 before_script:
-  - if [[ ! -f /usr/local/bin/node ]]; then curl -SLO https://nodejs.org/dist/v$NODE_VERSION/node-v${NODE_VERSION}-linux-x64.tar.xz && tar -xJf node-v${NODE_VERSION}-linux-x64.tar.xz -C /usr/local --strip-components=1; fi
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH=$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
-  - gem install bundler -v 1.13.7
+  - gem install bundler -v 1.17.3
   - bundle install --without development -j $(nproc) --path vendor  # install dependencies into ./vendor/ruby
   - yarn install
 
@@ -39,7 +34,7 @@ rspec:
   stage: test
   script:
     - bundle exec rake db:schema:load
-    - bundle exec rspec -p
+    - bundle exec rspec
 
 rubocop:
   stage: test
@@ -51,7 +46,6 @@ rubocop:
 
 eslint:
   stage: test
-  image: "node:8.1"
   services: []
   before_script:
     - npm install
