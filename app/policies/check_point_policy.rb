@@ -43,9 +43,9 @@ class CheckPointPolicy < ApplicationPolicy
 
   def permitted_attributes_for_update
     if manage?
-      %i[name type machine_id registrar_id]
+      %i[name type category machine_id registrar_id]
     else
-      %i[name type machine_id]
+      %i[name type category machine_id]
     end
   end
 

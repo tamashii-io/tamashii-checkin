@@ -2,6 +2,7 @@
   .card-body
     = f.input :name
     = f.input :type, collection: CheckPoint.types.keys
+    = f.input :category
     = f.association :machine
     = f.association :registrar, collection: @event.staffs if policy(@checkpoint).manage?
   .card-footer

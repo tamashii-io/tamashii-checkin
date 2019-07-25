@@ -11,19 +11,19 @@
             table.table.table-bordered.table-striped.table-condensed
               thead
                 tr
-                  th 打卡點
-                  th 打卡類型
-                  th 對應機器
-                  th 對應的活動
-                  th 對應的工作人員
-                  th 處理
+                  th 名稱
+                  th 類型
+                  th 分類
+                  th 裝置
+                  th 工作人員
+                  th 動作
               tbody
                 - @checkpoints.each do |checkpoint|
                   tr
                     td= checkpoint.name
                     td= checkpoint.type
+                    td= checkpoint.category
                     td= checkpoint.machine
-                    td= checkpoint.event
                     td= checkpoint.registrar
                     td
                       = edit_button_for_check_point @event, checkpoint
