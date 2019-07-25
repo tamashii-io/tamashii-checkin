@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2017_11_03_101513) do
+ActiveRecord::Schema.define(version: 2019_07_25_093638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 2017_11_03_101513) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "registrar_id"
+    t.string "category"
+    t.index ["event_id", "category"], name: "index_check_points_on_event_id_and_category"
     t.index ["registrar_id"], name: "index_check_points_on_registrar_id"
   end
 

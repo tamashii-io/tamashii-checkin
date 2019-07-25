@@ -41,7 +41,7 @@ class CheckPointsController < ApplicationController
   private
 
   def checkpoint_params
-    params.require(:check_point).permit(:name, :type, :machine_id, :registrar_id)
+    params.require(:check_point).permit(:name, :type, :category, :machine_id, :registrar_id)
   end
 
   def find_checkpoint
