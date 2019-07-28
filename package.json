@@ -13,6 +13,8 @@
     "chart.js": "^2.8.0",
     "immutable": "^4.0.0-rc.12",
     "jquery": "^3.4.1",
+    "lodash": "4.17.13",
+    "lodash.template": "4.5.0",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
