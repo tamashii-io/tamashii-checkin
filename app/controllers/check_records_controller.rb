@@ -4,7 +4,7 @@
 class CheckRecordsController < ApplicationController
   before_action :find_event
   def index
-    @checkrecords = @event.check_records
+    @checkrecords = @event.check_records.preload(:check_point, :attendee)
 
     respond_to do |format|
       format.html

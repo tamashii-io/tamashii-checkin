@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '2.6.2'
+ruby '2.6.3'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
@@ -57,6 +57,7 @@ group :development, :test do
   gem 'shoulda', require: false
   gem 'shoulda-matchers', require: false
   gem 'simplecov', require: false
+  gem 'falcon'
 
   gem 'dotenv-rails'
   gem 'rubocop', '~> 0.71.0', require: false
