@@ -50,6 +50,7 @@ group :development, :test do
   gem 'database_rewinder'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'falcon'
   gem 'fuubar', require: false
   gem 'rails-controller-testing'
   gem 'rspec'
@@ -57,7 +58,6 @@ group :development, :test do
   gem 'shoulda', require: false
   gem 'shoulda-matchers', require: false
   gem 'simplecov', require: false
-  gem 'falcon'
 
   gem 'dotenv-rails'
   gem 'rubocop', '~> 0.71.0', require: false
