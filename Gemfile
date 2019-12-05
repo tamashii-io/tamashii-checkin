@@ -12,7 +12,7 @@ end
 gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'pg', '~> 0.18'
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 3.12'
 gem 'rails', '~> 5.2.3'
 gem 'sassc-rails'
 gem 'simple-line-icons-rails'
