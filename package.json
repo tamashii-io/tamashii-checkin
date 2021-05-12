@@ -10,7 +10,7 @@
     "@rails/webpacker": "^4.0.7",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bootstrap": "^4.3.1",
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.4",
     "immutable": "^4.0.0-rc.12",
     "jquery": "^3.4.1",
     "lodash": "4.17.13",
